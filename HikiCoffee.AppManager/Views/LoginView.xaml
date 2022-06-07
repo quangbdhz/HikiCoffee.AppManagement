@@ -1,0 +1,123 @@
+﻿<Window x:Class="HikiCoffee.AppManager.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HikiCoffee.AppManager.Views"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        
+        Name="loginWindow"
+        Title="Login" Height="500" Width="900">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding DirectionalWindow}" CommandParameter="{Binding ElementName=loginWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid Background="#ebb5b5">
+        <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=loginWindow}" Margin="0 8 8 0" BorderBrush="Transparent" 
+                Background="Transparent" Name="buttonClose" Width="40" Height="40" Padding="0" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <materialDesign:PackIcon Foreground="{Binding ColorChangeButtonClose}" Width="35" Height="35" Kind="CloseCircleOutline" />
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseMove">
+                    <i:InvokeCommandAction Command="{Binding MouseMoveButtonCloseCommand}" CommandParameter="{Binding ElementName=buttonClose}"/>
+                </i:EventTrigger>
+
+                <i:EventTrigger EventName="MouseLeave">
+                    <i:InvokeCommandAction Command="{Binding MouseLeaveButtonCloseCommand}" CommandParameter="{Binding ElementName=buttonClose}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+
+        <materialDesign:Card Width="250" Margin="0 35" Background="#000232">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Ellipse Grid.Row="0" Height="90" Margin="80,20,80,36" Width="90" Stroke="Gray" StrokeThickness="0.7" Grid.RowSpan="2">
+                    <Ellipse.Fill>
+                        <ImageBrush RenderOptions.BitmapScalingMode="Fant" ImageSource="https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1652610654/HikiCoffee/App_Manager/hachiman_iup4z5.png" Stretch="UniformToFill"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <TextBlock Grid.Row="1" Margin="0,10,0,0" Text="WELCOME" HorizontalAlignment="Center" FontSize="20" Foreground="White"/>
+
+                <TextBlock HorizontalAlignment="Center" Margin="0,5,0,0" Grid.Row="2" Foreground="#747d8c" Text="Sign in entering the information below"/>
+
+                <Border Margin="20,15,20,0" Grid.Row="3" BorderThickness="0 0 0 1" BorderBrush="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <materialDesign:PackIcon Width="25" Height="25" Margin="0 4 0 0" Foreground="White" Kind="Account" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                        <TextBox Margin="10 0 0 1" Grid.Column="1" BorderThickness="0" materialDesign:HintAssist.Hint="Username" VerticalAlignment="Center"
+                            materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Text="{Binding UserName, NotifyOnTargetUpdated=True}"
+                            Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    </Grid>
+                </Border>
+
+                <Border Margin="20,5,20,0" Grid.Row="4" BorderThickness="0 0 0 1" BorderBrush="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <materialDesign:PackIcon Width="25" Height="25" Margin="0 3 0 5" Grid.Column="0" Foreground="White" Kind="Lock" />
+
+                        <PasswordBox Margin="10 7 0 0" Grid.Column="1" materialDesign:HintAssist.Hint="Password" VerticalAlignment="Center"
+                            Name="password_UserStaff" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Foreground="White" BorderThickness="0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PasswordChanged">
+                                    <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}"
+                                                                   CommandParameter="{Binding ElementName=password_UserStaff}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </PasswordBox>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="5" Margin="20, 5, 20, 0">
+                    <CheckBox FontSize="9" IsChecked="True" Foreground="White" Style="{StaticResource MaterialDesignDarkCheckBox}" Content="Remenber me" />
+                </Grid>
+
+                <Button Grid.Row="6" FontSize="12" Padding="0" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" Margin="0 10 20 0" Foreground="#747d8c" Content="Forgot Password"/>
+
+                <Button Grid.Row="7" IsDefault="True" Background="#7158e2" Command="{Binding GetStartedCommand}" CommandParameter="{Binding ElementName=loginWindow}" Margin="30 10 20 0" Content="Get Started" Grid.RowSpan="2"/>
+
+                <TextBlock Grid.Row="9" HorizontalAlignment="Center" Margin="0,10,0,0" Foreground="#747d8c" Text="Don't have an account?"/>
+
+                <TextBlock Grid.Row="10" HorizontalAlignment="Center" FontSize="15" Margin="0, 10, 0, 10" Foreground="#747d8c" Text="SIGN UP"/>
+
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Window>
