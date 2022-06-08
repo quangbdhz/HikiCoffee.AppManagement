@@ -1,4 +1,5 @@
 ﻿using HikiCoffee.AppManager.DataRequests;
+using HikiCoffee.Utilities;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -12,18 +13,25 @@ namespace HikiCoffee.AppManager.ViewModels
 {
     public class LoginVM : BindableBase
     {
-        private string _userName;
-        public string UserName
+        private string? _userName;
+        public string? UserName
         {
             get { return _userName; }
             set { SetProperty(ref _userName, value); }
         }
 
-        private string _password;
-        public string Password
+        private string? _password;
+        public string? Password
         {
             get { return _password; }
             set { SetProperty(ref _password, value); }
+        }
+
+        private bool _rememberMe;
+        public bool RememberMe
+        {
+            get { return _rememberMe; }
+            set { SetProperty(ref _rememberMe, value); }
         }
 
         private string? _colorChangeButtonClose;
@@ -34,7 +42,6 @@ namespace HikiCoffee.AppManager.ViewModels
         }
 
         public DelegateCommand<PasswordBox> PasswordChangedCommand { get; set; }
-        public DelegateCommand<Object> DirectionalWindow { get; set; }
         public DelegateCommand<Object> GetStartedCommand { get; set; }
         public DelegateCommand<Button> MouseMoveButtonCloseCommand { get; set; }
         public DelegateCommand<Button> MouseLeaveButtonCloseCommand { get; set; }
@@ -43,6 +50,10 @@ namespace HikiCoffee.AppManager.ViewModels
         public LoginVM()
         {
             ColorChangeButtonClose = "#2f3542";
+
+            UserName = Rms.Read("Info", "UserName", "");
+            Password = Rms.Read("Info", "Password", "");
+            RememberMe = Rms.Read("Info", "RememberMe", "") == "true" ? true : false;
 
             PasswordChangedCommand = new DelegateCommand<PasswordBox>(ExecutePasswordChangedCommand).ObservesProperty(() => Password);
 
@@ -68,11 +79,11 @@ namespace HikiCoffee.AppManager.ViewModels
 
         private async void ExecuteGetStartedCommand(object obj)
         {
-            LoginRequest loginRequest = new LoginRequest() { UserName = UserName, Password = Password, RememberMe = true};
+            LoginRequest loginRequest = new LoginRequest() { UserName = UserName, Password = Password, RememberMe = RememberMe};
 
             var json = JsonConvert.SerializeObject(loginRequest);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = "https://localhost:7227/api/Users/authenticate";
+            var url = SystemConstants.DomainName + "/api/Users/Login";
 
             using (var client = new HttpClient())
             {

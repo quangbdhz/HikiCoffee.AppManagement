@@ -93,7 +93,7 @@
 
                         <materialDesign:PackIcon Width="25" Height="25" Margin="0 3 0 5" Grid.Column="0" Foreground="White" Kind="Lock" />
 
-                        <PasswordBox Margin="10 7 0 0" Grid.Column="1" materialDesign:HintAssist.Hint="Password" VerticalAlignment="Center"
+                        <PasswordBox Margin="10 7 0 0" PasswordChar="{Binding Password}" Grid.Column="1" materialDesign:HintAssist.Hint="Password" VerticalAlignment="Center"
                             Name="password_UserStaff" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Foreground="White" BorderThickness="0">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PasswordChanged">
@@ -106,7 +106,7 @@
                 </Border>
 
                 <Grid Grid.Row="5" Margin="20, 5, 20, 0">
-                    <CheckBox FontSize="9" IsChecked="True" Foreground="White" Style="{StaticResource MaterialDesignDarkCheckBox}" Content="Remenber me" />
+                    <CheckBox FontSize="9" IsChecked="{Binding RememberMe}" Foreground="White" Style="{StaticResource MaterialDesignDarkCheckBox}" Content="Remenber me" />
                 </Grid>
 
                 <Button Grid.Row="6" FontSize="12" Padding="0" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" Margin="0 10 20 0" Foreground="#747d8c" Content="Forgot Password"/>
