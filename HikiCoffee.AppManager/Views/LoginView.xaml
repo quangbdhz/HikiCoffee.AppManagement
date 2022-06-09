@@ -24,7 +24,7 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding DirectionalWindow}" CommandParameter="{Binding ElementName=loginWindow}"/>
+            <i:InvokeCommandAction Command="{Binding CheckNetworkConnection}" CommandParameter="{Binding ElementName=loginWindow}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 

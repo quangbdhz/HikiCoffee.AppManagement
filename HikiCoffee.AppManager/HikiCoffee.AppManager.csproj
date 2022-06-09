@@ -21,8 +21,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="2.0.5" />
     <PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="6.0.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
@@ -31,6 +37,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HikiCoffee.ApiIntegration\HikiCoffee.ApiIntegration.csproj" />
+    <ProjectReference Include="..\HikiCoffee.Models\HikiCoffee.Models.csproj" />
     <ProjectReference Include="..\HikiCoffee.Utilities\HikiCoffee.Utilities.csproj" />
   </ItemGroup>
 
