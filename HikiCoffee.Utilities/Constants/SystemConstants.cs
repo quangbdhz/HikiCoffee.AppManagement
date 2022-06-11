@@ -19,5 +19,7 @@
                 return false;
             }
         }
+
+        public static string TokenInUse { get; set; } = string.Empty;
     }
 }

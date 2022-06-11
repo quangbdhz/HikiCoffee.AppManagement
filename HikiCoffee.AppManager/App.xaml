@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"   
                         
-             xmlns:customconverter="clr-namespace:HikiCoffee.AppManager.Converter"           
+             xmlns:customconverter="clr-namespace:HikiCoffee.AppManager.Converter" 
+             xmlns:customconverterUser="clr-namespace:HikiCoffee.AppManager.Converter.UserConverter"           
                         
              xmlns:local="clr-namespace:HikiCoffee.AppManager">
     <prism:PrismApplication.Resources>
@@ -14,9 +15,15 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
 
+                <ResourceDictionary Source="/Styles/StyleTextBoxAndTextBlock.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleButton.xaml"/>
+
                 <ResourceDictionary>
                     <customconverter:BackgroundTableFurnitureConverter x:Key="backgroundTableFurnitureConverter"/>
                     <customconverter:StatusTableFurnitureImageConverter x:Key="statusTableFurnitureImageConverter"/>
+                    
+                    <customconverterUser:IsActiveUserConverter x:Key="isActiveUserConverter"/>
+                    <customconverterUser:ForegroundIsActiveUserConverter x:Key="foregroundIsActiveUserConverter"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -1,10 +1,10 @@
 ﻿using HikiCoffee.Models;
 using HikiCoffee.Models.Common;
 
-namespace HikiCoffee.ApiIntegration.CategoryApi
+namespace HikiCoffee.ApiIntegration.CategoryAPI
 {
-    public interface ICategoryApi
+    public interface ICategoryAPI
     {
-        Task<PagedResult<Category>> GetAll(int pageIndex, int pageSize);
+        Task<PagedResult<Category>> GetAllCategories(int pageIndex, int pageSize, string token);
     }
 }

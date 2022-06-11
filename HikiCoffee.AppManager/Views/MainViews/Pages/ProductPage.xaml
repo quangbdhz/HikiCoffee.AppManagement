@@ -3,22 +3,97 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:HikiCoffee.AppManager.Views.MainViews.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        
+      xmlns:prism="http://prismlibrary.com/"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      
+      d:DesignHeight="686" d:DesignWidth="1236"
       Title="ProductPage">
 
-    <StackPanel >
-        <WrapPanel>
-            <Image Stretch="Uniform" Width="200">
-                <Image.Source>
-                    <BitmapImage DecodePixelWidth="300" UriSource="/Images/TableFurniture/status_table_0.jpg" />
-                </Image.Source>
-            </Image>
+    <Grid Background="White" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
 
-            <Image Stretch="Uniform" Width="200" Source="/Images/TableFurniture/status_table_1.jpg"/>
+        <materialDesign:Card Grid.Row="0" Margin="5 5 5 0">
+            <WrapPanel Margin="0 2 0 2">
+                <Button Command="{Binding AddProductWindowCommand}" 
+                        Content="Add" Margin="4 0 0 0" Width="100" ToolTip="Thêm" Background="#12CBC4" 
+                        FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"/>
 
-        </WrapPanel>
-        <TextBlock Text="ProductPage"/>
-    </StackPanel>
+                <Button Command="{Binding UpdateProductWindowCommand}"
+                        Content="Update" Margin="10 0 0 0" Width="100" ToolTip="Sửa" Background="#3ae374" FontWeight="Bold" 
+                        Foreground="Black" BorderBrush="Black" BorderThickness="1"/>
+
+                <Button Command="{Binding DeleteProductCommand}" Content="Delete" Margin="10 0 10 0" Width="100" ToolTip="Xóa"
+                        Background="#EA2027" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"></Button>
+
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Stretch">
+            <ScrollViewer PreviewMouseWheel="LvProductScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                <ListView Name="Lv_Product" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedItemProduct, Mode=OneWayToSource}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Update}" Value="True">
+                                    <Setter Property="Background" Value="Red" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding HasErrors}" Value="False">
+                                    <Setter Property="Background" Value="Green" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                            <GridViewColumn Header="Stock" DisplayMemberBinding="{Binding Stock}"/>
+                            <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                            <GridViewColumn Header="Original Price" DisplayMemberBinding="{Binding OriginalPrice}"/>
+                            <GridViewColumn Header="View Count" DisplayMemberBinding="{Binding ViewCount}"/>
+                            <GridViewColumn Header="Date Created" DisplayMemberBinding="{Binding DateCreated}"/>
+                            <GridViewColumn Header="Image Convert">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image RenderOptions.BitmapScalingMode="Fant"  Width="100" Height="100" Source="{Binding Path=UrlImageCoverProduct}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Featured" DisplayMemberBinding="{Binding IsFeatured}"/>
+                            <GridViewColumn Header="Active">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Margin="20 0" Command="{Binding ElementName=Lv_Product, Path=DataContext.LockOrUnlockUserComamnd}" CommandParameter="{Binding}" Background="Aqua" Padding="0" Style="{DynamicResource MaterialDesignToolButton}">
+                                            <materialDesign:PackIcon Width="20" Height="20" Foreground="{Binding IsActive, Converter={StaticResource foregroundIsActiveUserConverter}}"
+                                                                     Kind="{Binding IsActive, Converter={StaticResource isActiveUserConverter}}" Opacity=".99" />
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding MouseUpLvProductCommand}"
+                                CommandParameter="{Binding ElementName=Lv_Product, Path=SelectedItem}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding MouseDoubleLvProductCommand}"
+                                CommandParameter="{Binding ElementName=Lv_Product, Path=SelectedItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
+    </Grid>
 </Page>

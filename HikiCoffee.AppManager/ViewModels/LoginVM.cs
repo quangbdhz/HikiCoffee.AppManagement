@@ -1,4 +1,4 @@
-﻿using HikiCoffee.ApiIntegration.CategoryApi;
+﻿using HikiCoffee.ApiIntegration.LanguageAPI;
 using HikiCoffee.AppManager.DataRequests;
 using HikiCoffee.AppManager.Service;
 using HikiCoffee.AppManager.Views;
@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
 using System.Windows;
@@ -20,6 +21,12 @@ namespace HikiCoffee.AppManager.ViewModels
 {
     public class LoginVM : BindableBase
     {
+        private ObservableCollection<Language> _languages;
+        public ObservableCollection<Language> Languages
+        {
+            get { return _languages; }
+            set { SetProperty(ref _languages, value); }
+        }
 
         private string? _userName;
         public string? UserName
@@ -49,15 +56,23 @@ namespace HikiCoffee.AppManager.ViewModels
             set { SetProperty(ref _colorChangeButtonClose, value); }
         }
 
+        private int _languageIdDefault;
+        public int LanguageIdDefault
+        {
+            get { return _languageIdDefault; }
+            set { SetProperty(ref _languageIdDefault, value); }
+        }
+
         public DelegateCommand<PasswordBox> PasswordChangedCommand { get; set; }
         public DelegateCommand<Window> GetStartedCommand { get; set; }
         public DelegateCommand<Button> MouseMoveButtonCloseCommand { get; set; }
         public DelegateCommand<Button> MouseLeaveButtonCloseCommand { get; set; }
         public DelegateCommand<Window> CloseWindowCommand { get; set; }
         public DelegateCommand<Window> CheckNetworkConnection { get; set; }
-
-        private readonly ICategoryApi _categoryApi;
+        public DelegateCommand<Language> SelectLanguageCommand { get; set; }
+        
         private readonly TokenService tokenService;
+        private readonly ILanguageAPI _languageAPI;
 
 
         public LoginVM()
@@ -67,13 +82,28 @@ namespace HikiCoffee.AppManager.ViewModels
             var service = serviceCollection.BuildServiceProvider();
             tokenService = ActivatorUtilities.GetServiceOrCreateInstance<TokenService>(service);
 
-            _categoryApi = new CategoryApi();
+            _languageAPI = new LanguageAPI();
+
+            Languages = new ObservableCollection<Language>();
 
             ColorChangeButtonClose = "#2f3542";
 
             UserName = Rms.Read("UserInfo", "UserName", "");
             Password = Rms.Read("UserInfo", "Password", "");
             RememberMe = Rms.Read("UserInfo", "RememberMe", "") == "true" ? true : false;
+
+            string languageId = Rms.Read("Language", "Id", "");
+            if(languageId == "")
+            {
+                languageId = "0";
+                Rms.Write("Language", "Id", "0");
+            }
+
+
+            Loaded();
+
+
+            LanguageIdDefault = Int32.Parse(languageId);
 
             PasswordChangedCommand = new DelegateCommand<PasswordBox>(ExecutePasswordChangedCommand).ObservesProperty(() => Password);
 
@@ -86,6 +116,34 @@ namespace HikiCoffee.AppManager.ViewModels
             GetStartedCommand = new DelegateCommand<Window>(ExecuteGetStartedCommand, CanExecuteGetStartedCommand).ObservesProperty(() => UserName).ObservesProperty(() => Password);
 
             CheckNetworkConnection = new DelegateCommand<Window>(ExecuteCheckNetworkConnection);
+
+            SelectLanguageCommand = new DelegateCommand<Language>((p) =>
+            {
+                Rms.Write("Language", "Id", p.Id.ToString());
+            });
+        }
+
+        private async void Loaded()
+        {
+            try
+            {
+                Languages = await _languageAPI.GetAllLanguages(null);
+
+                int index = 0;
+                foreach(var item in Languages)
+                {
+                    if(item.Id == LanguageIdDefault)
+                    {
+                        LanguageIdDefault = index;
+                    }
+                    index++;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageDialogView messageDialogView = new MessageDialogView(ex.Message, 1);
+                messageDialogView.Show();
+            }
         }
 
         private async void ExecuteCheckNetworkConnection(Window obj)
@@ -118,7 +176,7 @@ namespace HikiCoffee.AppManager.ViewModels
 
         private async void ExecuteGetStartedCommand(Window obj)
         {
-            LoginRequest loginRequest = new LoginRequest() { UserName = UserName, Password = Password, RememberMe = RememberMe};
+            LoginRequest loginRequest = new LoginRequest() { UserName = UserName, Password = Password, RememberMe = RememberMe };
 
             var json = JsonConvert.SerializeObject(loginRequest);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
@@ -138,6 +196,7 @@ namespace HikiCoffee.AppManager.ViewModels
 
                         if (myDeserializedObjList != null)
                         {
+                            SystemConstants.TokenInUse = myDeserializedObjList.Message;
                             tokenService.SaveToken(myDeserializedObjList.Message);
 
                             obj.Hide();
@@ -156,7 +215,7 @@ namespace HikiCoffee.AppManager.ViewModels
                 }
                 catch (HttpRequestException ex)
                 {
-                    MessageDialogView messageDialogView = new MessageDialogView(ex.Message, 1); 
+                    MessageDialogView messageDialogView = new MessageDialogView(ex.Message, 1);
                     messageDialogView.Show();
                 }
             }

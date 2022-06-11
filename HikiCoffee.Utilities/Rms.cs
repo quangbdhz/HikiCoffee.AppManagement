@@ -16,11 +16,13 @@ namespace HikiCoffee.Utilities
             try
             {
                 string re = GetPath(Directory.GetCurrentDirectory());
-                re = re.Replace("/", "\\");
+                re = re.Replace("/", "\\") + "\\HikiCoffee.AppManager\\Data\\DataConfig.ini";
 
+                if (!CheckFileExist(re))
+                    return "";
 
                 StringBuilder sb = new StringBuilder(1024);
-                GetPrivateProfileString(section, key, def, sb, 1024, re + "\\HikiCoffee.AppManager\\Data\\DataConfig.ini");
+                GetPrivateProfileString(section, key, def, sb, 1024, re);
                 return sb.ToString();
             }
             catch (Exception ex)
@@ -36,9 +38,12 @@ namespace HikiCoffee.Utilities
             try
             {
                 string re = GetPath(Directory.GetCurrentDirectory());
-                re = re.Replace("/", "\\");
+                re = re.Replace("/", "\\") + "\\HikiCoffee.AppManager\\Data\\DataConfig.ini";
 
-                return WritePrivateProfileString(section, key, value, re + "\\HikiCoffee.AppManager\\Data\\DataConfig.ini");
+                if (!CheckFileExist(re))
+                    return 0;
+
+                return WritePrivateProfileString(section, key, value, re);
             }
             catch (Exception ex)
             {
@@ -88,6 +93,11 @@ namespace HikiCoffee.Utilities
             int index = value.IndexOf("HikiCoffee.AppManager") + 21;
 
             return value.Substring(0, index);
+        }
+
+        public static bool CheckFileExist(string filePath)
+        {
+            return File.Exists(filePath);
         }
     }
 }
