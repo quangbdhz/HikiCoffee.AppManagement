@@ -43,6 +43,17 @@
             </i:Interaction.Triggers>
         </Button>
 
+        <ComboBox Grid.Column="1" Margin="7 0 0 0" Padding="0 6 0 0" VerticalAlignment="Top" HorizontalAlignment="Left" Name="cbx_language"
+                  BorderThickness="0" materialDesign:ColorZoneAssist.Mode="Light" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderBrush="Black"
+                  ItemsSource="{Binding Languages}" DisplayMemberPath="Code" SelectedIndex="{Binding LanguageIdDefault}" FontWeight="DemiBold">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="DropDownClosed">
+                    <i:InvokeCommandAction Command="{Binding SelectLanguageCommand}"
+                                                           CommandParameter="{Binding ElementName=cbx_language, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
+
         <materialDesign:Card Width="250" Margin="0 35" Background="#000232">
             <Grid>
                 <Grid.RowDefinitions>
@@ -93,7 +104,7 @@
 
                         <materialDesign:PackIcon Width="25" Height="25" Margin="0 3 0 5" Grid.Column="0" Foreground="White" Kind="Lock" />
 
-                        <PasswordBox Margin="10 7 0 0" PasswordChar="{Binding Password}" Grid.Column="1" materialDesign:HintAssist.Hint="Password" VerticalAlignment="Center"
+                        <PasswordBox Margin="10 7 0 0" Grid.Column="1" materialDesign:HintAssist.Hint="Password" VerticalAlignment="Center"
                             Name="password_UserStaff" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Foreground="White" BorderThickness="0">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PasswordChanged">

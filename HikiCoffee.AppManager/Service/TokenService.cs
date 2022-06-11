@@ -1,6 +1,7 @@
 ﻿using HikiCoffee.Utilities;
 using Microsoft.AspNetCore.DataProtection;
 using System;
+using System.Security.Cryptography;
 
 namespace HikiCoffee.AppManager.Service
 {
@@ -15,13 +16,20 @@ namespace HikiCoffee.AppManager.Service
 
         public string ReadToken()
         {
-            string token1 = Rms.Read("TokenInfoVersion1", "Token", "");
-            token1 = _protector.Unprotect(token1);
+            try
+            {
+                string token1 = Rms.Read("TokenInfoVersion1", "Token", "");
+                token1 = _protector.Unprotect(token1);
 
-            string token2 = Rms.Read("TokenInfoVersion2", "Token", "");
-            token2 = _protector.Unprotect(token2);
+                string token2 = Rms.Read("TokenInfoVersion2", "Token", "");
+                token2 = _protector.Unprotect(token2);
 
-            return token1 + token2;
+                return token1 + token2;
+            }
+            catch (CryptographicException ex)
+            {
+                return ex.Message;
+            }
         }
 
         public bool SaveToken(string token)

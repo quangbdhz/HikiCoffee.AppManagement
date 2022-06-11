@@ -1,7 +1,9 @@
-﻿namespace HikiCoffee.Models.Common
+﻿using System.Collections.ObjectModel;
+
+namespace HikiCoffee.Models.Common
 {
     public class PagedResult<T> : PagedResultBase
     {
-        public List<T> Items { set; get; }
+        public ObservableCollection<T> Items { set; get; }
     }
 }
