@@ -17,6 +17,11 @@ namespace HikiCoffee.ApiIntegration.ProductTranslationAPI
             return await DeleteAsync(SystemConstants.DomainName + $"/api/ProductTranslations/Delete/{productTransltionId}", token);
         }
 
+        public async Task<ObservableCollection<ProductTranslation>> GetAllProductTranslationByLanguageId(int languageId, string token)
+        {
+            return await GetListAsync<ProductTranslation>(SystemConstants.DomainName + $"/api/ProductTranslations/GetAllByLanguageId/{languageId}", token);
+        }
+
         public async Task<ObservableCollection<ProductTranslation>> GetAllProductTranslations(int productId, string token)
         {
             return await GetListAsync<ProductTranslation>(SystemConstants.DomainName + $"/api/ProductTranslations/GetByProductId/{productId}", token);

@@ -8,6 +8,8 @@ namespace HikiCoffee.ApiIntegration.ProductTranslationAPI
     {
         Task<ObservableCollection<ProductTranslation>> GetAllProductTranslations(int productId, string token);
 
+        Task<ObservableCollection<ProductTranslation>> GetAllProductTranslationByLanguageId(int languageId, string token);
+
         Task<string> AddProductTranslation(string? token, ProductTranslationCreateRequest request);
 
         Task<string> UpdateProductTranslation(string? token, ProductTranslationUpdateRequest request);

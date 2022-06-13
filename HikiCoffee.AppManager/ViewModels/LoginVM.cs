@@ -105,6 +105,8 @@ namespace HikiCoffee.AppManager.ViewModels
 
             LanguageIdDefault = Int32.Parse(languageId);
 
+            SystemConstants.LanguageIdInUse = LanguageIdDefault;
+
             PasswordChangedCommand = new DelegateCommand<PasswordBox>(ExecutePasswordChangedCommand).ObservesProperty(() => Password);
 
             MouseMoveButtonCloseCommand = new DelegateCommand<Button>((p) => { ColorChangeButtonClose = "#EA2027"; }).ObservesProperty(() => ColorChangeButtonClose);
@@ -119,6 +121,8 @@ namespace HikiCoffee.AppManager.ViewModels
 
             SelectLanguageCommand = new DelegateCommand<Language>((p) =>
             {
+                SystemConstants.LanguageIdInUse = p.Id;
+
                 Rms.Write("Language", "Id", p.Id.ToString());
             });
         }
@@ -197,6 +201,8 @@ namespace HikiCoffee.AppManager.ViewModels
                         if (myDeserializedObjList != null)
                         {
                             SystemConstants.TokenInUse = myDeserializedObjList.Message;
+                            SystemConstants.UserIdInUse = myDeserializedObjList.ResultObj;
+
                             tokenService.SaveToken(myDeserializedObjList.Message);
 
                             obj.Hide();

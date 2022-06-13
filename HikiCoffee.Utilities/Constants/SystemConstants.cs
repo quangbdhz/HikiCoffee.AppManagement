@@ -21,5 +21,10 @@
         }
 
         public static string TokenInUse { get; set; } = string.Empty;
+
+        public static Guid UserIdInUse { get; set; } = Guid.Empty;
+
+        public static int LanguageIdInUse { get; set; } = 0;
+
     }
 }
