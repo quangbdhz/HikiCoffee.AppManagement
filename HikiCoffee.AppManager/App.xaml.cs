@@ -4,6 +4,7 @@ using HikiCoffee.AppManager.ViewModels.ImportProductViewModels;
 using HikiCoffee.AppManager.ViewModels.MainViewModels;
 using HikiCoffee.AppManager.ViewModels.MyUserControlViewModels;
 using HikiCoffee.AppManager.ViewModels.ProductViewModels;
+using HikiCoffee.AppManager.ViewModels.UserViewModels;
 using HikiCoffee.AppManager.Views;
 using HikiCoffee.AppManager.Views.ImportProductViews;
 using HikiCoffee.AppManager.Views.MainViews.Pages;
@@ -36,6 +37,7 @@ namespace HikiCoffee.AppManager
             ViewModelLocationProvider.Register<ProductPage, PageProductVM>();
             ViewModelLocationProvider.Register<ImportProductPage, PageImportProductVM>();
             ViewModelLocationProvider.Register<AddImportProductView, AddImportProductVM>();
+            ViewModelLocationProvider.Register<CustomerPage, PageCustomerVM>();
 
 
             ViewModelLocationProvider.Register<AddProductView, PageProductVM>();
