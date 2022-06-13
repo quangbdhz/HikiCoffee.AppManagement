@@ -5,10 +5,72 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HikiCoffee.AppManager.Views.MainViews.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        
+      xmlns:prism="http://prismlibrary.com/"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      
+      d:DesignHeight="686" d:DesignWidth="1236"
+      
       Title="ImportProductPage">
 
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock Text="ImportProductPage"/>
+    <Grid Background="White" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <materialDesign:Card Grid.Row="0" Margin="5 5 5 0">
+            <WrapPanel Margin="0 2 0 2">
+                <Button Command="{Binding AddImportProductWindowCommand}" 
+                        Content="Add" Margin="4 0 0 0" Width="100" ToolTip="Thêm" Background="#12CBC4" 
+                        FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"/>
+
+                <Button Command="{Binding DeleteImportProductCommand}" IsEnabled="False" Content="Delete" Margin="10 0 10 0" Width="100" ToolTip="Xóa"
+                        Background="#EA2027" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"/>
+
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Stretch">
+            <ScrollViewer PreviewMouseWheel="LvImportProuctScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                <ListView Name="Lv_ImportProduct" ItemsSource="{Binding ImportProducts}" SelectedItem="{Binding SelectedItemProduct, Mode=OneWayToSource}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Update}" Value="True">
+                                    <Setter Property="Background" Value="Red" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding HasErrors}" Value="False">
+                                    <Setter Property="Background" Value="Green" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                            <GridViewColumn Header="Product Name" DisplayMemberBinding="{Binding ProductName}"/>
+                            <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}"/>
+                            <GridViewColumn Header="Name Staff" DisplayMemberBinding="{Binding FullNameStaffAddImportProduct}"/>
+                            <GridViewColumn Header="SuplierName" DisplayMemberBinding="{Binding SuplierName}"/>
+                            <GridViewColumn Header="Price Import" DisplayMemberBinding="{Binding PriceImportProduct}"/>
+                            <GridViewColumn Header="Date Created" DisplayMemberBinding="{Binding DateImportProduct}"/>
+                            
+                        </GridView>
+                    </ListView.View>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding MouseUpLvImportProductCommand}"
+                                CommandParameter="{Binding ElementName=Lv_ImportProduct, Path=SelectedItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
     </Grid>
 </Page>
