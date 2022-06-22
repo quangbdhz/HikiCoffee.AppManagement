@@ -18,13 +18,18 @@
         
         Name="addImportProductWindow"
         Title="Add Import Product" Height="Auto" Width="600">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <customcontrol:ControlBarUC Margin="0 5 5 0" Background="Aqua" VerticalContentAlignment="Top" Grid.Row="0" 
+        <customcontrol:ControlBarUC Margin="0 5 5 0" VerticalContentAlignment="Top" Grid.Row="0" 
                                     Tag="{Binding ElementName=addImportProductWindow}"  HorizontalAlignment="Right"/>
 
 

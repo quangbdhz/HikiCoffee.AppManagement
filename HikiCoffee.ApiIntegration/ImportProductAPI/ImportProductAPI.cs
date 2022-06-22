@@ -7,9 +7,9 @@ namespace HikiCoffee.ApiIntegration.ImportProductAPI
 {
     public class ImportProductAPI : BaseAPI, IImportProductAPI
     {
-        public async Task<string> AddImportProduct(ImportProductCreateRequest request, string? token)
+        public async Task<ApiResult<int>> AddImportProduct(ImportProductCreateRequest request, string? token)
         {
-            return await PostAsync<ImportProductCreateRequest>(SystemConstants.DomainName + $"/api/ImportProducts/Add", token, request);
+            return await ApiResultPostAsync<ImportProductCreateRequest>(SystemConstants.DomainName + $"/api/ImportProducts/Add", token, request);
         }
 
         public async Task<PagedResult<ImportProduct>> GetAllImportProduct(int pageIndex, int pageSize, int languageId, string? token)

@@ -9,6 +9,7 @@ using System;
 using System.Collections.ObjectModel;
 using HikiCoffee.Models.DataRequest.ImportProducts;
 using HikiCoffee.ApiIntegration.ImportProductAPI;
+using HikiCoffee.Models.Common;
 
 namespace HikiCoffee.AppManager.ViewModels.ImportProductViewModels
 {
@@ -74,12 +75,18 @@ namespace HikiCoffee.AppManager.ViewModels.ImportProductViewModels
             {
                 var request = new ImportProductCreateRequest() { Quantity = Quantity, PriceImportProduct = PriceImportProduct, ProductId = SelectedProductTranslation.ProductId, SuplierId = SelectedSuplier.Id, UserIdImportProduct = SystemConstants.UserIdInUse };
 
-                var reponse = await _importProductAPI.AddImportProduct(request, SystemConstants.TokenInUse);
+                ApiResult<int> result = await _importProductAPI.AddImportProduct(request, SystemConstants.TokenInUse);
 
-                MessageDialogView messageDialogView = new MessageDialogView(reponse, 0);
-                messageDialogView.Show();
-
-
+                if (result.IsSuccessed)
+                {
+                    MessageDialogView messageDialogView = new MessageDialogView(result.Message, 0);
+                    messageDialogView.Show();
+                }
+                else
+                {
+                    MessageDialogView messageDialogView = new MessageDialogView(result.Message, 1);
+                    messageDialogView.Show();
+                }
             }, () =>
             {
                 if (PriceImportProduct <= 0 || Quantity < 0)

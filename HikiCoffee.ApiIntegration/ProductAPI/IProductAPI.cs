@@ -8,8 +8,10 @@ namespace HikiCoffee.ApiIntegration.ProductAPI
     {
         Task<PagedResult<Product>> GetAllProducts(int pageIndex, int pageSize, string token);
 
-        Task<string> UpdateProduct(ProductUpdateRequest request, string? token);
+        Task<ApiResult<int>> AddProduct(ProductCreateRequest request, string? token);
 
-        Task<string> DeleteProduct(int productId, string? token);
+        Task<ApiResult<bool>> UpdateProduct(ProductUpdateRequest request, string? token);
+
+        Task<ApiResult<bool>> DeleteProduct(int productId, string? token);
     }
 }

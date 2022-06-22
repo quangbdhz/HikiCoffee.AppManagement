@@ -1,4 +1,4 @@
-﻿namespace HikiCoffee.AppManager.DataRequests
+﻿namespace HikiCoffee.Models.DataRequest.Users
 {
     public class LoginRequest
     {

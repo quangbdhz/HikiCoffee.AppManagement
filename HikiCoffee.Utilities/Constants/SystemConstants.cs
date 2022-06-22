@@ -1,4 +1,6 @@
-﻿namespace HikiCoffee.Utilities
+﻿using HikiCoffee.Models;
+
+namespace HikiCoffee.Utilities
 {
     public class SystemConstants
     {
@@ -24,7 +26,11 @@
 
         public static Guid UserIdInUse { get; set; } = Guid.Empty;
 
+        public static User UserLogin { get; set; }
+
         public static int LanguageIdInUse { get; set; } = 0;
+
+        public static User GetUserOrder { get; set; }
 
     }
 }

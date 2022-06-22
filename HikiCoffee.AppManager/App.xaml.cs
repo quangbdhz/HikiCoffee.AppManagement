@@ -1,15 +1,16 @@
 ﻿using HikiCoffee.AppManager.MyUserControl;
 using HikiCoffee.AppManager.ViewModels;
+using HikiCoffee.AppManager.ViewModels.CoffeeTableViewModels;
 using HikiCoffee.AppManager.ViewModels.ImportProductViewModels;
 using HikiCoffee.AppManager.ViewModels.MainViewModels;
 using HikiCoffee.AppManager.ViewModels.MyUserControlViewModels;
 using HikiCoffee.AppManager.ViewModels.ProductViewModels;
 using HikiCoffee.AppManager.ViewModels.UserViewModels;
 using HikiCoffee.AppManager.Views;
+using HikiCoffee.AppManager.Views.CoffeeTableViews;
 using HikiCoffee.AppManager.Views.ImportProductViews;
 using HikiCoffee.AppManager.Views.MainViews.Pages;
 using HikiCoffee.AppManager.Views.ProductViews;
-using HikiCoffee.AppManager.Views.ProductViews.ProductTranslationViews;
 using Prism.Ioc;
 using Prism.Mvvm;
 using System.Windows;
@@ -35,12 +36,14 @@ namespace HikiCoffee.AppManager
             ViewModelLocationProvider.Register<LoginView, LoginVM>();
 
             ViewModelLocationProvider.Register<ProductPage, PageProductVM>();
+            ViewModelLocationProvider.Register<AddProductView, AddProductVM>();
             ViewModelLocationProvider.Register<ImportProductPage, PageImportProductVM>();
             ViewModelLocationProvider.Register<AddImportProductView, AddImportProductVM>();
             ViewModelLocationProvider.Register<CustomerPage, PageCustomerVM>();
 
-
-            ViewModelLocationProvider.Register<AddProductView, PageProductVM>();
+            ViewModelLocationProvider.Register<CoffeeTablePage, PageCoffeeTableVM>();
+            ViewModelLocationProvider.Register<MoveCoffeeTableView, MoveCoffeeTableVM>();
+            ViewModelLocationProvider.Register<MergeCoffeeTableView, MergeCoffeeTableVM>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

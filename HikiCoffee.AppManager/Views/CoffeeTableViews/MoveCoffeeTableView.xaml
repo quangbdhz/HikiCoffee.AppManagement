@@ -1,0 +1,83 @@
+﻿<Window x:Class="HikiCoffee.AppManager.Views.CoffeeTableViews.MoveCoffeeTableView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HikiCoffee.AppManager.Views.CoffeeTableViews"
+        mc:Ignorable="d"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:customcontrol="clr-namespace:HikiCoffee.AppManager.MyUserControl"
+        
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        
+        Name="moveCoffeeTableView"
+        Title="MoveCoffeeTableView" Height="450" Width="800">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <customcontrol:ControlBarUC Grid.Row="0" Margin="0 5 5 0" VerticalContentAlignment="Top"
+                                    Tag="{Binding ElementName=moveCoffeeTableView}"  HorizontalAlignment="Right"/>
+
+        <materialDesign:Card Grid.Row="1" Margin="5">
+            <ScrollViewer  PreviewMouseWheel="LvTableFurnitureScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                <ListView Name="lv_coffee_table_founds" Margin="0 0" Padding="0" ItemsSource="{Binding CoffeeTableFounds}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Margin="0 0 0 0"
+                                    Width="{Binding (FrameworkElement.ActualWidth), 
+                                    RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                    ItemWidth="{Binding (ListView.View).ItemWidth, 
+                                    RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                                    ItemHeight="{Binding (ListView.View).ItemHeight, 
+                                    RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Margin" Value="0"/>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn>
+                                <GridViewColumn.Header>
+                                    <TextBlock Text="TABLE" Margin="0" Padding="0" FontWeight="Bold" FontSize="14" Foreground="Black"/>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <customcontrol:ControlTableFurniture NameTable="{Binding NameCoffeeTable}" 
+                                                                       UrlImage="{Binding StatusId}" BackgroundTable="{Binding StatusId}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding GetSelectedCoffeeTableFoundCommand}" CommandParameter="{Binding ElementName=lv_coffee_table_founds, Path=SelectedItem}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding CloseMoveCoffeeTableWindowCommand}" CommandParameter="{Binding ElementName=moveCoffeeTableView}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
+    </Grid>
+</Window>

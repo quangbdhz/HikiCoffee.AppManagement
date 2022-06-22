@@ -18,7 +18,8 @@
                 </Ellipse.Fill>
             </Ellipse>
 
-            <TextBlock Text="{Binding NameTable, ElementName=this, FallbackValue=NameTable, TargetNullValue=NameTable}" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Margin="15 5 0 0" HorizontalAlignment="Left"/>
+            <TextBlock Text="{Binding NameTable, ElementName=this, FallbackValue=NameTable, TargetNullValue=NameTable}" VerticalAlignment="Top" 
+                       FontSize="15" FontWeight="Bold" Margin="5 5 0 0" HorizontalAlignment="Left"/>
         </Grid>
     </Border>
 </UserControl>
