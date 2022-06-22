@@ -15,15 +15,15 @@ namespace HikiCoffee.AppManager.Converter
 
             string replaceePathProject = pathProject.Replace("bin\\Debug\\net6.0-windows", "");
 
-            if (status == "0")
+            if (status == "3")
             {
                 //https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1648398535/HikiCoffee/App_Manager/status_table_1_ywspa2.jpg
-                return replaceePathProject + "Images\\TableFurniture\\status_table_0.jpg";
+                return replaceePathProject + "Images\\TableFurniture\\status_table_not_use.jpg";
             }
             else
             {
                 //https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1648398537/HikiCoffee/App_Manager/status_table_0_lvu91t.jpg
-                return replaceePathProject + "Images\\TableFurniture\\status_table_1.jpg";
+                return replaceePathProject + "Images\\TableFurniture\\status_table_in_use.jpg";
             }
         }
 

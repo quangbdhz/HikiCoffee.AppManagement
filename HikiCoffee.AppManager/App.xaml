@@ -17,10 +17,13 @@
 
                 <ResourceDictionary Source="/Styles/StyleTextBoxAndTextBlock.xaml"/>
                 <ResourceDictionary Source="/Styles/StyleButton.xaml"/>
+                <ResourceDictionary Source="/Styles/Color.xaml"/>
+                <ResourceDictionary Source="/Styles/Border.xaml"/>
 
                 <ResourceDictionary>
                     <customconverter:BackgroundTableFurnitureConverter x:Key="backgroundTableFurnitureConverter"/>
                     <customconverter:StatusTableFurnitureImageConverter x:Key="statusTableFurnitureImageConverter"/>
+                    <customconverter:NumberConverter x:Key="numberConverter"/>
                     
                     <customconverterUser:IsActiveUserConverter x:Key="isActiveUserConverter"/>
                     <customconverterUser:ForegroundIsActiveUserConverter x:Key="foregroundIsActiveUserConverter"/>

@@ -10,7 +10,7 @@ namespace HikiCoffee.AppManager.Converter
         {
             string? status = value as string;
 
-            if (status == "0")
+            if (status == "4")
             {
                 return "White";
             }

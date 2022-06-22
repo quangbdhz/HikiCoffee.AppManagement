@@ -8,17 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\TableFurniture\status_table_0.jpg" />
+    <None Remove="Images\TableFurniture\status_table_in_use.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Images\TableFurniture\status_table_0.jpg" />
+    <EmbeddedResource Include="Images\TableFurniture\status_table_in_use.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="ModelDataRequest\ProductTranslations\" />
-    <Folder Include="ViewModels\CustomerViewModels\" />
   </ItemGroup>
 
   <ItemGroup>

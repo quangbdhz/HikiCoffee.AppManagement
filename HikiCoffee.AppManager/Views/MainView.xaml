@@ -16,7 +16,7 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Name="mainWindow"
-        Title="MainWindow" Height="730" Width="1385">
+        Title="MainWindow" Height="730" Width="1400">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,59 +25,57 @@
         </Grid.ColumnDefinitions>
 
         <Border  Margin="5" BorderThickness="5" BorderBrush="#7b40f2" CornerRadius="5" Grid.Column="0">
-            <Grid Grid.Column="0" Margin="-1" Background="#7b40f2">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+            <Grid Grid.Column="0"  Background="#7b40f2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                    <ListView Grid.Row="0" Name="Menu" >
-                        <ListViewItem Background="Transparent" BorderBrush="Transparent" Margin="0 20 0 0">
-                            <materialDesign:PackIcon ToolTip="Home" Kind="Home" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconHome}"/>
-                        </ListViewItem>
+                <ListView Grid.Row="0" Name="Menu" >
+                    <ListViewItem Background="Transparent" BorderBrush="Transparent" Margin="0 20 0 0">
+                        <materialDesign:PackIcon ToolTip="Home" Kind="Home" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconHome}"/>
+                    </ListViewItem>
 
-                        <ListViewItem>
-                            <materialDesign:PackIcon ToolTip="Table Furniture" Kind="TableFurniture" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconTableFurniture}"/>
-                        </ListViewItem>
+                    <ListViewItem>
+                        <materialDesign:PackIcon ToolTip="Table Furniture" Kind="TableFurniture" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconTableFurniture}"/>
+                    </ListViewItem>
 
-                        <ListViewItem>
-                            <materialDesign:PackIcon ToolTip="Product" Kind="Cart" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconDrink}"/>
-                        </ListViewItem>
+                    <ListViewItem>
+                        <materialDesign:PackIcon ToolTip="Product" Kind="Cart" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconDrink}"/>
+                    </ListViewItem>
 
-                        <ListViewItem>
-                            <materialDesign:PackIcon ToolTip="Food" Kind="Import" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconFood}"/>
-                        </ListViewItem>
+                    <ListViewItem>
+                        <materialDesign:PackIcon ToolTip="Food" Kind="Import" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconFood}"/>
+                    </ListViewItem>
 
-                        <ListViewItem>
-                            <materialDesign:PackIcon ToolTip="Customer" Kind="AccountTie" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconCustomer}"/>
-                        </ListViewItem>
+                    <ListViewItem>
+                        <materialDesign:PackIcon ToolTip="Customer" Kind="AccountTie" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconCustomer}"/>
+                    </ListViewItem>
 
-                        <ListViewItem>
-                            <materialDesign:PackIcon ToolTip="Statistical" Kind="ChartBarStacked" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconStatistical}"/>
-                        </ListViewItem>
+                    <ListViewItem>
+                        <materialDesign:PackIcon ToolTip="Statistical" Kind="ChartBarStacked" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconStatistical}"/>
+                    </ListViewItem>
 
-                        <ListViewItem>
-                            <materialDesign:PackIcon ToolTip="Bill" Kind="FormatListBulleted" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconBill}"/>
-                        </ListViewItem>
+                    <ListViewItem>
+                        <materialDesign:PackIcon ToolTip="Bill" Kind="FormatListBulleted" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconBill}"/>
+                    </ListViewItem>
 
-                        <ListViewItem>
-                            <materialDesign:PackIcon ToolTip="Delete" Kind="DeleteOutline" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconDelete}"/>
-                        </ListViewItem>
+                    <ListViewItem>
+                        <materialDesign:PackIcon ToolTip="Delete" Kind="DeleteOutline" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconDelete}"/>
+                    </ListViewItem>
 
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseUp">
-                                <i:InvokeCommandAction Command="{Binding ChoosePageCommand}"
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding ChoosePageCommand}"
                                                                CommandParameter="{Binding ElementName=Menu}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ListView>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListView>
 
 
-                    <Button Background="Transparent"  Margin="0 0 0 10" Padding="0" Grid.Row="1"  BorderThickness="0">
-                        <materialDesign:PackIcon HorizontalAlignment="Center" Kind="Logout" Width="25" Height="25" Foreground="White"/>
-                    </Button>
-                </Grid>
+                <Button Background="Transparent"  Margin="0 0 0 10" Padding="0" Grid.Row="1"  BorderThickness="0">
+                    <materialDesign:PackIcon HorizontalAlignment="Center" Kind="Logout" Width="25" Height="25" Foreground="White"/>
+                </Button>
             </Grid>
         </Border>
 
@@ -125,7 +123,7 @@
                         </materialDesign:PopupBox.ToggleContent>
 
 
-                        <StackPanel  Background="#2d3436">
+                        <StackPanel Background="#2d3436">
                             <ScrollViewer Name="ListViewScrollViewerMessager"
                                         VerticalScrollBarVisibility="Auto" Margin="0 0 0 0" Background="#2d3436" Width="160">
                                 <ListView Name="MenuSetting" FontFamily="Champagne &amp; Limousines" Margin="0 5 0 0" FontSize="13" TextElement.Foreground="White">
@@ -168,11 +166,11 @@
 
                     <Ellipse Grid.Column="2" Margin="0 0 5 0" Height="30" Width="30">
                         <Ellipse.Fill>
-                            <ImageBrush RenderOptions.BitmapScalingMode="Fant" ImageSource="{Binding UrlAvatarStaffLogin}"/>
+                            <ImageBrush RenderOptions.BitmapScalingMode="Fant" ImageSource="{Binding UrlImageCoverEmployee}"/>
                         </Ellipse.Fill>
                     </Ellipse>
 
-                    <TextBlock FontSize="15" VerticalAlignment="Center" Margin="0 0 50 0" Grid.Column="3" Text="Hikigaya Hachiman"/>
+                    <TextBlock Grid.Column="3" Text="{Binding FullNameOfEmployeeWorking}" FontSize="15" VerticalAlignment="Center" Margin="0 0 50 0"/>
                 </Grid>
             </Grid>
 

@@ -8,7 +8,7 @@ namespace HikiCoffee.ApiIntegration.ImportProductAPI
     {
         Task<PagedResult<ImportProduct>> GetAllImportProduct(int pageIndex, int pageSize, int languageId, string? token);
 
-        Task<string> AddImportProduct(ImportProductCreateRequest request, string? token);
+        Task<ApiResult<int>> AddImportProduct(ImportProductCreateRequest request, string? token);
 
     }
 }

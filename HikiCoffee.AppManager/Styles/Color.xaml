@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="BlueMartina" Color="#12CBC4" />
+    <SolidColorBrush x:Key="Energos" Color="#C4E538" />
+    <SolidColorBrush x:Key="BaraRed" Color="#ED4C67" />
+    <SolidColorBrush x:Key="CasadoraYellow" Color="#feca57" />
+    <SolidColorBrush x:Key="FuelTown" Color="#576574" />
+    <SolidColorBrush x:Key="TwinkleBlue" Color="#d1d8e0" />
+    <SolidColorBrush x:Key="MintyGreen" Color="#0be881" />
+    <SolidColorBrush x:Key="DarkPeriwinkle" Color="#575fcf" />
+    <SolidColorBrush x:Key="GoodNight" Color="#485460" />
+    <SolidColorBrush x:Key="LighterPurple" Color="#a55eea" />
+    <SolidColorBrush x:Key="CoastalBreeze" Color="#dff9fb" />
+    <SolidColorBrush x:Key="LavenderTea" Color="#FDA7DF" />
+    <SolidColorBrush x:Key="AuroraGreen" Color="#78e08f" />
+    <SolidColorBrush x:Key="PrestigeBlue" Color="#2f3542" />
+    <SolidColorBrush x:Key="RedPigment" Color="#EA2027" />
+    
+</ResourceDictionary>

@@ -2,6 +2,7 @@
 using Prism.Commands;
 using System.Windows.Controls;
 using System;
+using HikiCoffee.Utilities;
 
 namespace HikiCoffee.AppManager.ViewModels.MainViewModels
 {
@@ -22,6 +23,19 @@ namespace HikiCoffee.AppManager.ViewModels.MainViewModels
             set { SetProperty(ref _optionMenu, value); }
         }
 
+        private string? _fullNameOfEmployeeWorking;
+        public string? FullNameOfEmployeeWorking
+        {
+            get { return _fullNameOfEmployeeWorking; }
+            set { SetProperty(ref _fullNameOfEmployeeWorking, value); }
+        }
+
+        private string? _urlImageCoverEmployee;
+        public string? UrlImageCoverEmployee
+        {
+            get { return _urlImageCoverEmployee; }
+            set { SetProperty(ref _urlImageCoverEmployee, value); }
+        }
         #region color_icon_listview
         private string? _colorIconHome;
         public string? ColorIconHome
@@ -94,6 +108,9 @@ namespace HikiCoffee.AppManager.ViewModels.MainViewModels
         {
             SourcePage = @"/Views/MainViews/Pages/MainPage.xaml";
 
+            FullNameOfEmployeeWorking = SystemConstants.UserLogin.FirstName + " " + SystemConstants.UserLogin.LastName;
+            UrlImageCoverEmployee = SystemConstants.UserLogin.UrlImageUser;
+
             ColorIconHome = "Black";
             ColorIconTableFurniture = "White";
             ColorIconFood = "White";
@@ -117,7 +134,7 @@ namespace HikiCoffee.AppManager.ViewModels.MainViewModels
             }
             else if (OptionMenu == 1)
             {
-                SourcePage = @"/Views/MainViews/Pages/TableFurniturePage.xaml";
+                SourcePage = @"/Views/MainViews/Pages/CoffeeTablePage.xaml";
                 ClickChangeColorIcon(OptionMenu);
             }
             else if (OptionMenu == 2)
@@ -137,12 +154,12 @@ namespace HikiCoffee.AppManager.ViewModels.MainViewModels
             }
             else if (OptionMenu == 5)
             {
-                SourcePage = @"/Views/MainViews/Pages/CustomerPage.xaml";
+                SourcePage = @"/Views/MainViews/Pages/CategoryPage.xaml";
                 ClickChangeColorIcon(OptionMenu);
             }
             else if (OptionMenu == 6)
             {
-                SourcePage = @"/Views/MainViews/Pages/CustomerPage.xaml";
+                SourcePage = @"/Views/MainViews/Pages/SuplierPage.xaml";
                 ClickChangeColorIcon(OptionMenu);
             }
             else if (OptionMenu == 7)

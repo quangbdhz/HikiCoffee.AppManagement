@@ -1,9 +1,9 @@
 ﻿using HikiCoffee.ApiIntegration.CategoryTranslationAPI;
 using HikiCoffee.ApiIntegration.ProductAPI;
-using HikiCoffee.AppManager.Service;
 using HikiCoffee.AppManager.Service.UploadImageCloudinary;
 using HikiCoffee.AppManager.Views.MessageDialogViews;
 using HikiCoffee.Models;
+using HikiCoffee.Models.Common;
 using HikiCoffee.Models.DataRequest.Products;
 using HikiCoffee.Utilities;
 using Microsoft.Win32;
@@ -12,7 +12,6 @@ using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 
 namespace HikiCoffee.AppManager.ViewModels.ProductViewModels
 {
@@ -121,23 +120,29 @@ namespace HikiCoffee.AppManager.ViewModels.ProductViewModels
 
                     foreach (var item in AddCategoryInProducts)
                     {
-
                         var productInCategory = new ProductInCategory() { CategoryId = item.CategoryId, ProductId = product.Id };
                         await _categoryTranslationAPI.AddCategoryInProduct(productInCategory, SystemConstants.TokenInUse);
-
                     }
 
-                    if(UrlImageCoverProduct != product.UrlImageCoverProduct)
+                    if (UrlImageCoverProduct != product.UrlImageCoverProduct)
                     {
                         UrlImageCoverProduct = await _uploadImageCloudinaryService.UploadImageCloudinary(UrlImageCoverProduct);
                     }
 
                     ProductUpdateRequest productUpdateRequest = new ProductUpdateRequest() { Id = product.Id, IsFeatured = IsFeatured, OriginalPrice = product.Price, Price = Price, UrlImageCoverProduct = UrlImageCoverProduct };
 
-                    string response = await _productAPI.UpdateProduct(productUpdateRequest, SystemConstants.TokenInUse);
+                    ApiResult<bool> result = await _productAPI.UpdateProduct(productUpdateRequest, SystemConstants.TokenInUse);
 
-                    MessageDialogView messageDialogView = new MessageDialogView(response, 0);
-                    messageDialogView.Show();
+                    if (result.IsSuccessed)
+                    {
+                        MessageDialogView messageDialogView = new MessageDialogView(result.Message, 0);
+                        messageDialogView.Show();
+                    }
+                    else
+                    {
+                        MessageDialogView messageDialogView = new MessageDialogView(result.Message, 1);
+                        messageDialogView.Show();
+                    }
                 }
                 else
                 {
@@ -187,7 +192,7 @@ namespace HikiCoffee.AppManager.ViewModels.ProductViewModels
                 AddCategoryInProducts = await _categoryTranslationAPI.GetAllCategoryTranslationOfProduct(languageIdDefault, product.Id, SystemConstants.TokenInUse);
                 OldCategoryInProducts = await _categoryTranslationAPI.GetAllCategoryTranslationOfProduct(languageIdDefault, product.Id, SystemConstants.TokenInUse); ;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageDialogView messageDialogView = new MessageDialogView(ex.Message, 1);
                 messageDialogView.Show();

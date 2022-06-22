@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace HikiCoffee.AppManager.Views.MainViews.Pages
 {
     /// <summary>
-    /// Interaction logic for TableFurniturePage.xaml
+    /// Interaction logic for CategoryPage.xaml
     /// </summary>
-    public partial class TableFurniturePage : Page
+    public partial class CategoryPage : Page
     {
-        public TableFurniturePage()
+        public CategoryPage()
         {
             InitializeComponent();
         }

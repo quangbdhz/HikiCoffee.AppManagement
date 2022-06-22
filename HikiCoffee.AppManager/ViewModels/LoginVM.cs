@@ -1,10 +1,11 @@
 ﻿using HikiCoffee.ApiIntegration.LanguageAPI;
-using HikiCoffee.AppManager.DataRequests;
+using HikiCoffee.ApiIntegration.UserAPI;
 using HikiCoffee.AppManager.Service;
 using HikiCoffee.AppManager.Views;
 using HikiCoffee.AppManager.Views.MessageDialogViews;
 using HikiCoffee.Models;
 using HikiCoffee.Models.Common;
+using HikiCoffee.Models.DataRequest.Users;
 using HikiCoffee.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -70,10 +71,10 @@ namespace HikiCoffee.AppManager.ViewModels
         public DelegateCommand<Window> CloseWindowCommand { get; set; }
         public DelegateCommand<Window> CheckNetworkConnection { get; set; }
         public DelegateCommand<Language> SelectLanguageCommand { get; set; }
-        
+
         private readonly TokenService tokenService;
         private readonly ILanguageAPI _languageAPI;
-
+        private readonly IUserAPI _userAPI;
 
         public LoginVM()
         {
@@ -83,29 +84,9 @@ namespace HikiCoffee.AppManager.ViewModels
             tokenService = ActivatorUtilities.GetServiceOrCreateInstance<TokenService>(service);
 
             _languageAPI = new LanguageAPI();
-
-            Languages = new ObservableCollection<Language>();
-
-            ColorChangeButtonClose = "#2f3542";
-
-            UserName = Rms.Read("UserInfo", "UserName", "");
-            Password = Rms.Read("UserInfo", "Password", "");
-            RememberMe = Rms.Read("UserInfo", "RememberMe", "") == "true" ? true : false;
-
-            string languageId = Rms.Read("Language", "Id", "");
-            if(languageId == "")
-            {
-                languageId = "0";
-                Rms.Write("Language", "Id", "0");
-            }
-
+            _userAPI = new UserAPI();
 
             Loaded();
-
-
-            LanguageIdDefault = Int32.Parse(languageId);
-
-            SystemConstants.LanguageIdInUse = LanguageIdDefault;
 
             PasswordChangedCommand = new DelegateCommand<PasswordBox>(ExecutePasswordChangedCommand).ObservesProperty(() => Password);
 
@@ -129,21 +110,40 @@ namespace HikiCoffee.AppManager.ViewModels
 
         private async void Loaded()
         {
+            Languages = new ObservableCollection<Language>();
+
+            ColorChangeButtonClose = "#2f3542";
+
+            UserName = Rms.Read("UserInfo", "UserName", "");
+            Password = Rms.Read("UserInfo", "Password", "");
+            RememberMe = Rms.Read("UserInfo", "RememberMe", "") == "true" ? true : false;
+
+            string languageId = Rms.Read("Language", "Id", "");
+            if (languageId == "")
+            {
+                languageId = "0";
+                Rms.Write("Language", "Id", "0");
+            }
+
+            LanguageIdDefault = Int32.Parse(languageId);
+
+            SystemConstants.LanguageIdInUse = LanguageIdDefault;
+
             try
             {
                 Languages = await _languageAPI.GetAllLanguages(null);
 
                 int index = 0;
-                foreach(var item in Languages)
+                foreach (var item in Languages)
                 {
-                    if(item.Id == LanguageIdDefault)
+                    if (item.Id == LanguageIdDefault)
                     {
                         LanguageIdDefault = index;
                     }
                     index++;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageDialogView messageDialogView = new MessageDialogView(ex.Message, 1);
                 messageDialogView.Show();
@@ -182,50 +182,42 @@ namespace HikiCoffee.AppManager.ViewModels
         {
             LoginRequest loginRequest = new LoginRequest() { UserName = UserName, Password = Password, RememberMe = RememberMe };
 
-            var json = JsonConvert.SerializeObject(loginRequest);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = SystemConstants.DomainName + "/api/Users/Login";
+            ApiResult<Guid> result = await _userAPI.Login(loginRequest);
 
-            using (var client = new HttpClient())
+            if(!result.IsSuccessed)
             {
-                try
+                MessageDialogView messageDialogView = new MessageDialogView(result.Message, 1);
+                messageDialogView.Show();
+            }
+            else
+            {
+                User userLogin = await _userAPI.GetByUserLoginAppManagement(result.ResultObj, result.Message);
+
+                if(userLogin.Id != Guid.Empty && UserName != null && Password != null)
                 {
-                    var response = await client.PostAsync(url, data);
+                    SystemConstants.TokenInUse = result.Message;
+                    SystemConstants.UserIdInUse = result.ResultObj;
+                    SystemConstants.UserLogin = userLogin;
 
-                    var body = await response.Content.ReadAsStringAsync();
+                    tokenService.SaveToken(result.Message);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        ApiResult<Guid> myDeserializedObjList = (ApiResult<Guid>)JsonConvert.DeserializeObject(body, typeof(ApiResult<Guid>));
+                    Rms.Write("UserInfo", "UserName", UserName);
+                    Rms.Write("UserInfo", "Password", Password);
+                    Rms.Write("UserInfo", "RememberMe", RememberMe.ToString());
 
-                        if (myDeserializedObjList != null)
-                        {
-                            SystemConstants.TokenInUse = myDeserializedObjList.Message;
-                            SystemConstants.UserIdInUse = myDeserializedObjList.ResultObj;
+                    obj.Hide();
 
-                            tokenService.SaveToken(myDeserializedObjList.Message);
+                    MainView mainView = new MainView();
+                    mainView.ShowDialog();
 
-                            obj.Hide();
-
-                            MainView mainView = new MainView();
-                            mainView.ShowDialog();
-
-                            obj.ShowDialog();
-                        }
-                    }
-                    else
-                    {
-                        MessageDialogView messageDialogView = new MessageDialogView(body, 1);
-                        messageDialogView.Show();
-                    }
+                    obj.ShowDialog();
                 }
-                catch (HttpRequestException ex)
+                else
                 {
-                    MessageDialogView messageDialogView = new MessageDialogView(ex.Message, 1);
+                    MessageDialogView messageDialogView = new MessageDialogView("User does not permission.", 1);
                     messageDialogView.Show();
                 }
             }
-
         }
 
         private void ExecutePasswordChangedCommand(PasswordBox obj)

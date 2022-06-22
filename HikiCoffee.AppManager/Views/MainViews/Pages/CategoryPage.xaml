@@ -1,0 +1,41 @@
+﻿<Page x:Class="HikiCoffee.AppManager.Views.MainViews.Pages.CategoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HikiCoffee.AppManager.Views.MainViews.Pages"
+      mc:Ignorable="d" 
+      
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        
+      xmlns:prism="http://prismlibrary.com/"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      
+      d:DesignHeight="686" d:DesignWidth="1250"
+      Title="Category Page">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <materialDesign:Card Grid.Row="0" Margin="5 5 2.5 5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <WrapPanel Grid.Row="0">
+                    <Button Padding="0" Margin="0" Content="Add" Background="{DynamicResource BaraRed}" Style="{StaticResource MainButton}"/>
+                </WrapPanel>
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="1" Margin="5 5 2.5 5">
+
+        </materialDesign:Card>
+    </Grid>
+</Page>

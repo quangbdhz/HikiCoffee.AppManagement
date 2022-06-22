@@ -3,6 +3,7 @@ using HikiCoffee.ApiIntegration.ProductTranslationAPI;
 using HikiCoffee.AppManager.Service;
 using HikiCoffee.AppManager.Views.MessageDialogViews;
 using HikiCoffee.Models;
+using HikiCoffee.Models.Common;
 using HikiCoffee.Models.DataRequest.ProductTranslations;
 using Microsoft.Extensions.DependencyInjection;
 using Prism.Commands;
@@ -109,10 +110,18 @@ namespace HikiCoffee.AppManager.ViewModels.ProductViewModels
                 {
                     string token = tokenService.ReadToken();
 
-                    string result = await _productTranslationAPI.AddProductTranslation(token, request);
+                    ApiResult<int> result = await _productTranslationAPI.AddProductTranslation(token, request);
 
-                    MessageDialogView messageDialogView = new MessageDialogView(result, 0);
-                    messageDialogView.Show();
+                    if (result.IsSuccessed)
+                    {
+                        MessageDialogView messageDialogView = new MessageDialogView(result.Message, 0);
+                        messageDialogView.Show();
+                    }
+                    else
+                    {
+                        MessageDialogView messageDialogView = new MessageDialogView(result.Message, 1);
+                        messageDialogView.Show();
+                    }
                 }
                 catch (Exception ex)
                 {

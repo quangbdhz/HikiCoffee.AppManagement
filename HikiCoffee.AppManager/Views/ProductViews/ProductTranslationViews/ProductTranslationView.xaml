@@ -17,7 +17,7 @@
         
         Name="productTranslationView"
         mc:Ignorable="d"
-        Title="ProductTranslationView" Height="730" Width="1385">
+        Title="ProductTranslationView" Height="730" Width="1400">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />

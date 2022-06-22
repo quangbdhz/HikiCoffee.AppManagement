@@ -2,7 +2,9 @@
 using HikiCoffee.AppManager.Service;
 using HikiCoffee.AppManager.Views.MessageDialogViews;
 using HikiCoffee.Models;
+using HikiCoffee.Models.Common;
 using HikiCoffee.Models.DataRequest.ProductTranslations;
+using HikiCoffee.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -50,7 +52,6 @@ namespace HikiCoffee.AppManager.ViewModels.ProductViewModels
 
         public DelegateCommand UpdateProductTranslationCommand { get; set; }
 
-        private readonly TokenService tokenService;
         private readonly IProductTranslationAPI _productTranslationAPI;
 
         public UpdateProductTranslationVM(ProductTranslation productTranslation)
@@ -60,11 +61,6 @@ namespace HikiCoffee.AppManager.ViewModels.ProductViewModels
             Details = productTranslation.Details;
             SeoDescription = productTranslation.SeoDescription;
             SeoTitle = productTranslation.SeoTitle;
-
-            var serviceCollection = new ServiceCollection();
-            serviceCollection.AddDataProtection();
-            var service = serviceCollection.BuildServiceProvider();
-            tokenService = ActivatorUtilities.GetServiceOrCreateInstance<TokenService>(service);
 
             _productTranslationAPI = new ProductTranslationAPI();
 
@@ -82,12 +78,18 @@ namespace HikiCoffee.AppManager.ViewModels.ProductViewModels
 
                 try
                 {
-                    string token = tokenService.ReadToken();
+                    ApiResult<bool> result = await _productTranslationAPI.UpdateProductTranslation(SystemConstants.TokenInUse, request);
 
-                    string result = await _productTranslationAPI.UpdateProductTranslation(token, request);
-
-                    MessageDialogView messageDialogView = new MessageDialogView(result, 0);
-                    messageDialogView.Show();
+                    if (result.IsSuccessed)
+                    {
+                        MessageDialogView messageDialogView = new MessageDialogView(result.Message, 0);
+                        messageDialogView.Show();
+                    }
+                    else
+                    {
+                        MessageDialogView messageDialogView = new MessageDialogView(result.Message, 1);
+                        messageDialogView.Show();
+                    }
                 }
                 catch (Exception ex)
                 {

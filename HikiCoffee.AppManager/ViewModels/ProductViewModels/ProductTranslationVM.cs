@@ -110,12 +110,19 @@ namespace HikiCoffee.AppManager.ViewModels.ProductViewModels
             {
                 try
                 {
-                    var reponse = await _productTranslationAPI.DeleteProductTranslation(SelectedProductTranslation.Id, TokenInUse);
+                    var result = await _productTranslationAPI.DeleteProductTranslation(SelectedProductTranslation.Id, TokenInUse);
 
-                    ProductTranslations.Remove(SelectedProductTranslation);
-
-                    MessageDialogView messageDialogView = new MessageDialogView(reponse, 0);
-                    messageDialogView.Show();
+                    if (result.IsSuccessed)
+                    {
+                        MessageDialogView messageDialogView = new MessageDialogView(result.Message, 0);
+                        messageDialogView.Show();
+                        ProductTranslations.Remove(SelectedProductTranslation);
+                    }
+                    else
+                    {
+                        MessageDialogView messageDialogView = new MessageDialogView(result.Message, 1);
+                        messageDialogView.Show();
+                    }
                 }
                 catch(Exception ex)
                 {

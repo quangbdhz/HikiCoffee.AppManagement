@@ -1,4 +1,4 @@
-﻿namespace HikiCoffee.AppManager.ModelDataRequest.Products
+﻿namespace HikiCoffee.Models.DataRequest.Products
 {
     public class ProductCreateRequest
     {
@@ -7,5 +7,7 @@
         public decimal Price { get; set; }
 
         public bool? IsFeatured { get; set; }
+
+        public int? UnitId { get; set; }
     }
 }
