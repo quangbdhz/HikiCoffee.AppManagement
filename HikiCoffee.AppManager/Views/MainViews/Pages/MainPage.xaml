@@ -8,17 +8,17 @@
       
       xmlns:muc="clr-namespace:HikiCoffee.AppManager.MyUserControl"
       
-      d:DesignHeight="450" d:DesignWidth="800"
+      Style="{StaticResource PageStyle}"
+      d:DesignHeight="686" d:DesignWidth="1205"
       Title="MainPage">
 
-    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+    <GroupBox Header="GroupBox">
+        <UniformGrid Rows="7" HorizontalAlignment="Center">
+            <Button Content="Button" />
 
-       
+            <RadioButton x:Name="DarkMode" Content="Dark Mode" HorizontalAlignment="Center" Height="20" GroupName="modesSelection" Checked="DarkMode_Checked"/>
+            <RadioButton x:Name="LightkMode" Content="Light Mode" HorizontalAlignment="Center" Height="20" IsChecked="True" GroupName="modesSelection" Checked="LightkMode_Checked"/>
 
-        <muc:ControlTableFurniture NameTable="Ban 02" 
-                                            UrlImage="0" BackgroundTable="0"/>
-
-        <muc:ControlTableFurniture NameTable="Ban 01" 
-                                            UrlImage="1" BackgroundTable="1"/>
-    </WrapPanel>
+        </UniformGrid>
+    </GroupBox>
 </Page>

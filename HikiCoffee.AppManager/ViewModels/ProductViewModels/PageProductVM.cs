@@ -1,27 +1,16 @@
-﻿using HikiCoffee.ApiIntegration.CategoryTranslationAPI;
-using HikiCoffee.ApiIntegration.ProductAPI;
-using HikiCoffee.ApiIntegration.UnitTranslationAPI;
-using HikiCoffee.AppManager.Service;
-using HikiCoffee.AppManager.Service.UploadImageCloudinary;
+﻿using HikiCoffee.ApiIntegration.ProductAPI;
 using HikiCoffee.AppManager.Views.MessageDialogViews;
 using HikiCoffee.AppManager.Views.ProductViews;
 using HikiCoffee.AppManager.Views.ProductViews.ProductTranslationViews;
 using HikiCoffee.AppManager.Views.ProductViews.ProductViews;
 using HikiCoffee.Models;
 using HikiCoffee.Models.Common;
-using HikiCoffee.Models.DataRequest.Products;
 using HikiCoffee.Utilities;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Win32;
-using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 
 namespace HikiCoffee.AppManager.ViewModels.ProductViewModels
 {
@@ -73,7 +62,7 @@ namespace HikiCoffee.AppManager.ViewModels.ProductViewModels
 
             }, CanExecuteUpdateProductCommand).ObservesProperty(() => SelectedItemProduct);
 
-           
+
 
             MouseUpLvProductCommand = new DelegateCommand<Product>((p) =>
             {
@@ -153,9 +142,9 @@ namespace HikiCoffee.AppManager.ViewModels.ProductViewModels
             }
         }
 
-        
-        
 
-        
+
+
+
     }
 }

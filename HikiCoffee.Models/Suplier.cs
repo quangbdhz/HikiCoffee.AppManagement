@@ -1,6 +1,8 @@
-﻿namespace HikiCoffee.Models
+﻿using Prism.Mvvm;
+
+namespace HikiCoffee.Models
 {
-    public class Suplier
+    public class Suplier : BindableBase
     {
         public int Id { get; set; }
 
@@ -16,6 +18,11 @@
 
         public DateTime ContractDate { get; set; }
 
-        public bool IsActive { get; set; }
+        private bool _isActive;
+        public bool IsActive
+        {
+            get { return _isActive; }
+            set { SetProperty(ref _isActive, value); }
+        }
     }
 }

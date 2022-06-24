@@ -23,6 +23,11 @@ namespace HikiCoffee.ApiIntegration.SuplierAPI
             return await GetListAsync<Suplier>(SystemConstants.DomainName + $"/api/Supliers/GetAll", token);
         }
 
+        public async Task<ObservableCollection<Suplier>> GetAllSuplierManagements(string? token)
+        {
+            return await GetListAsync<Suplier>(SystemConstants.DomainName + $"/api/Supliers/GetAllSuplierManagements", token);
+        }
+
         public async Task<ApiResult<bool>> UpdateSuplier(SuplierUpdateRequest request, string? token)
         {
             return await ApiResultPutAsync<SuplierUpdateRequest>(SystemConstants.DomainName + $"/api/Supliers/Update", token, request);

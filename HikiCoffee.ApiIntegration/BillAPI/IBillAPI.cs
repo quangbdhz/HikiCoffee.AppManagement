@@ -13,5 +13,7 @@ namespace HikiCoffee.ApiIntegration.BillAPI
         Task<ApiResult<bool>> BillCheckOut(BillCheckOutRequest request, string? token);
 
         Task<Bill> GetBillIdOfCoffeeTable(int coffeeTableId, string? token);
+
+        Task<PagedResult<Bill>> GetAllBill(int pageIndex, int pageSize, string? token);
     }
 }

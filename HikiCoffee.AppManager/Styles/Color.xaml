@@ -16,5 +16,19 @@
     <SolidColorBrush x:Key="AuroraGreen" Color="#78e08f" />
     <SolidColorBrush x:Key="PrestigeBlue" Color="#2f3542" />
     <SolidColorBrush x:Key="RedPigment" Color="#EA2027" />
-    
+    <SolidColorBrush x:Key="ElectronBlue" Color="#0984e3" />
+    <SolidColorBrush x:Key="GreenDarnerTail" Color="#74b9ff" />
+    <SolidColorBrush x:Key="UfoGreen" Color="#2ed573" />
+    <SolidColorBrush x:Key="JadeDust" Color="#0fbcf9" />
+    <SolidColorBrush x:Key="MiddleBule" Color="#7ed6df" />
+    <SolidColorBrush x:Key="BlackPearl" Color="#1e272e" />
+    <SolidColorBrush x:Key="LineSoap" Color="#7bed9f" />
+    <SolidColorBrush x:Key="Greenb3ff99" Color="#b3ff99" />
+    <SolidColorBrush x:Key="Blue80ffe5" Color="#80ffe5" />
+    <SolidColorBrush x:Key="Pinkff99ff" Color="#ff99ff" />
+    <SolidColorBrush x:Key="DarkTheme" Color="#34393f" />
+    <SolidColorBrush x:Key="Purple7b40f2" Color="#7b40f2" />
+    <SolidColorBrush x:Key="Dark2F3136" Color="#2F3136" />
+    <SolidColorBrush x:Key="Dark36393F" Color="#36393F" />
+
 </ResourceDictionary>

@@ -11,50 +11,36 @@
       xmlns:prism="http://prismlibrary.com/"
       prism:ViewModelLocator.AutoWireViewModel="True"
       
-      d:DesignHeight="686" d:DesignWidth="1250"
+      Style="{StaticResource PageStyle}"
+      d:DesignHeight="686" d:DesignWidth="1205"
       Title="ProductPage">
 
-    <Grid Background="White" >
+    <Grid Style="{StaticResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
         <materialDesign:Card Grid.Row="0" Margin="5 5 5 0">
-            <WrapPanel Margin="0 2 0 2">
-                <Button Command="{Binding AddProductWindowCommand}" 
-                        Content="Add" Margin="4 0 0 0" Width="100" ToolTip="Thêm" Background="#12CBC4" 
-                        FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"/>
+            <WrapPanel Margin="5">
+                <Button Command="{Binding AddProductWindowCommand}" Height="30" Content="Add" Margin="0" Padding="0"
+                        Background="{DynamicResource JadeDust}" Style="{StaticResource MainButton}"/>
 
-                <Button Command="{Binding UpdateProductWindowCommand}"
-                        Content="Update" Margin="10 0 0 0" Width="100" ToolTip="Sửa" Background="#3ae374" FontWeight="Bold" 
-                        Foreground="Black" BorderBrush="Black" BorderThickness="1"/>
+                <Button Command="{Binding UpdateProductWindowCommand}" Height="30" Content="Update" Margin="15 0 0 0" Padding="0"
+                        Background="{DynamicResource MintyGreen}" Style="{StaticResource MainButton}"/>
 
-                <Button Command="{Binding DeleteProductCommand}" Content="Delete" Margin="10 0 10 0" Width="100" ToolTip="Xóa"
-                        Background="#EA2027" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"></Button>
+                <Button Command="{Binding DeleteProductCommand}" Content="Delete" Height="30" Margin="15 0 0 0" Padding="0"
+                        Background="{DynamicResource BaraRed}" Style="{StaticResource MainButton}"/>
 
             </WrapPanel>
         </materialDesign:Card>
 
         <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Stretch">
             <ScrollViewer PreviewMouseWheel="LvProductScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                <ListView Name="Lv_Product" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedItemProduct, Mode=OneWayToSource}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Update}" Value="True">
-                                    <Setter Property="Background" Value="Red" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding HasErrors}" Value="False">
-                                    <Setter Property="Background" Value="Green" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListView.ItemContainerStyle>
+                <ListView Name="Lv_Product" ItemsSource="{Binding Products}" ItemContainerStyle="{StaticResource MainListView}"
+                          SelectedItem="{Binding SelectedItemProduct, Mode=OneWayToSource}">
                     <ListView.View>
-                        <GridView>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource MainGridViewColumnHeader}">
                             <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
                             <GridViewColumn Header="Stock" DisplayMemberBinding="{Binding Stock}"/>
                             <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>

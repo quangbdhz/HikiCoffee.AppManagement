@@ -2,6 +2,7 @@
 using HikiCoffee.Models.Common;
 using HikiCoffee.Models.DataRequest.Bills;
 using HikiCoffee.Utilities;
+using System.Collections.ObjectModel;
 
 namespace HikiCoffee.ApiIntegration.BillAPI
 {
@@ -15,6 +16,11 @@ namespace HikiCoffee.ApiIntegration.BillAPI
         public async Task<ApiResult<bool>> BillCheckOut(BillCheckOutRequest request, string? token)
         {
             return await ApiResultPutAsync<BillCheckOutRequest>(SystemConstants.DomainName + $"/api/Bills/CheckOut", token, request);
+        }
+
+        public async Task<PagedResult<Bill>> GetAllBill(int pageIndex, int pageSize, string? token)
+        {
+            return await GetAsync<PagedResult<Bill>>(SystemConstants.DomainName + $"/api/Bills/GetAllBill?PageIndex={pageIndex}&PageSize={pageSize}", token);
         }
 
         public async Task<Bill> GetBillIdOfCoffeeTable(int coffeeTableId, string? token)

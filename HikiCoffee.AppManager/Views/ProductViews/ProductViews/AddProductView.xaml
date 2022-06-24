@@ -24,14 +24,13 @@
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
 
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <customcontrol:ControlBarUC Margin="0 5 5 0" Background="Aqua" VerticalContentAlignment="Top" Grid.Row="0" 
+        <customcontrol:ControlBarUC Margin="0 5 5 0" VerticalContentAlignment="Top" Grid.Row="0" 
                                     Tag="{Binding ElementName=addProductView}" HorizontalAlignment="Right"/>
 
         <materialDesign:Card Grid.Row="1" Margin="5">

@@ -19,6 +19,13 @@ namespace HikiCoffee.AppManager.Views.MainViews.Pages
             e.Handled = true;
         }
 
+        private void LvCategoriesScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            ScrollViewer scv = (ScrollViewer)sender;
+            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
+            e.Handled = true;
+        }
+
         private void LvProductItemOderScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             ScrollViewer scv = (ScrollViewer)sender;

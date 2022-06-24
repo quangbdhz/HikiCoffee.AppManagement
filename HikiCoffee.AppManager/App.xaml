@@ -17,8 +17,15 @@
 
                 <ResourceDictionary Source="/Styles/StyleTextBoxAndTextBlock.xaml"/>
                 <ResourceDictionary Source="/Styles/StyleButton.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleListView.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleGridView.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleTheme.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleWindow.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleBorder.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleGrid.xaml"/>
+                <ResourceDictionary Source="/Styles/StylePage.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleMaterialDesignCard.xaml"/>
                 <ResourceDictionary Source="/Styles/Color.xaml"/>
-                <ResourceDictionary Source="/Styles/Border.xaml"/>
 
                 <ResourceDictionary>
                     <customconverter:BackgroundTableFurnitureConverter x:Key="backgroundTableFurnitureConverter"/>

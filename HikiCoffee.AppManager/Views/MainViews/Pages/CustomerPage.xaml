@@ -12,42 +12,29 @@
       xmlns:prism="http://prismlibrary.com/"
       prism:ViewModelLocator.AutoWireViewModel="True"
       
-      d:DesignHeight="686" d:DesignWidth="1250"
-      
+      Style="{StaticResource PageStyle}"
+      d:DesignHeight="686" d:DesignWidth="1205"
       Title="Customer Page">
 
-    <Grid Background="White" >
+    <Grid Style="{StaticResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
         <materialDesign:Card Grid.Row="0" Margin="5 5 5 0">
-            <WrapPanel Margin="0 2 0 2">
-                <Button Command="{Binding DeleteUserCommand}" Content="Delete" Margin="10 0 10 0" Width="100" ToolTip="Xóa"
-                        Background="#EA2027" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"/>
+            <WrapPanel Margin="5">
+                <Button Command="{Binding DeleteUserCommand}" Content="Delete" Height="30" Padding="0" Margin="0"
+                        Background="{DynamicResource BaraRed}" Style="{StaticResource MainButton}"/>
             </WrapPanel>
         </materialDesign:Card>
 
         <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Stretch">
             <ScrollViewer PreviewMouseWheel="LvUserScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                <ListView Name="Lv_User" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser, Mode=OneWayToSource}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Update}" Value="True">
-                                    <Setter Property="Background" Value="Red" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding HasErrors}" Value="False">
-                                    <Setter Property="Background" Value="Green" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListView.ItemContainerStyle>
+                <ListView Name="Lv_User" ItemsSource="{Binding Users}" ItemContainerStyle="{StaticResource MainListView}"
+                          SelectedItem="{Binding SelectedUser, Mode=OneWayToSource}">
                     <ListView.View>
-                        <GridView>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource MainGridViewColumnHeader}">
                             <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
                             <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
                             <GridViewColumn Header="User Name" DisplayMemberBinding="{Binding UserName}"/>

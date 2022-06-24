@@ -23,6 +23,11 @@ namespace HikiCoffee.ApiIntegration.BillInfoAPI
             return await GetListAsync<BillInfo>(SystemConstants.DomainName + $"/api/BillInfos/GetAllBillInfoManagement/{billId}/{languageId}", token);
         }
 
+        public async Task<ObservableCollection<BillInfo>> GetBillInfoByBillId(int billId, int languageId, string? token)
+        {
+            return await GetListAsync<BillInfo>(SystemConstants.DomainName + $"/api/BillInfos/GetBillInfoByBillId/{billId}/{languageId}", token);
+        }
+
         public async Task<ApiResult<bool>> UpdateBillInfo(BillInfoUpdateRequest request, string? token)
         {
             return await ApiResultPutAsync<BillInfoUpdateRequest>(SystemConstants.DomainName + $"/api/BillInfos/Update", token, request);
