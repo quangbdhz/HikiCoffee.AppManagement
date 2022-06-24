@@ -17,6 +17,7 @@
         
         Name="productTranslationView"
         mc:Ignorable="d"
+        Style="{StaticResource WindowStyle}"
         Title="ProductTranslationView" Height="730" Width="1400">
 
     <WindowChrome.WindowChrome>
@@ -80,38 +81,23 @@
                     </Grid.RowDefinitions>
 
                     <materialDesign:Card Grid.Row="0" Margin="5 5 5 0">
-                        <WrapPanel Margin="0 2 0 2">
-                            <Button Command="{Binding AddProductTranslationWindowCommand}" 
-                                Content="Add" Margin="4 0 0 0" Width="100" ToolTip="Thêm" Background="#12CBC4" 
-                                FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"/>
+                        <WrapPanel Margin="5">
+                            <Button Command="{Binding AddProductTranslationWindowCommand}" Content="Add" Padding="0" Margin="0" Height="30"
+                                    Background="{DynamicResource JadeDust}" Style="{StaticResource MainButton}"/>
 
-                            <Button Command="{Binding UpdateProductTranslationWindowCommand}"
-                                Content="Update" Margin="10 0 0 0" Width="100" ToolTip="Sửa" Background="#3ae374" FontWeight="Bold" 
-                                Foreground="Black" BorderBrush="Black" BorderThickness="1"/>
+                            <Button Command="{Binding UpdateProductTranslationWindowCommand}" Content="Update" Padding="0" Margin="15 0 0 0" Height="30"
+                                    Background="{DynamicResource MintyGreen}" Style="{StaticResource MainButton}"/>
 
-                            <Button Command="{Binding DeleteProductTranslationWindowCommand}" Content="Delete" Margin="10 0 10 0" Width="100" ToolTip="Xóa"
-                                Background="#EA2027" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"></Button>
+                            <Button Command="{Binding DeleteProductTranslationWindowCommand}" Content="Delete" Margin="15 0 0 0" Padding="0" Height="30"
+                                    Background="{DynamicResource BaraRed}" Style="{StaticResource MainButton}"/>
 
                         </WrapPanel>
                     </materialDesign:Card>
 
-                    <ListView Margin="5 5 5 0" Grid.Row="1" Name="Lv_ProductTranslation" ItemsSource="{Binding ProductTranslations}">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Update}" Value="True">
-                                        <Setter Property="Background" Value="Red" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding HasErrors}" Value="False">
-                                        <Setter Property="Background" Value="Green" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListView.ItemContainerStyle>
+                    <ListView Margin="5 5 5 0" Grid.Row="1" Name="Lv_ProductTranslation" ItemContainerStyle="{StaticResource MainListView}"
+                              ItemsSource="{Binding ProductTranslations}">
                         <ListView.View>
-                            <GridView>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource MainGridViewColumnHeader}">
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
                                 <GridViewColumn Header="Product Id" DisplayMemberBinding="{Binding ProductId}"/>
                                 <GridViewColumn Header="Name Product" DisplayMemberBinding="{Binding NameProduct}"/>

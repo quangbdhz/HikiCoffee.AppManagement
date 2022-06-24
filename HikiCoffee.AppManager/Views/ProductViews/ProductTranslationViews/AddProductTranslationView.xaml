@@ -17,6 +17,7 @@
         WindowStyle="None"
         
         Name="addProductTranslationWindow"
+        Style="{StaticResource WindowStyle}"
         Title="Add Product Translation" Height="Auto" Width="600">
 
     <WindowChrome.WindowChrome>

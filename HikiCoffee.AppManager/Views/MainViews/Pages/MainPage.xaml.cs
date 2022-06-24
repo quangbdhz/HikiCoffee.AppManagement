@@ -24,5 +24,22 @@ namespace HikiCoffee.AppManager.Views.MainViews.Pages
         {
             InitializeComponent();
         }
+
+
+        private void DarkMode_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.ThemeAppManager = "Dark";
+
+            //and to save the settings
+            Properties.Settings.Default.Save();
+        }
+
+        private void LightkMode_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.ThemeAppManager = "Light";
+
+            //and to save the settings
+            Properties.Settings.Default.Save();
+        }
     }
 }

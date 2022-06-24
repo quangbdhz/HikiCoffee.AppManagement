@@ -14,5 +14,7 @@ namespace HikiCoffee.ApiIntegration.BillInfoAPI
         Task<ApiResult<bool>> DeleteBillInfo(int billId, int productId, string? token);
 
         Task<ObservableCollection<BillInfo>> GetAllBillInfoCustomerOrder(int billId, int languageId, string? token);
+
+        Task<ObservableCollection<BillInfo>> GetBillInfoByBillId(int billId, int languageId, string? token);
     }
 }

@@ -1,0 +1,69 @@
+﻿<Window x:Class="HikiCoffee.AppManager.Views.CategoryViews.CategoryTranslationViews.AddCategoryTranslationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HikiCoffee.AppManager.Views.CategoryViews.CategoryTranslationViews"
+        mc:Ignorable="d"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:customcontrol="clr-namespace:HikiCoffee.AppManager.MyUserControl"
+        
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        
+        Name="addCategoryTranslationView"
+        Title="Add Category Translation" Height="450" Width="400">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <customcontrol:ControlBarUC Margin="0 5 5 0" VerticalContentAlignment="Top" Grid.Row="0" 
+                                    Tag="{Binding ElementName=addCategoryTranslationView}" HorizontalAlignment="Right"/>
+
+        <materialDesign:Card Grid.Row="1" Margin="5">
+            <Grid Margin="5 2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBox Grid.Row="0" Margin="0" Padding="0" Text="{Binding NameCategory}" materialDesign:HintAssist.Hint="Name Category" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+                <TextBox Grid.Row="1" Margin="0 5 0 0" Padding="0" Text="{Binding SeoDescription}" materialDesign:HintAssist.Hint="Seo Description" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+                <TextBox Grid.Row="2" Margin="0 5 0 0" Padding="0" Text="{Binding SeoTitle}" materialDesign:HintAssist.Hint="Seo Title" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+                <ComboBox Grid.Row="3" Margin="0 5 0 0" Padding="0 8 0 7" VerticalAlignment="Top" HorizontalAlignment="Left" Name="cbx_language"
+                          materialDesign:HintAssist.Hint="Languages" FontSize="13" Width="Auto"
+                          BorderThickness="0 0 0 1" materialDesign:ColorZoneAssist.Mode="Light" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderBrush="Black"
+                          ItemsSource="{Binding Languages}" DisplayMemberPath="NameLanguage">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="DropDownClosed">
+                            <i:InvokeCommandAction Command="{Binding SelectLanguageCommand}"
+                                                           CommandParameter="{Binding ElementName=cbx_language, Path=SelectedItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+
+                <Button Grid.Row="4" Padding="0" Margin="0 5 0 0" Height="30" Content="Add" Foreground="Black" 
+                        Command="{Binding AddCategoryTranslationCommand}" Background="{DynamicResource JadeDust}" Style="{StaticResource MainButton}"/>
+
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Window>

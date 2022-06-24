@@ -164,7 +164,7 @@ namespace HikiCoffee.AppManager.ViewModels.MainViewModels
             }
             else if (OptionMenu == 7)
             {
-                SourcePage = @"/Views/MainViews/Pages/CustomerPage.xaml";
+                SourcePage = @"/Views/MainViews/Pages/BillPage.xaml";
                 ClickChangeColorIcon(OptionMenu);
             }
             else

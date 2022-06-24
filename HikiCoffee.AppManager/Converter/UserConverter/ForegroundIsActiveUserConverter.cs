@@ -13,7 +13,7 @@ namespace HikiCoffee.AppManager.Converter.UserConverter
                 bool isActive = (bool)value;
 
                 if (isActive)
-                    return "#05c46b";
+                    return "#1e272e";
                 return "Red";
             }
             return "";

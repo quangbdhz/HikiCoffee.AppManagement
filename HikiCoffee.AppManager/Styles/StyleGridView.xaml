@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="MainGridViewColumnHeader" TargetType="GridViewColumnHeader">
+        <Setter Property="Padding" Value="20 2.5"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontWeight" Value="DemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource BlackPearl}"/>
+    </Style>
+
+    <Style x:Key="MainGridViewHeaderRowPresenter" TargetType="GridViewRowPresenter">
+        <Setter Property="Margin" Value="0 2"/>
+    </Style>
+</ResourceDictionary>

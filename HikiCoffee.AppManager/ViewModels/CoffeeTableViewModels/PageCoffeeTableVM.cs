@@ -121,8 +121,8 @@ namespace HikiCoffee.AppManager.ViewModels.CoffeeTableViewModels
         #endregion
 
         #region customer
-        private User _infoOfCustomerOrder;
-        public User InfoOfCustomerOrder
+        private User? _infoOfCustomerOrder;
+        public User? InfoOfCustomerOrder
         {
             get { return _infoOfCustomerOrder; }
             set { SetProperty(ref _infoOfCustomerOrder, value); }
@@ -271,39 +271,43 @@ namespace HikiCoffee.AppManager.ViewModels.CoffeeTableViewModels
 
             GetSelectedCoffeeTableCommand = new DelegateCommand<CoffeeTable>(async (p) =>
             {
-                GetBillInfoInsideBill = null;
-                NameTableChoosed = p.NameCoffeeTable;
-                CoffeeTableChoosed = p;
-                TotalDueBillOfCustomerOrder = 0;
-                CheckOutPercentVAT = 0;
-                ToTalPayment = 0;
-                IndexCountProductOrderInBill = 0;
-                BillInfoCustomerOrders.Clear();
-
-                if (p.StatusId == 3)
+                if (p != null)
                 {
-                    VisibilityButtonSelectedCoffeeTable = Visibility.Visible;
-                    BillCoffeeTable = null;
-                    FullNameCustomerOrder = "";
-                }
-                else
-                {
-                    Bill result = await _billAPI.GetBillIdOfCoffeeTable(CoffeeTableChoosed.Id, SystemConstants.TokenInUse);
-                    BillCoffeeTable = result;
-                    FullNameCustomerOrder = result.NameCustomer;
+                    InfoOfCustomerOrder = null;
+                    GetBillInfoInsideBill = null;
+                    NameTableChoosed = p.NameCoffeeTable;
+                    CoffeeTableChoosed = p;
+                    TotalDueBillOfCustomerOrder = 0;
+                    CheckOutPercentVAT = 0;
+                    ToTalPayment = 0;
+                    IndexCountProductOrderInBill = 0;
+                    BillInfoCustomerOrders.Clear();
 
-                    if (result.BillId != 0)
+                    if (p.StatusId == 3)
                     {
-                        BillInfoCustomerOrders = await _billInfoAPI.GetAllBillInfoCustomerOrder(result.BillId, SystemConstants.LanguageIdInUse, SystemConstants.TokenInUse);
-
-                        foreach (var item in BillInfoCustomerOrders)
-                        {
-                            TotalDueBillOfCustomerOrder += item.Amount;
-                        }
+                        VisibilityButtonSelectedCoffeeTable = Visibility.Visible;
+                        BillCoffeeTable = null;
+                        FullNameCustomerOrder = "";
                     }
+                    else
+                    {
+                        Bill result = await _billAPI.GetBillIdOfCoffeeTable(CoffeeTableChoosed.Id, SystemConstants.TokenInUse);
+                        BillCoffeeTable = result;
+                        FullNameCustomerOrder = result.NameCustomer;
 
-                    UpdateCheckOutPercentVAT();
-                    VisibilityButtonSelectedCoffeeTable = Visibility.Hidden;
+                        if (result.BillId != 0)
+                        {
+                            BillInfoCustomerOrders = await _billInfoAPI.GetAllBillInfoCustomerOrder(result.BillId, SystemConstants.LanguageIdInUse, SystemConstants.TokenInUse);
+
+                            foreach (var item in BillInfoCustomerOrders)
+                            {
+                                TotalDueBillOfCustomerOrder += item.Amount;
+                            }
+                        }
+
+                        UpdateCheckOutPercentVAT();
+                        VisibilityButtonSelectedCoffeeTable = Visibility.Hidden;
+                    }
                 }
             }).ObservesProperty(() => NameTableChoosed).ObservesProperty(() => VisibilityButtonSelectedCoffeeTable).ObservesProperty(() => CoffeeTableChoosed);
 
@@ -327,7 +331,7 @@ namespace HikiCoffee.AppManager.ViewModels.CoffeeTableViewModels
 
             TurnOnCoffeeTableCommand = new DelegateCommand(async () =>
             {
-                if (CoffeeTableChoosed != null)
+                if (CoffeeTableChoosed != null && InfoOfCustomerOrder != null)
                 {
                     ChangeStatusCoffeeTableRequest request = new ChangeStatusCoffeeTableRequest() { CoffeeTableId = CoffeeTableChoosed.Id, StatusId = 4 };
 
@@ -371,7 +375,7 @@ namespace HikiCoffee.AppManager.ViewModels.CoffeeTableViewModels
 
             GetItemCustomerOderCommand = new DelegateCommand<ItemOrder>(async (p) =>
             {
-                if (BillCoffeeTable != null)
+                if (BillCoffeeTable != null && p != null)
                 {
                     TotalDueBillOfCustomerOrder += p.Price;
 

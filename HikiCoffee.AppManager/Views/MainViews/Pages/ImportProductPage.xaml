@@ -12,47 +12,33 @@
       xmlns:prism="http://prismlibrary.com/"
       prism:ViewModelLocator.AutoWireViewModel="True"
       
-      d:DesignHeight="686" d:DesignWidth="1250"
-      
+      Style="{StaticResource PageStyle}"
+      d:DesignHeight="686" d:DesignWidth="1205"
       Title="ImportProductPage">
 
-    <Grid Background="White" >
+    <Grid Style="{StaticResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <materialDesign:Card Grid.Row="0" Margin="5 5 5 0">
-            <WrapPanel Margin="0 2 0 2">
-                <Button Command="{Binding AddImportProductWindowCommand}" 
-                        Content="Add" Margin="4 0 0 0" Width="100" ToolTip="Thêm" Background="#12CBC4" 
-                        FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"/>
+        <materialDesign:Card Grid.Row="0" Style="{StaticResource MaterialDesignCardStyle}" Margin="5 5 5 0">
+            <WrapPanel Margin="5">
+                <Button Padding="0" Margin="0" Command="{Binding AddImportProductWindowCommand}" Content="Add" Height="30"
+                        Background="{DynamicResource JadeDust}" Style="{StaticResource MainButton}"/>
 
-                <Button Command="{Binding DeleteImportProductCommand}" IsEnabled="False" Content="Delete" Margin="10 0 10 0" Width="100" ToolTip="Xóa"
-                        Background="#EA2027" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"/>
+                <Button Padding="0" Margin="15 0 0 0" Command="{Binding DeleteImportProductCommand}" Content="Delete" Height="30"
+                        Background="{DynamicResource BaraRed}" Style="{StaticResource MainButton}"/>
 
             </WrapPanel>
         </materialDesign:Card>
 
-        <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Stretch">
+        <materialDesign:Card Grid.Row="1" Style="{StaticResource MaterialDesignCardStyle}" Margin="5" VerticalAlignment="Stretch">
             <ScrollViewer PreviewMouseWheel="LvImportProuctScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                <ListView Name="Lv_ImportProduct" ItemsSource="{Binding ImportProducts}" SelectedItem="{Binding SelectedItemProduct, Mode=OneWayToSource}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Update}" Value="True">
-                                    <Setter Property="Background" Value="Red" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding HasErrors}" Value="False">
-                                    <Setter Property="Background" Value="Green" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListView.ItemContainerStyle>
+                <ListView Name="Lv_ImportProduct" ItemsSource="{Binding ImportProducts}" ItemContainerStyle="{StaticResource MainListView}"
+                          SelectedItem="{Binding SelectedItemProduct, Mode=OneWayToSource}">
                     <ListView.View>
-                        <GridView>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource MainGridViewColumnHeader}">
                             <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
                             <GridViewColumn Header="Product Name" DisplayMemberBinding="{Binding ProductName}"/>
                             <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}"/>
@@ -60,7 +46,6 @@
                             <GridViewColumn Header="SuplierName" DisplayMemberBinding="{Binding SuplierName}"/>
                             <GridViewColumn Header="Price Import" DisplayMemberBinding="{Binding PriceImportProduct}"/>
                             <GridViewColumn Header="Date Created" DisplayMemberBinding="{Binding DateImportProduct}"/>
-                            
                         </GridView>
                     </ListView.View>
                     <i:Interaction.Triggers>
