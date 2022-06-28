@@ -17,13 +17,14 @@
         WindowStyle="None"
         
         Name="addImportProductWindow"
+        Style="{StaticResource WindowStyle}"
         Title="Add Import Product" Height="Auto" Width="600">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
 
-    <Grid>
+    <Grid Style="{StaticResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -33,7 +34,7 @@
                                     Tag="{Binding ElementName=addImportProductWindow}"  HorizontalAlignment="Right"/>
 
 
-        <materialDesign:Card Grid.Row="1" Margin="5">
+        <materialDesign:Card Grid.Row="1" Margin="5" Style="{StaticResource MaterialDesignCardStyle}">
             <Grid VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -44,12 +45,12 @@
                 </Grid.RowDefinitions>
 
                 <TextBox Grid.Row="0" Margin="10 5 10 0" Padding="0" Text="{Binding Quantity}" materialDesign:HintAssist.Hint="Quantity Product" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Row="1" Margin="10 5 10 00" Padding="0" Text="{Binding PriceImportProduct}" materialDesign:HintAssist.Hint="Price Import Product" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
-                <Grid Grid.Row="2" Margin="10 5 10 0">
+                <Grid Grid.Row="2" Margin="10 5 10 0" Style="{StaticResource GridStyle}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -58,8 +59,7 @@
 
                     <ComboBox Grid.Column="0" Padding="0 8 0 7" VerticalAlignment="Top" HorizontalAlignment="Left" Name="cbx_supliers"
                           materialDesign:HintAssist.Hint="Suplier" FontSize="13" MinWidth="120" IsEditable ="True" SelectedItem="{Binding SelectedSuplier}"
-                          BorderThickness="0 0 0 1" materialDesign:ColorZoneAssist.Mode="Light" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderBrush="Black"
-                          ItemsSource="{Binding Supliers}" DisplayMemberPath="NameSuplier">
+                          Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding Supliers}" DisplayMemberPath="NameSuplier">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="DropDownClosed">
                                 <i:InvokeCommandAction Command="{Binding SelectSuplierCommand}"
@@ -68,10 +68,9 @@
                         </i:Interaction.Triggers>
                     </ComboBox>
 
-                    <TextBlock Margin="15 5 0 0" Grid.Column="1" Width="70" Text="Suplier Id" VerticalAlignment="Center" Style="{StaticResource MainTextBlock}"/>
+                    <TextBlock Margin="15 5 0 0" Grid.Column="1" Width="70" Text="Suplier Id" VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}"/>
 
-                    <TextBlock Grid.Column="2" VerticalAlignment="Center" FontWeight="Bold" Style="{StaticResource MainTextBlock}" Text="{Binding SelectedSuplier.Id}"/>
-
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center" FontWeight="Bold" Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedSuplier.Id}"/>
                 </Grid>
 
                 <Grid Grid.Row="3" Margin="10 5 10 0">
@@ -83,8 +82,7 @@
 
                     <ComboBox Grid.Column="0" Padding="0 8 0 7" VerticalAlignment="Top" HorizontalAlignment="Left" Name="cbx_products" MinWidth="120"
                           materialDesign:HintAssist.Hint="Products" FontSize="13" IsEditable ="True" SelectedItem="{Binding SelectedProductTranslation}"
-                          BorderThickness="0 0 0 1" materialDesign:ColorZoneAssist.Mode="Light" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderBrush="Black"
-                          ItemsSource="{Binding ProductTranslations}" DisplayMemberPath="NameProduct">
+                          Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding ProductTranslations}" DisplayMemberPath="NameProduct">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="DropDownClosed">
                                 <i:InvokeCommandAction Command="{Binding SelectProductCommand}"
@@ -93,14 +91,14 @@
                         </i:Interaction.Triggers>
                     </ComboBox>
 
-                    <TextBlock Margin="15 5 0 0" Grid.Column="1" Width="70" Text="Product Id" VerticalAlignment="Center" Style="{StaticResource MainTextBlock}"/>
+                    <TextBlock Margin="15 5 0 0" Grid.Column="1" Width="70" Text="Product Id" VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}"/>
 
-                    <TextBlock Grid.Column="2" VerticalAlignment="Center" FontWeight="Bold" Style="{StaticResource MainTextBlock}" Text="{Binding SelectedProductTranslation.ProductId}"/>
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center" FontWeight="Bold" Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedProductTranslation.ProductId}"/>
 
                 </Grid>
 
                 <Button Grid.Row="4" Width="Auto" Command="{Binding AddImportProductCommand}" Margin="10 5" 
-                        Background="#00cec9" Content="Add ProductTranslation" Style="{StaticResource MainButton}"/>
+                        Background="#00cec9" Content="Add ProductTranslation" Style="{StaticResource ButtonStyle}"/>
             </Grid>
         </materialDesign:Card>
     </Grid>

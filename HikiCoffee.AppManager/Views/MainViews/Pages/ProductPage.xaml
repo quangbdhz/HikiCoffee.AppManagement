@@ -21,28 +21,34 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <materialDesign:Card Grid.Row="0" Margin="5 5 5 0">
+        <materialDesign:Card Style="{StaticResource MaterialDesignCardStyle}" Grid.Row="0" Margin="5 5 5 0">
             <WrapPanel Margin="5">
                 <Button Command="{Binding AddProductWindowCommand}" Height="30" Content="Add" Margin="0" Padding="0"
-                        Background="{DynamicResource JadeDust}" Style="{StaticResource MainButton}"/>
+                        Background="{DynamicResource JadeDust}" Style="{StaticResource ButtonStyle}"/>
 
                 <Button Command="{Binding UpdateProductWindowCommand}" Height="30" Content="Update" Margin="15 0 0 0" Padding="0"
-                        Background="{DynamicResource MintyGreen}" Style="{StaticResource MainButton}"/>
+                        Background="{DynamicResource MintyGreen}" Style="{StaticResource ButtonStyle}"/>
 
                 <Button Command="{Binding DeleteProductCommand}" Content="Delete" Height="30" Margin="15 0 0 0" Padding="0"
-                        Background="{DynamicResource BaraRed}" Style="{StaticResource MainButton}"/>
+                        Background="{DynamicResource BaraRed}" Style="{StaticResource ButtonStyle}"/>
 
             </WrapPanel>
         </materialDesign:Card>
 
-        <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Stretch">
+        <materialDesign:Card Grid.Row="1" Style="{StaticResource MaterialDesignCardStyle}" Margin="5" VerticalAlignment="Stretch">
             <ScrollViewer PreviewMouseWheel="LvProductScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                <ListView Name="Lv_Product" ItemsSource="{Binding Products}" ItemContainerStyle="{StaticResource MainListView}"
+                <ListView Name="Lv_Product" ItemsSource="{Binding Products}" ItemContainerStyle="{StaticResource ListViewItemStyle}"
                           SelectedItem="{Binding SelectedItemProduct, Mode=OneWayToSource}">
                     <ListView.View>
-                        <GridView ColumnHeaderContainerStyle="{StaticResource MainGridViewColumnHeader}">
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
-                            <GridViewColumn Header="Stock" DisplayMemberBinding="{Binding Stock}"/>
+                            <GridViewColumn Header="Stock">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Stock}" Foreground="{Binding Stock, Converter={StaticResource foregroundStockConverter}}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
                             <GridViewColumn Header="Original Price" DisplayMemberBinding="{Binding OriginalPrice}"/>
                             <GridViewColumn Header="View Count" DisplayMemberBinding="{Binding ViewCount}"/>

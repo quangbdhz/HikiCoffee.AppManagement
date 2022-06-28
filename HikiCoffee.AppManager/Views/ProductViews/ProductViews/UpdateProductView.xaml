@@ -17,50 +17,50 @@
         WindowStyle="None"
         
         Name="updateProductView"
-        
+        Style="{StaticResource WindowStyle}"
         Title="UpdateProductView" Height="450" Width="900">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
 
-    <Grid>
-
+    <Grid Style="{StaticResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <customcontrol:ControlBarUC Margin="0 5 5 0" Background="Aqua" VerticalContentAlignment="Top" Grid.Row="0" 
+        <customcontrol:ControlBarUC Margin="0 5 5 0" VerticalContentAlignment="Top" Grid.Row="0" 
                                     Tag="{Binding ElementName=addProductView}" HorizontalAlignment="Right"/>
 
-        <materialDesign:Card Grid.Row="1" Margin="5">
-            <Grid>
+        <materialDesign:Card Grid.Row="1" Margin="5" Style="{StaticResource MaterialDesignCardStyle}">
+            <Grid Style="{StaticResource GridStyle}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="10 5">
+                <Grid Grid.Column="0" Margin="10 5" Style="{StaticResource GridStyle}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" FontSize="14" Margin="0" HorizontalAlignment="Left" Text="Image Convert Product"/>
+                    <TextBlock Grid.Row="0" Style="{StaticResource TextBlockStyle}" FontWeight="DemiBold"
+                               FontSize="14" Margin="0" HorizontalAlignment="Left" Text="Image Convert Product"/>
 
                     <Image Grid.Row="1" Width="400" MaxHeight="350" HorizontalAlignment="Center" Source="{Binding UrlImageCoverProduct}" />
 
-                    <Button Grid.Row="2" Command="{Binding UpLoadImageProductCommand}" Content="Upload Image" Padding="0" Width="150" ToolTip="Upload"
-                            Background="Transparent" FontSize="15" FontWeight="Bold" Foreground="Green" BorderBrush="Transparent"></Button>
+                    <Button Grid.Row="2" Command="{Binding UpLoadImageProductCommand}" Style="{StaticResource ButtonStyle}" Height="30" Width="150" ToolTip="Upload"
+                            Content="Upload Image" Background="{DynamicResource TwinkleBlue}" FontSize="15" Foreground="Green" BorderBrush="Transparent"/>
 
                 </Grid>
 
                 <Border Grid.Column="1" Margin="0 5" BorderThickness="0.5 0 0 0" BorderBrush="Black"/>
 
-                <Grid Grid.Column="2" Margin="10 5">
+                <Grid Grid.Column="2" Margin="10 5" Style="{StaticResource GridStyle}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -70,21 +70,20 @@
                     </Grid.RowDefinitions>
 
                     <TextBox Grid.Row="0" Margin="0" Padding="0" Text="{Binding Price}" materialDesign:HintAssist.Hint="Price Product" 
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                             Style="{StaticResource TextBoxStyle}" />
 
-                    <CheckBox Grid.Row="1" Margin="0 10 0 0" Padding="0" IsChecked="{Binding IsFeatured}" Content="IsFeatured" Style="{StaticResource MaterialDesignCheckBox}"/>
+                    <CheckBox Grid.Row="1" Margin="0 10 0 0" Padding="0" IsChecked="{Binding IsFeatured}" Content="IsFeatured" Style="{StaticResource CheckBoxStyle}"/>
 
-                    <TextBlock Grid.Row="2" Margin="0 10 0 0" Text="Category of Product" Style="{StaticResource MainTextBlock}"/>
+                    <TextBlock Grid.Row="2" Margin="0 10 0 0" Text="Category of Product" Style="{StaticResource TextBlockStyle}"/>
 
-                    <Grid Grid.Row="3" Margin="0 10 0 0">
+                    <Grid Grid.Row="3" Margin="0 10 0 0" Style="{StaticResource GridStyle}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                         <ComboBox Grid.Column="0" Margin="0 0 0 0" Padding="0 8 0 7" VerticalAlignment="Top" HorizontalAlignment="Left" Name="cbx_category"
-                                  materialDesign:HintAssist.Hint="Category In Product" Width="150" FontSize="13"
-                                  BorderThickness="0 0 0 1" materialDesign:ColorZoneAssist.Mode="Light" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderBrush="Black"
+                                  materialDesign:HintAssist.Hint="Category In Product" Width="150" FontSize="13" Style="{StaticResource ComboBoxStyle}"
                                   ItemsSource="{Binding CategoryTranslations}" DisplayMemberPath="NameCategory">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="DropDownClosed">
@@ -96,7 +95,7 @@
 
                         <materialDesign:Card Grid.Column="1" Margin="5 0 0 0" MaxHeight="250">
                             <ScrollViewer VerticalScrollBarVisibility="Auto" PreviewMouseWheel="sc_PreviewMouseWheel">
-                                <ListBox x:Name="lb_category_in_product"
+                                <ListBox x:Name="lb_category_in_product"  Style="{StaticResource ListBoxStyle}"
                                     ItemsSource="{Binding AddCategoryInProducts}" DisplayMemberPath="NameCategory"/>
                             </ScrollViewer>
                         </materialDesign:Card>
@@ -104,7 +103,7 @@
 
 
                     <Button Grid.Row="4" Width="Auto" Command="{Binding UpdateProductCommand}" Margin="0 10 0 0"
-                            Background="#00cec9" Content="Update Product" Style="{StaticResource MainButton}"/>
+                            Background="#00cec9" Content="Update Product" Style="{StaticResource ButtonStyle}"/>
 
                 </Grid>
             </Grid>

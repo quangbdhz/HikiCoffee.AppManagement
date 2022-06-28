@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:HikiCoffee.AppManager.Views"
         
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:properties="clr-namespace:HikiCoffee.AppManager.Properties"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:muc="clr-namespace:HikiCoffee.AppManager.MyUserControl"
         
@@ -58,7 +59,7 @@
                     </ListViewItem>
 
                     <ListViewItem>
-                        <materialDesign:PackIcon ToolTip="Category" Kind="ChartBarStacked" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconStatistical}"/>
+                        <materialDesign:PackIcon ToolTip="Category" Kind="FormatListBulletedType" Width="25" Height="25" Margin="0" Foreground="{Binding ColorIconStatistical}"/>
                     </ListViewItem>
 
                     <ListViewItem>
@@ -78,7 +79,7 @@
                 </ListView>
 
 
-                <Button Background="Transparent"  Margin="0 0 0 10" Padding="0" Grid.Row="1"  BorderThickness="0">
+                <Button Command="{Binding CloswWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}" Background="Transparent"  Margin="0 0 0 10" Padding="0" Grid.Row="1"  BorderThickness="0">
                     <materialDesign:PackIcon HorizontalAlignment="Center" Kind="Logout" Width="25" Height="25" Foreground="White"/>
                 </Button>
             </Grid>
@@ -99,18 +100,34 @@
 
                 <muc:ControlBarUC Margin="0 -3 0 0" VerticalContentAlignment="Top" Grid.Column="2" Tag="{Binding ElementName=mainWindow}"  HorizontalAlignment="Right"/>
 
-                <Border Margin="20 5 0 0" BorderThickness="2" CornerRadius="16" Background="#CAD3C8">
+                <Border Margin="20 5 0 0" BorderThickness="2" CornerRadius="16">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Dark">
+                                    <Setter Property="Background" Value="{DynamicResource FuelTown}"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Light">
+                                    <Setter Property="Background" Value="{DynamicResource HintOfPensive}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <materialDesign:PackIcon Grid.Column="0" Kind="Search" Width="18" Height="18" Margin="8 7 0 5" Foreground="#2C3A47"/>
+                        <materialDesign:PackIcon Grid.Column="0" Kind="Search" Width="18" Height="18" Margin="8 7 0 5"
+                                                 Style="{StaticResource MaterialDesignPackIconStyle}"/>
 
                         <TextBox Margin="10 0 0 0" Grid.Column="1" BorderThickness="0" materialDesign:HintAssist.Hint="Search" VerticalAlignment="Center"
-                            materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Text="{Binding Username, NotifyOnTargetUpdated=True}"
-                            Foreground="#414447"/>
+                                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
+                                 Text="{Binding Username, NotifyOnTargetUpdated=True}"
+                                 Style="{StaticResource TextBoxNormalStyle}"/>
                     </Grid>
                 </Border>
 
@@ -124,42 +141,50 @@
 
                     <materialDesign:PopupBox Margin="0 0 10 0" Grid.Column="0" BorderBrush="Transparent" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Padding="0 0">
                         <materialDesign:PopupBox.ToggleContent>
-                            <materialDesign:PackIcon Width="23" Height="23" Kind="Settings" Foreground="#414447" />
+                            <materialDesign:PackIcon Width="23" Height="23" Kind="Settings" Style="{StaticResource MaterialDesignPackIconStyle}" />
                         </materialDesign:PopupBox.ToggleContent>
 
 
-                        <StackPanel Background="#2d3436">
-                            <ScrollViewer Name="ListViewScrollViewerMessager"
-                                        VerticalScrollBarVisibility="Auto" Margin="0 0 0 0" Background="#2d3436" Width="160">
-                                <ListView Name="MenuSetting" FontFamily="Champagne &amp; Limousines" Margin="0 5 0 0" FontSize="13" TextElement.Foreground="White">
-                                    <ListViewItem Height="35" Padding="0">
+                        <StackPanel>
+                            <ScrollViewer Name="ListViewScrollViewerMessager" VerticalScrollBarVisibility="Auto" 
+                                          Margin="0 0 0 0" Width="160" Background="{DynamicResource Dark36393F}">
+                                <ListView Name="MenuSetting" FontFamily="Champagne &amp; Limousines"
+                                          ItemContainerStyle="{StaticResource ListViewSettingStyle}"
+                                          Margin="0" FontSize="13">
+                                    <ListViewItem Height="35" Padding="0" Style="{StaticResource ListViewSettingStyle}">
                                         <StackPanel Orientation="Horizontal" Margin="10 0">
-                                            <materialDesign:PackIcon Kind="WeatherSunny" Width="20" Height="20" Margin="0" Foreground="White"/>
-                                            <TextBlock Foreground="White" Text="Light Mode" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                                            <materialDesign:PackIcon Style="{StaticResource  MaterialDesignPackIconStyle}" HorizontalAlignment="Left" Kind="WeatherSunny" Width="20" Height="20" Margin="0"/>
+                                            <TextBlock Style="{StaticResource TextBlockStyle}" Text="Light Mode" VerticalAlignment="Center" Margin="10 0 0 0"/>
                                         </StackPanel>
                                     </ListViewItem>
 
-
-                                    <ListViewItem Height="35" Padding="0">
+                                    <ListViewItem Height="35" Padding="0" Style="{StaticResource ListViewSettingStyle}">
                                         <StackPanel Orientation="Horizontal" Margin="10 0">
-                                            <materialDesign:PackIcon Kind="WeatherNight" Width="20" Height="20" Margin="0" Foreground="White"/>
-                                            <TextBlock Foreground="White" Text="Dark Mode" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                                            <materialDesign:PackIcon Style="{StaticResource  MaterialDesignPackIconStyle}" HorizontalAlignment="Left" Kind="WeatherNight" Width="20" Height="20" Margin="0"/>
+                                            <TextBlock Style="{StaticResource TextBlockStyle}" Text="Dark Mode" VerticalAlignment="Center" Margin="10 0 0 0"/>
                                         </StackPanel>
                                     </ListViewItem>
 
-                                    <ListViewItem Height="35" Padding="0">
+                                    <ListViewItem Height="35" Padding="0" Style="{StaticResource ListViewSettingStyle}">
                                         <StackPanel Orientation="Horizontal" Margin="10 0">
-                                            <materialDesign:PackIcon Kind="Refresh" Width="20" Height="20" Margin="0" Foreground="White"/>
-                                            <TextBlock Foreground="White" Text="Change Password" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                                            <materialDesign:PackIcon Style="{StaticResource  MaterialDesignPackIconStyle}" HorizontalAlignment="Left" Kind="Refresh" Width="20" Height="20" Margin="0"/>
+                                            <TextBlock Style="{StaticResource TextBlockStyle}" Text="Change Password" VerticalAlignment="Center" Margin="10 0 0 0"/>
                                         </StackPanel>
                                     </ListViewItem>
 
-                                    <ListViewItem Height="35" Padding="0">
+                                    <ListViewItem Height="35" Padding="0" Style="{StaticResource ListViewSettingStyle}">
                                         <StackPanel Orientation="Horizontal" Margin="10 0">
-                                            <materialDesign:PackIcon Kind="Logout" Width="20" Height="20" Margin="0" Foreground="White"/>
-                                            <TextBlock Foreground="White" Text="Logout" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                                            <materialDesign:PackIcon Style="{StaticResource  MaterialDesignPackIconStyle}" Kind="Logout" Width="20" Height="20" Margin="0"/>
+                                            <TextBlock Style="{StaticResource TextBlockStyle}" Text="Logout" VerticalAlignment="Center" Margin="10 0 0 0"/>
                                         </StackPanel>
                                     </ListViewItem>
+
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseUp">
+                                            <i:InvokeCommandAction Command="{Binding GetSelectedSettingCommand}"
+                                                       CommandParameter="{Binding ElementName=MenuSetting}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
                                 </ListView>
                             </ScrollViewer>
                         </StackPanel>
@@ -167,7 +192,8 @@
                     </materialDesign:PopupBox>
 
 
-                    <materialDesign:PackIcon VerticalAlignment="Center"  Margin="0 0 20 0"  Grid.Column="1" Kind="Notifications" Width="23" Height="23"  Foreground="#2C3A47"/>
+                    <materialDesign:PackIcon VerticalAlignment="Center"  Margin="0 0 20 0"  Grid.Column="1" Kind="Notifications" 
+                                             Style="{StaticResource MaterialDesignPackIconStyle}" Width="23" Height="23"/>
 
                     <Ellipse Grid.Column="2" Margin="0 0 5 0" Height="30" Width="30">
                         <Ellipse.Fill>
@@ -175,7 +201,8 @@
                         </Ellipse.Fill>
                     </Ellipse>
 
-                    <TextBlock Grid.Column="3" Text="{Binding FullNameOfEmployeeWorking}" FontSize="15" VerticalAlignment="Center" Margin="0 0 50 0"/>
+                    <TextBlock Grid.Column="3" Text="{Binding FullNameOfEmployeeWorking}" Style="{StaticResource TextBlockStyle}"
+                               FontSize="15" VerticalAlignment="Center" Margin="0 0 50 0"/>
                 </Grid>
             </Grid>
 

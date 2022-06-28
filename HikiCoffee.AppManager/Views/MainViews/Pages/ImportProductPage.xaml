@@ -25,20 +25,20 @@
         <materialDesign:Card Grid.Row="0" Style="{StaticResource MaterialDesignCardStyle}" Margin="5 5 5 0">
             <WrapPanel Margin="5">
                 <Button Padding="0" Margin="0" Command="{Binding AddImportProductWindowCommand}" Content="Add" Height="30"
-                        Background="{DynamicResource JadeDust}" Style="{StaticResource MainButton}"/>
+                        Background="{DynamicResource JadeDust}" Style="{StaticResource ButtonStyle}"/>
 
                 <Button Padding="0" Margin="15 0 0 0" Command="{Binding DeleteImportProductCommand}" Content="Delete" Height="30"
-                        Background="{DynamicResource BaraRed}" Style="{StaticResource MainButton}"/>
+                        Background="{DynamicResource BaraRed}" Style="{StaticResource ButtonStyle}"/>
 
             </WrapPanel>
         </materialDesign:Card>
 
         <materialDesign:Card Grid.Row="1" Style="{StaticResource MaterialDesignCardStyle}" Margin="5" VerticalAlignment="Stretch">
             <ScrollViewer PreviewMouseWheel="LvImportProuctScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                <ListView Name="Lv_ImportProduct" ItemsSource="{Binding ImportProducts}" ItemContainerStyle="{StaticResource MainListView}"
+                <ListView Name="Lv_ImportProduct" ItemsSource="{Binding ImportProducts}" ItemContainerStyle="{StaticResource ListViewItemStyle}"
                           SelectedItem="{Binding SelectedItemProduct, Mode=OneWayToSource}">
                     <ListView.View>
-                        <GridView ColumnHeaderContainerStyle="{StaticResource MainGridViewColumnHeader}">
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
                             <GridViewColumn Header="Product Name" DisplayMemberBinding="{Binding ProductName}"/>
                             <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}"/>

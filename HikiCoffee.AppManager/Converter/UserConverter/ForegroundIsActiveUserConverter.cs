@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace HikiCoffee.AppManager.Converter.UserConverter
 {
-    internal class ForegroundIsActiveUserConverter : IValueConverter
+    public class ForegroundIsActiveUserConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -12,9 +12,21 @@ namespace HikiCoffee.AppManager.Converter.UserConverter
             {
                 bool isActive = (bool)value;
 
-                if (isActive)
-                    return "#1e272e";
-                return "Red";
+                string theme = Properties.Settings.Default.ThemeAppManager;
+
+                if(theme == "Light")
+                {
+                    if (isActive)
+                        return "#1e272e";
+                    return "Red";
+                }
+                else
+                {
+                    if (isActive)
+                        return "Black";
+                    return "Red";
+                }
+                
             }
             return "";
         }

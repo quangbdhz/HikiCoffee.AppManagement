@@ -23,7 +23,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <materialDesign:Card Grid.Row="0" Margin="5 5 5 0">
+        <materialDesign:Card Grid.Row="0" Margin="5 5 5 0" Style="{StaticResource MaterialDesignCardStyle}">
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -34,41 +34,41 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox Grid.Column="0" Margin="0" Padding="0" Text="{Binding NameSuplier}" materialDesign:HintAssist.Hint="Name Suplier" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Column="1" Margin="15 0 0 0" Padding="0" Text="{Binding Address}" materialDesign:HintAssist.Hint="Address" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Column="2" Margin="15 0 0 0" Padding="0" Text="{Binding Phone}" materialDesign:HintAssist.Hint="Phone" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Column="3" Margin="15 0 0 0" Padding="0" Text="{Binding Email}" materialDesign:HintAssist.Hint="Email" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Column="4" Margin="15 0 0 0" Padding="0" Text="{Binding MoreInfo}" materialDesign:HintAssist.Hint="MoreInfo" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
             </Grid>
         </materialDesign:Card>
 
-        <materialDesign:Card Grid.Row="1" Margin="5 5 5 0">
+        <materialDesign:Card Grid.Row="1" Margin="5 5 5 0" Style="{StaticResource MaterialDesignCardStyle}">
             <WrapPanel Margin="5">
                 <Button Padding="0" Margin="0" Height="30" Content="Add" Foreground="Black" 
-                        Command="{Binding AddSuplierCommand}" Background="{DynamicResource JadeDust}" Style="{StaticResource MainButton}"/>
+                        Command="{Binding AddSuplierCommand}" Background="{DynamicResource JadeDust}" Style="{StaticResource ButtonStyle}"/>
 
                 <Button Padding="0" Margin="15 0 0 0" Height="30" Content="Update" Foreground="Black" 
-                        Command="{Binding UpdateSuplierCommand}" Background="{DynamicResource MintyGreen}" Style="{StaticResource MainButton}"/>
+                        Command="{Binding UpdateSuplierCommand}" Background="{DynamicResource MintyGreen}" Style="{StaticResource ButtonStyle}"/>
 
                 <Button Padding="0" Margin="15 0 0 0" Height="30" Content="Delete" Foreground="Black" 
-                        Command="{Binding DeleteSuplierCommand}" Background="{DynamicResource BaraRed}" Style="{StaticResource MainButton}"/>
+                        Command="{Binding DeleteSuplierCommand}" Background="{DynamicResource BaraRed}" Style="{StaticResource ButtonStyle}"/>
             </WrapPanel>
         </materialDesign:Card>
 
-        <materialDesign:Card Grid.Row="2" Margin="5">
+        <materialDesign:Card Grid.Row="2" Margin="5" Style="{StaticResource MaterialDesignCardStyle}">
             <ScrollViewer PreviewMouseWheel="LvSuplierScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                <ListView Name="lv_supliers" ItemsSource="{Binding Supliers}" ItemContainerStyle="{StaticResource MainListView}"
+                <ListView Name="lv_supliers" ItemsSource="{Binding Supliers}" ItemContainerStyle="{StaticResource ListViewItemStyle}"
                           SelectedItem="{Binding SelectedSuplier}">
                     <ListView.View>
-                        <GridView ColumnHeaderContainerStyle="{StaticResource MainGridViewColumnHeader}">
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
                             <GridViewColumn Header="Name Suplier" DisplayMemberBinding="{Binding NameSuplier}"/>
                             <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>

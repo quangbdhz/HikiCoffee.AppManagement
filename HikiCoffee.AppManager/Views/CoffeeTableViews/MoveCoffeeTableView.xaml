@@ -17,13 +17,14 @@
         WindowStyle="None"
         
         Name="moveCoffeeTableView"
-        Title="MoveCoffeeTableView" Height="450" Width="800">
+        Style="{StaticResource WindowStyle}"
+        Title="MoveCoffeeTableView" Height="450" Width="735">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
     
-    <Grid>
+    <Grid Style="{StaticResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -32,9 +33,21 @@
         <customcontrol:ControlBarUC Grid.Row="0" Margin="0 5 5 0" VerticalContentAlignment="Top"
                                     Tag="{Binding ElementName=moveCoffeeTableView}"  HorizontalAlignment="Right"/>
 
-        <materialDesign:Card Grid.Row="1" Margin="5">
+        <materialDesign:Card Grid.Row="1" Margin="5" Style="{StaticResource MaterialDesignCardStyle}">
             <ScrollViewer  PreviewMouseWheel="LvTableFurnitureScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                <ListView Name="lv_coffee_table_founds" Margin="0 0" Padding="0" ItemsSource="{Binding CoffeeTableFounds}">
+                <ListView Name="lv_coffee_table_founds" Margin="0" Padding="0" 
+                          ItemsSource="{Binding CoffeeTableFounds}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource DownloadProgress}"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource BaraRed}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Margin="0 0 0 0"
@@ -53,10 +66,11 @@
                         </Style>
                     </ListView.Resources>
                     <ListView.View>
-                        <GridView>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn>
                                 <GridViewColumn.Header>
-                                    <TextBlock Text="TABLE" Margin="0" Padding="0" FontWeight="Bold" FontSize="14" Foreground="Black"/>
+                                    <TextBlock Text="TABLE" Margin="0" Padding="0" Style="{StaticResource TextBlockStyle}" 
+                                               FontWeight="Bold" FontSize="14"/>
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>

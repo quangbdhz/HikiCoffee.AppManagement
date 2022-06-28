@@ -30,5 +30,13 @@
     <SolidColorBrush x:Key="Purple7b40f2" Color="#7b40f2" />
     <SolidColorBrush x:Key="Dark2F3136" Color="#2F3136" />
     <SolidColorBrush x:Key="Dark36393F" Color="#36393F" />
-
+    <SolidColorBrush x:Key="HintOfPensive" Color="#dcdde1" />
+    <SolidColorBrush x:Key="Purple341f97" Color="#341f97" />
+    <SolidColorBrush x:Key="GreyPorcelain" Color="#84817a" />
+    <SolidColorBrush x:Key="Peace" Color="#747d8c" />
+    <SolidColorBrush x:Key="Grisaille" Color="#57606f" />
+    <SolidColorBrush x:Key="FirstDate" Color="#fab1a0" />
+    <SolidColorBrush x:Key="StormPetrel" Color="#8395a7" />
+    <SolidColorBrush x:Key="DownloadProgress" Color="#4cd137" />
+    
 </ResourceDictionary>

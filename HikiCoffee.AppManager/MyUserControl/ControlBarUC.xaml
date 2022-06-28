@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:properties="clr-namespace:HikiCoffee.AppManager.Properties"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              
              xmlns:prism="http://prismlibrary.com/"
@@ -47,7 +48,7 @@
                                 <Style TargetType="{x:Type Border}">
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#363940"/>
+                                            <Setter Property="Background" Value="Red"/>
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -71,24 +72,24 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid Background="White">
+    <Grid Style="{StaticResource GridStyle}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button Command="{Binding MinimizeWindowCommand}" CommandParameter="{Binding ElementName=controlBarUC}" Grid.Column="0" Margin="7 0" 
+         <Button Command="{Binding MinimizeWindowCommand}" CommandParameter="{Binding ElementName=controlBarUC}" Grid.Column="0" Margin="7 2 7 0" 
                 ToolTip="Minimize" Padding="0" Background="Transparent" BorderThickness="0" Width="18" Height="18">
             <materialDesign:PackIcon Width="18" Height="18" Foreground="Black" Kind="WindowMinimize" />
         </Button>
 
-        <Button Command="{Binding MaximizeWindowCommand}" CommandParameter="{Binding ElementName=controlBarUC}" Grid.Column="1" Margin="7 0" 
+        <Button Command="{Binding MaximizeWindowCommand}" CommandParameter="{Binding ElementName=controlBarUC}" Grid.Column="1" Margin="7 2 7 0" 
                 ToolTip="Maxnime" Padding="0" Background="Transparent" BorderThickness="0" Width="18" Height="18">
             <materialDesign:PackIcon Width="18" Height="18" Foreground="Black" Kind="{Binding PackIconMaxnime}" />
         </Button>
 
-        <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=controlBarUC}" Grid.Column="2" Margin="7 0" 
+        <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=controlBarUC}" Grid.Column="2" Margin="7 2 7 0" 
                 Name="buttonClose" ToolTip="Close" Padding="0" Background="Transparent" BorderThickness="0" Width="18" Height="18">
             <materialDesign:PackIcon Width="18" Height="18" Foreground="{Binding ColorChangeButtonClose}" Kind="CloseThick">
 

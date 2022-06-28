@@ -16,9 +16,15 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         
+        Style="{StaticResource WindowStyle}"
         Name="updateCategoryTranslationView"
         Title="Update Category Translation" Height="450" Width="400">
-    <Grid>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
+    <Grid Style="{StaticResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -27,7 +33,7 @@
         <customcontrol:ControlBarUC Margin="0 5 5 0" VerticalContentAlignment="Top" Grid.Row="0" 
                                     Tag="{Binding ElementName=updateCategoryTranslationView}" HorizontalAlignment="Right"/>
 
-        <materialDesign:Card Grid.Row="1" Margin="5">
+        <materialDesign:Card Grid.Row="1" Margin="5" Style="{StaticResource MaterialDesignCardStyle}">
             <Grid Margin="5 2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -37,17 +43,17 @@
                 </Grid.RowDefinitions>
 
                 <TextBox Grid.Row="0" Margin="0" Padding="0" Text="{Binding NameCategory}" materialDesign:HintAssist.Hint="Name Category" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Row="1" Margin="0 5 0 0" Padding="0" Text="{Binding SeoDescription}" materialDesign:HintAssist.Hint="Seo Description" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Row="2" Margin="0 5 0 0" Padding="0" Text="{Binding SeoTitle}" materialDesign:HintAssist.Hint="Seo Title" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 
                 <Button Grid.Row="3" Padding="0" Margin="0 5 0 0" Height="30" Content="Update" Foreground="Black" 
-                        Command="{Binding UpdateCategoryTranslationCommand}" Background="{DynamicResource MintyGreen}" Style="{StaticResource MainButton}"/>
+                        Command="{Binding UpdateCategoryTranslationCommand}" Background="{DynamicResource MintyGreen}" Style="{StaticResource ButtonStyle}"/>
 
             </Grid>
         </materialDesign:Card>

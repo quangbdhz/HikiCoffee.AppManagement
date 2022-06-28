@@ -7,18 +7,59 @@
       mc:Ignorable="d" 
       
       xmlns:muc="clr-namespace:HikiCoffee.AppManager.MyUserControl"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+
+      xmlns:prism="http://prismlibrary.com/"
+      prism:ViewModelLocator.AutoWireViewModel="True"
       
       Style="{StaticResource PageStyle}"
       d:DesignHeight="686" d:DesignWidth="1205"
       Title="MainPage">
 
-    <GroupBox Header="GroupBox">
-        <UniformGrid Rows="7" HorizontalAlignment="Center">
-            <Button Content="Button" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <RadioButton x:Name="DarkMode" Content="Dark Mode" HorizontalAlignment="Center" Height="20" GroupName="modesSelection" Checked="DarkMode_Checked"/>
-            <RadioButton x:Name="LightkMode" Content="Light Mode" HorizontalAlignment="Center" Height="20" IsChecked="True" GroupName="modesSelection" Checked="LightkMode_Checked"/>
+        <Grid Grid.Row="0" Margin="0 5 0 0" Style="{StaticResource GridStyle}" Height="85">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        </UniformGrid>
-    </GroupBox>
+            <muc:ControlCardItem Grid.Column="0" Margin="5 0 2.5 0" Description="Product" Number="15"
+                                 UrlImage="https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1656258801/HikiCoffee/App_Manager/Product_n1dlmd.png"/>
+
+            <muc:ControlCardItem Grid.Column="1" Margin="2.5 0" Description="Customer" Number="123"
+                                 UrlImage="https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1656258801/HikiCoffee/App_Manager/Customer_kjv2ab.png"/>
+
+            <muc:ControlCardItem Grid.Column="2" Margin="2.5 0" Description="Staff" Number="25"
+                                 UrlImage="https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1656258801/HikiCoffee/App_Manager/Staff_hak9bz.png"/>
+
+            <muc:ControlCardItem Grid.Column="3" Margin="2.5 0" Description="Bill" Number="15,241"
+                                 UrlImage="https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1656258801/HikiCoffee/App_Manager/Bill_zbrk5j.png"/>
+
+            <muc:ControlCardItem Grid.Column="4" Margin="2.5 0 5 0" Description="Costs" Number="252,424,444"
+                                 UrlImage="https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1656258801/HikiCoffee/App_Manager/Money_d7qi0r.png"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0 0 0 0">
+            <!--<Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>-->
+
+            <!--<Calendar Grid.Column="1" Width="380" Height="300" Margin="-12 0 -12 0" Padding="0"
+                      Style="{DynamicResource CalendarStyle}" CalendarButtonStyle="{DynamicResource CalendarButtonStyle}" 
+                      CalendarDayButtonStyle="{DynamicResource CalendarDayButtonStyle}" 
+                      CalendarItemStyle="{DynamicResource CalendarItemStyle}"/>-->
+
+            <Image Margin="5" Stretch="UniformToFill" Source="https://images3.alphacoders.com/677/thumb-1920-677273.png"/>
+        </Grid>
+    </Grid>
 </Page>

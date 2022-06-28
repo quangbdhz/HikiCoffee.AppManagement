@@ -31,7 +31,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Style="{StaticResource GridStyle}">
                 <ScrollViewer  PreviewMouseWheel="LvTableFurnitureScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                     <ListView Name="lv_coffee_tables" Margin="0 0" Padding="0" 
                               ItemsSource="{Binding CoffeeTables}">
@@ -65,10 +65,11 @@
                             </Style>
                         </ListView.Resources>
                         <ListView.View>
-                            <GridView>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyleNoPading}">
                                 <GridViewColumn>
                                     <GridViewColumn.Header>
-                                        <TextBlock Text="TABLE" Margin="0" Padding="0" FontWeight="Bold" FontSize="14" Foreground="Black"/>
+                                        <TextBlock Text="TABLE" Margin="0" Style="{StaticResource TextBlockStyle}" Padding="0" FontWeight="Bold" 
+                                                   FontSize="14"/>
                                     </GridViewColumn.Header>
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -88,12 +89,10 @@
                     </ListView>
                 </ScrollViewer>
             </Grid>
-
-
         </Grid>
 
-        <materialDesign:Card Grid.Column="1" Margin="5" Background="White">
-            <Grid>
+        <materialDesign:Card Grid.Column="1" Margin="5" Style="{StaticResource MaterialDesignCardStyle}">
+            <Grid Style="{StaticResource GridStyle}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
@@ -108,7 +107,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Keyword" FontWeight="Bold" FontSize="15" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="0" Margin="5 0 0 0" Style="{StaticResource TextBlockStyle}" Text="Keyword" FontWeight="Bold" FontSize="15" VerticalAlignment="Center"/>
 
                     <Border Grid.Column="1" Margin="10 0 5 0" Height="30" BorderBrush="Black" BorderThickness="1">
                         <Grid>
@@ -120,59 +119,37 @@
 
                             <TextBox Grid.Column="0" Margin="2 0 0 0" materialDesign:HintAssist.Hint="Search the customer" 
                                      Text="{Binding SearchNameCustomerOrder, UpdateSourceTrigger=PropertyChanged}"
-                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                                     BorderThickness="0" VerticalAlignment="Center"/>
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Padding="0"
+                                     Style="{StaticResource TextBoxNormalStyle}" BorderThickness="0" VerticalAlignment="Center"/>
 
                             <Button Grid.Column="1" Padding="0" IsDefault="True" Width="30" Background="Transparent"
                                     Visibility="{Binding VisibilityButtonSelectedCoffeeTable}" BorderBrush="Transparent"
                                     Command="{Binding SearchCustomerOrderCommand}">
-                                <materialDesign:PackIcon VerticalAlignment="Center" Kind="Search" Width="18" Height="18" Margin="0 0 6 0" Foreground="#2C3A47"/>
+                                <materialDesign:PackIcon Style="{StaticResource MaterialDesignPackIconStyle}" VerticalAlignment="Center" Kind="Search" Width="18" Height="18" Margin="0 0 6 0"/>
                             </Button>
                         </Grid>
                     </Border>
                 </Grid>
 
-                <Grid Grid.Row="1" Margin="5 5 5 0">
+                <Grid Grid.Row="1" Margin="0 5 5 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" 
-                               Text="{Binding NameTableChoosed, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="15" FontWeight="Bold" 
+                               Style="{StaticResource TextBlockStyle}" Text="{Binding NameTableChoosed, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <Button Grid.Column="1" Command="{Binding TurnOnCoffeeTableCommand}" Visibility="{Binding VisibilityButtonSelectedCoffeeTable}" 
-                            Margin="10 0 0 0" Background="{DynamicResource BlueMartina}" BorderThickness="0" Foreground="Black" Content="Turn On"/>
+                            Margin="13 0 0 0" Background="{DynamicResource BlueMartina}" BorderThickness="0" Foreground="Black" Content="Turn On"/>
                 </Grid>
 
-                <materialDesign:Card Grid.Row="2" Margin="5 5 5 0" VerticalAlignment="Stretch">
+                <materialDesign:Card Grid.Row="2" Style="{StaticResource MaterialDesignCardStyle}" Margin="5 5 5 0" VerticalAlignment="Stretch">
                     <ScrollViewer PreviewMouseWheel="LvCustomerOderItemScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                        <ListView Name="lv_customer_orders" ItemsSource="{Binding BillInfoCustomerOrders}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" Width="auto">
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                </Style>
-                            </ListView.ItemContainerStyle>
+                        <ListView Name="lv_customer_orders" ItemsSource="{Binding BillInfoCustomerOrders}" ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                                  SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" Width="auto">
                             <ListView.View>
-                                <GridView>
-                                    <GridView.ColumnHeaderContainerStyle>
-                                        <Style TargetType="{x:Type GridViewColumnHeader}">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-                                                        <Border BorderThickness="0,0,0,0" BorderBrush="Black" Background="Transparent">
-                                                            <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
-                                                        </Border>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Setter Property="OverridesDefaultStyle" Value="True" />
-                                            <Setter Property="Foreground" Value="Black" />
-                                            <Setter Property="FontWeight" Value="DemiBold" />
-                                            <Setter Property="FontFamily" Value="Segoe UI" />
-                                            <Setter Property="FontSize" Value="14" />
-                                        </Style>
-                                    </GridView.ColumnHeaderContainerStyle>
+                                <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyleNoPading}">
                                     <GridViewColumn Header="Name Product" DisplayMemberBinding="{Binding NameProduct}"></GridViewColumn>
                                     <GridViewColumn Header="Qty" DisplayMemberBinding="{Binding Quantity}"></GridViewColumn>
                                     <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price, Converter={StaticResource numberConverter}}"></GridViewColumn>
@@ -189,8 +166,8 @@
                     </ScrollViewer>
                 </materialDesign:Card>
 
-                <materialDesign:Card Grid.Row="3" Margin="5" Background="{DynamicResource AuroraGreen}" VerticalAlignment="Bottom">
-                    <Grid Margin="5">
+                <materialDesign:Card Grid.Row="3" Style="{StaticResource MaterialDesignCardCheckOutStyle}" Margin="5" VerticalAlignment="Bottom">
+                    <Grid Margin="5" Style="{StaticResource GridCheckOutStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -207,8 +184,8 @@
 
                             <TextBlock Grid.Column="0" Text="Name Customer:" FontWeight="Bold" FontSize="13"/>
 
-                            <TextBlock Grid.Column="1" Text="{Binding FullNameCustomerOrder}" Foreground="{DynamicResource RedPigment}" 
-                                       Style="{StaticResource InfoPayment}"/>
+                            <TextBlock Grid.Column="1" Text="{Binding FullNameCustomerOrder}" 
+                                       Style="{StaticResource NameCustomerStyle}"/>
                         </Grid>
 
                         <Grid Grid.Row="1" Margin="0 5 0 0">
@@ -217,10 +194,11 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="Total Due" Style="{StaticResource InfoPayment}"/>
+                            <TextBlock Grid.Column="0" Text="Total Due" Style="{StaticResource InfoPaymentStyle}"/>
 
                             <Border Grid.Column="1" Style="{StaticResource BorderInfoPayment}">
-                                <TextBlock Margin="5 2" HorizontalAlignment="Right" Text="{Binding TotalDueBillOfCustomerOrder, Converter={StaticResource numberConverter}}" Style="{StaticResource InfoPayment}"/>
+                                <TextBlock Margin="5 2" HorizontalAlignment="Right" Text="{Binding TotalDueBillOfCustomerOrder, Converter={StaticResource numberConverter}}" 
+                                           Style="{StaticResource InfoPaymentStyle}"/>
                             </Border>
                         </Grid>
 
@@ -231,11 +209,11 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="VAT" Style="{StaticResource InfoPayment}"/>
+                            <TextBlock Grid.Column="0" Text="VAT" Style="{StaticResource InfoPaymentStyle}"/>
 
                             <Border Grid.Column="1" Style="{StaticResource BorderInfoPayment}">
                                 <ComboBox Margin="0 0 0 0" BorderThickness="0" SelectedIndex="{Binding PercentVAT}" Width="90"
-                                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" FontSize="13"
+                                          Style="{StaticResource ComboBoxStyle}" FontSize="13"
                                           materialDesign:ColorZoneAssist.Mode="Dark" Name="cbx_vat"
                                           HorizontalAlignment="Center" HorizontalContentAlignment="Center"
                                           ItemsSource="{Binding NumberItemOrders}">     
@@ -249,7 +227,8 @@
                             </Border>
                             
                             <Border Grid.Column="2" Style="{StaticResource BorderInfoPayment}">
-                                <TextBlock Margin="5 2" HorizontalAlignment="Right" Text="{Binding CheckOutPercentVAT, Converter={StaticResource numberConverter}}" Style="{StaticResource InfoPayment}"/>
+                                <TextBlock Margin="5 2" HorizontalAlignment="Right" Text="{Binding CheckOutPercentVAT, Converter={StaticResource numberConverter}}" 
+                                           Style="{StaticResource InfoPaymentStyle}"/>
                             </Border>
                         </Grid>
 
@@ -260,7 +239,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="Discount" Style="{StaticResource InfoPayment}"/>
+                            <TextBlock Grid.Column="0" Text="Discount" Style="{StaticResource InfoPaymentStyle}"/>
 
                             <Border Grid.Column="1" Style="{StaticResource BorderInfoPayment}">
                                 <TextBox Margin="0 2 2.5 2" Padding="0" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
@@ -269,7 +248,8 @@
                             </Border>
 
                             <Border Grid.Column="2" Style="{StaticResource BorderInfoPayment}">
-                                <TextBlock Margin="2.5 2 5 2" HorizontalAlignment="Right" Text="{Binding ValuePromotional, Converter={StaticResource numberConverter}}" Style="{StaticResource InfoPayment}"/>
+                                <TextBlock Margin="2.5 2 5 2" HorizontalAlignment="Right" Text="{Binding ValuePromotional, Converter={StaticResource numberConverter}}" 
+                                           Style="{StaticResource InfoPaymentStyle}"/>
                             </Border>
                         </Grid>
 
@@ -279,10 +259,11 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="Net Amount" Style="{StaticResource InfoPayment}"/>
+                            <TextBlock Grid.Column="0" Text="Net Amount" Style="{StaticResource InfoPaymentStyle}"/>
 
                             <Border Grid.Column="1" Style="{StaticResource BorderInfoPayment}">
-                                <TextBlock HorizontalAlignment="Right" Text="{Binding ToTalPayment, Converter={StaticResource numberConverter}}" Style="{StaticResource InfoPayment}"/>
+                                <TextBlock HorizontalAlignment="Right" Text="{Binding ToTalPayment, Converter={StaticResource numberConverter}}" 
+                                           Style="{StaticResource InfoPaymentStyle}"/>
                             </Border>
                         </Grid>
                     </Grid>
@@ -290,10 +271,10 @@
             </Grid>
         </materialDesign:Card>
 
-        <materialDesign:Card Grid.Column="2" Margin="0 5">
+        <materialDesign:Card Grid.Column="2" Style="{StaticResource MaterialDesignCardStyle}" Margin="0 5">
             <StackPanel>
                 <Button Padding="0" Command="{Binding MoveCoffeeTableCommand}" Margin="5 5 5 0" 
-                        Style="{StaticResource MainButton}" Height="30" HorizontalContentAlignment="Stretch"
+                        Style="{StaticResource ButtonStyle}" Height="30" HorizontalContentAlignment="Stretch"
                         Background="{DynamicResource CoastalBreeze}">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -309,7 +290,7 @@
                 </Button>
 
                 <Button Padding="0" Command="{Binding MergeCoffeeTableComamnd}" Margin="5 15 5 0" 
-                        Style="{StaticResource MainButton}" Height="30" HorizontalContentAlignment="Stretch"
+                        Style="{StaticResource ButtonStyle}" Height="30" HorizontalContentAlignment="Stretch"
                         Background="{DynamicResource Energos}">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -326,10 +307,9 @@
 
                 <TextBlock Width="100"  Margin="0 140 0 0" Text="Number" FontWeight="Bold" FontSize="15"/>
                 
-                <Border Margin="0 2 0 0" Height="30" BorderBrush="Black" BorderThickness="1" Width="100" Background="White">
+                <Border Margin="0 2 0 0" Height="30" BorderBrush="Black" Style="{StaticResource BorderCountItemStyle}" Width="100">
                     <ComboBox Margin="0 0 0 0" Width="90" Height="27" BorderThickness="0" HorizontalAlignment="Center"
-                              materialDesign:TextFieldAssist.DecorationVisibility="Hidden" FontSize="14"
-                              materialDesign:ColorZoneAssist.Mode="Dark" Name="cbx_number_item_order"
+                              FontSize="14" Name="cbx_number_item_order" Style="{StaticResource ComboBoxItemCountStyle}"
                               SelectedIndex="{Binding IndexCountProductOrderInBill}" HorizontalContentAlignment="Center"
                               ItemsSource="{Binding NumberItemOrders}">
                         <i:Interaction.Triggers>
@@ -342,7 +322,7 @@
                 </Border>
 
                 <Button Padding="0" Command="{Binding AddQuantityBillInfoCoffeeTableCommand}" Margin="5 15 5 0" 
-                        Style="{StaticResource MainButton}" Height="30" HorizontalContentAlignment="Stretch"
+                        Style="{StaticResource ButtonStyle}" Height="30" HorizontalContentAlignment="Stretch"
                         Background="{DynamicResource MintyGreen}">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -358,7 +338,7 @@
                 </Button>
 
                 <Button Padding="0" Command="{Binding MinusQuantityBillInfoCoffeeTableCommand}" Margin="5 15 5 0" 
-                        Style="{StaticResource MainButton}" Height="30" HorizontalContentAlignment="Stretch"
+                        Style="{StaticResource ButtonStyle}" Height="30" HorizontalContentAlignment="Stretch"
                         Background="{DynamicResource TwinkleBlue}">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -374,7 +354,7 @@
                 </Button>
 
                 <Button Padding="0" Command="{Binding DeleteQuantityBillInfoCoffeeTableCommand}" Margin="5 15 5 0" 
-                        Style="{StaticResource MainButton}" Height="30" HorizontalContentAlignment="Stretch"
+                        Style="{StaticResource ButtonStyle}" Height="30" HorizontalContentAlignment="Stretch"
                         Background="{DynamicResource BaraRed}">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -390,7 +370,7 @@
                 </Button>
 
                 <Button Padding="0" Command="{Binding CheckOutBillCoffeeTableCommand}" Margin="5 150 5 0" 
-                        Style="{StaticResource MainButton}" Height="30" HorizontalContentAlignment="Stretch"
+                        Style="{StaticResource ButtonStyle}" Height="30" HorizontalContentAlignment="Stretch"
                         Background="{DynamicResource LavenderTea}">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -414,10 +394,10 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <materialDesign:Card Grid.Column="3" Margin="5 5 5 0" VerticalAlignment="Stretch" MaxHeight="300">
-                <Expander Header="{Binding NameCategoryChoosed}" Padding="0">
+            <materialDesign:Card Grid.Column="3" Style="{StaticResource MaterialDesignCardStyle}" Margin="5 5 5 0" Padding="0" VerticalAlignment="Stretch" MaxHeight="300">
+                <Expander Header="{Binding NameCategoryChoosed}" Style="{StaticResource ExpanderStyle}" Margin="-1 -1 0 0" Padding="0">
                     <ScrollViewer PreviewMouseWheel="LvCategoriesScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                        <ListBox Name="lb_category_translation" ItemsSource="{Binding CategoryTranslations}">
+                        <ListBox Name="lb_category_translation" ItemsSource="{Binding CategoryTranslations}" Style="{StaticResource ListBoxStyle}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -442,29 +422,12 @@
                 </Expander>
             </materialDesign:Card>
 
-            <materialDesign:Card Visibility="{Binding VisibilityListItemOder}" Margin="5" Grid.Row="1">
+            <materialDesign:Card Grid.Row="1" Style="{StaticResource MaterialDesignCardStyle}" Visibility="{Binding VisibilityListItemOder}" Margin="5">
                 <ScrollViewer PreviewMouseWheel="LvProductItemOderScrollViewer_PreviewMouseWheel" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <ListView Name="lv_item_orders"  ItemsSource="{Binding ItemOrders}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" Width="auto">
+                    <ListView Name="lv_item_orders"  ItemsSource="{Binding ItemOrders}" ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                              SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" Width="auto">
                         <ListView.View>
-                            <GridView>
-                                <GridView.ColumnHeaderContainerStyle>
-                                    <Style TargetType="{x:Type GridViewColumnHeader}">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-                                                    <Border BorderThickness="0,0,0,0" BorderBrush="Black" Background="Transparent">
-                                                        <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter Property="OverridesDefaultStyle" Value="True" />
-                                        <Setter Property="Foreground" Value="Black" />
-                                        <Setter Property="FontWeight" Value="DemiBold" />
-                                        <Setter Property="FontFamily" Value="Segoe UI" />
-                                        <Setter Property="FontSize" Value="14" />
-                                    </Style>
-                                </GridView.ColumnHeaderContainerStyle>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyleNoPading}">
                                 <GridViewColumn Header="Name Product" DisplayMemberBinding="{Binding NameProduct}"></GridViewColumn>
                                 <GridViewColumn Header=" Unit " DisplayMemberBinding="{Binding NameUnit}"></GridViewColumn>
                                 <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price, Converter={StaticResource numberConverter}}"></GridViewColumn>

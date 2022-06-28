@@ -97,7 +97,6 @@ namespace HikiCoffee.AppManager.ViewModels.MyUserControlViewModels
                 SizeWindow(p);
             });
 
-
         }
 
 
