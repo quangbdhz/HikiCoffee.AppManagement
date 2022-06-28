@@ -1,7 +1,5 @@
 # HikiCoffee Management Software
 
-
-
 ## Functions
 
 * Product Management.
@@ -23,6 +21,11 @@
 ## Video Demo
 
 [Link Demo](https://www.youtube.com/watch?v=LvtGNmnr-1g)
+
+## How to configure and run
+
+* Run **WebAPI:** [HikiCoffee.API](https://github.com/quangbdhz/HikiCoffee.API)
+* Change DomainName in SystemConstants in HikiCoffee.Utilities project
 
 ## Images
 
