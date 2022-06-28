@@ -30,7 +30,7 @@
 
 ![Coffee Table Light Theme](https://user-images.githubusercontent.com/81171112/176134913-2ec724c8-8f88-4b3d-959d-535eb36bd1fe.jpg)
 
-![https://user-images.githubusercontent.com/81171112/176134918-de815b4c-8164-4cf8-9456-e2f923ac7cde.jpg)
+![Coffee Table Dark Theme](https://user-images.githubusercontent.com/81171112/176134918-de815b4c-8164-4cf8-9456-e2f923ac7cde.jpg)
 
 
 
