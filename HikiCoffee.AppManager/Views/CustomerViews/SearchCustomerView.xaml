@@ -1,0 +1,111 @@
+﻿<Window x:Class="HikiCoffee.AppManager.Views.CustomerViews.SearchCustomerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HikiCoffee.AppManager.Views.CustomerViews"
+        mc:Ignorable="d"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:customcontrol="clr-namespace:HikiCoffee.AppManager.MyUserControl"
+        
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        
+        Name="searchCustomerWindow"
+        Style="{StaticResource WindowStyle}"
+        Title="Search Customer" Height="600" Width="1139">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
+    <Grid Style="{StaticResource GridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <customcontrol:ControlBarUC Grid.Row="0" Margin="0 5 5 0" VerticalContentAlignment="Top"
+                                    Tag="{Binding ElementName=searchCustomerWindow}"  HorizontalAlignment="Right"/>
+
+        <materialDesign:Card Grid.Row="1" UniformCornerRadius="5" Margin="5 5 5 0" Style="{StaticResource MaterialDesignCardStyle}">
+            <Border Margin="2" Height="30" CornerRadius="5" Style="{StaticResource BorderInfoPayment}" BorderThickness="1">
+                <Grid Style="{StaticResource GridStyle}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Grid.Column="0" Margin="10 0 0 0" Name="tb_name_customer" materialDesign:HintAssist.Hint="Search the customer" 
+                             Text="{Binding NameCustomerOrder, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderThickness="0"
+                             TextChanged="TextBox_TextChanged" Style="{StaticResource TextBoxNormalStyle}" VerticalAlignment="Center"/>
+
+                    <materialDesign:PackIcon Grid.Column="1" VerticalAlignment="Center" Kind="Search" 
+                                             Width="25" Height="25" Margin="0 0 0 0" Style="{StaticResource MaterialDesignPackIconStyle}"/>
+
+                    <ComboBox Grid.Column="2" Margin="5 0 10 0"  BorderThickness="0" SelectedIndex="0" FontSize="14"
+                              DropDownClosed="OptionSearch_DropDownClosed" HorizontalContentAlignment="Center"
+                              materialDesign:TextFieldAssist.DecorationVisibility="Hidden" HorizontalAlignment="Center"
+                              Style="{StaticResource ComboBoxStyle}" Name="cbx_number_item_order">
+                        <ComboBoxItem>Last Name</ComboBoxItem>
+                        <ComboBoxItem>First Name</ComboBoxItem>
+                        <ComboBoxItem>Phone</ComboBoxItem>
+                        <ComboBoxItem>Mail</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+            </Border>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="2" Margin="5" Style="{StaticResource MaterialDesignCardStyle}">
+            <ScrollViewer PreviewMouseWheel="LvUserScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                <ListView Name="Lv_Users" ItemsSource="{Binding Users}" ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                          SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                            <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
+                            <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
+                            <GridViewColumn Header="User Name" DisplayMemberBinding="{Binding UserName}"/>
+                            <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
+                            <GridViewColumn Header="Confirm Mail">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <materialDesign:PackIcon Width="20" Height="20" Foreground="{Binding IsEmailConfirmed, Converter={StaticResource foregroundIsActiveUserConverter}}"
+                                                                     Kind="{Binding IsEmailConfirmed, Converter={StaticResource isActiveUserConverter}}" Opacity=".99" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="PhoneNumber" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                            <GridViewColumn Header="Gender" DisplayMemberBinding="{Binding NameGender}"/>
+                            <GridViewColumn Header="Active">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Margin="20 0" Command="{Binding ElementName=Lv_User, Path=DataContext.LockOrUnlockUserComamnd}" CommandParameter="{Binding}" Background="Aqua" Padding="0" Style="{DynamicResource MaterialDesignToolButton}">
+                                            <materialDesign:PackIcon Width="20" Height="20" Foreground="{Binding IsActive, Converter={StaticResource foregroundIsActiveUserConverter}}"
+                                                                     Kind="{Binding IsActive, Converter={StaticResource isActiveUserConverter}}" Opacity=".99" />
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding MouseLvUserCommand}" CommandParameter="{Binding ElementName=Lv_Users, Path=SelectedItem}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding MouseLvUserCloseWindowSearchUserCommand}" CommandParameter="{Binding ElementName=searchCustomerWindow}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
+
+    </Grid>
+</Window>

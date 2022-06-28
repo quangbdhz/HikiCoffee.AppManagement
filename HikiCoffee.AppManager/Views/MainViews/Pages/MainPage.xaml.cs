@@ -24,5 +24,8 @@ namespace HikiCoffee.AppManager.Views.MainViews.Pages
         {
             InitializeComponent();
         }
+
+
+        
     }
 }

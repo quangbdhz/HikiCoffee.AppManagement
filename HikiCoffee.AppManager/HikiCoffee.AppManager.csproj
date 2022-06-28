@@ -8,25 +8,55 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\TableFurniture\status_table_0.jpg" />
+    <None Remove="Images\TableFurniture\status_table_in_use.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Images\TableFurniture\status_table_0.jpg" />
+    <EmbeddedResource Include="Images\TableFurniture\status_table_in_use.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\CustomerViewModels\" />
+    <Folder Include="Data\" />
+    <Folder Include="ViewModels\CategoryViewModels\CategoryViewModels\" />
+    <Folder Include="Views\CategoryViews\CategoryViews\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.18.1" />
     <PackageReference Include="MaterialDesignColors" Version="2.0.5" />
     <PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="6.0.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HikiCoffee.ApiIntegration\HikiCoffee.ApiIntegration.csproj" />
+    <ProjectReference Include="..\HikiCoffee.Models\HikiCoffee.Models.csproj" />
+    <ProjectReference Include="..\HikiCoffee.Utilities\HikiCoffee.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

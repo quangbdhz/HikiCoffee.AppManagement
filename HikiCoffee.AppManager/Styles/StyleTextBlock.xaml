@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:properties="clr-namespace:HikiCoffee.AppManager.Properties"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type TextBlock}" x:Key="TextBlockStyle">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Margin" Value="5 5 0 0"/>
+        <Setter Property="Padding" Value="0"/>
+        
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Dark">
+                <Setter Property="Foreground" Value="White"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Light">
+                <Setter Property="Foreground" Value="Black"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="InfoPaymentStyle">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 1 3 1"/>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Dark">
+                <Setter Property="Foreground" Value="White"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Light">
+                <Setter Property="Foreground" Value="Black"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="NameCustomerStyle">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Dark">
+                <Setter Property="Foreground" Value="{DynamicResource CoastalBreeze}"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Light">
+                <Setter Property="Foreground" Value="{DynamicResource RedPigment}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="TextBlockCardItemStyle">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Dark">
+                <Setter Property="Foreground" Value="White"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Light">
+                <Setter Property="Foreground" Value="{DynamicResource PrestigeBlue}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

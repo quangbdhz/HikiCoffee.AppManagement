@@ -97,7 +97,6 @@ namespace HikiCoffee.AppManager.ViewModels.MyUserControlViewModels
                 SizeWindow(p);
             });
 
-
         }
 
 
@@ -172,7 +171,9 @@ namespace HikiCoffee.AppManager.ViewModels.MyUserControlViewModels
             _execute((T)parameter);
         }
 
+#pragma warning disable CS8612 // Nullability of reference types in type doesn't match implicitly implemented member.
         public event EventHandler CanExecuteChanged
+#pragma warning restore CS8612 // Nullability of reference types in type doesn't match implicitly implemented member.
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }

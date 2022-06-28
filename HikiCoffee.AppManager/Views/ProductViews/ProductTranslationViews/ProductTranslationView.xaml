@@ -1,0 +1,113 @@
+﻿<Window x:Class="HikiCoffee.AppManager.Views.ProductViews.ProductTranslationViews.ProductTranslationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HikiCoffee.AppManager.Views.ProductViews.ProductTranslationViews"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:customcontrol="clr-namespace:HikiCoffee.AppManager.MyUserControl"
+        
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        
+        Name="productTranslationView"
+        mc:Ignorable="d"
+        Style="{StaticResource WindowStyle}"
+        Title="ProductTranslationView" Height="730" Width="1400">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
+    <Grid Style="{StaticResource GridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <customcontrol:ControlBarUC Margin="0 5 5 0"  VerticalContentAlignment="Top" Grid.Row="0" 
+                                    Tag="{Binding ElementName=productTranslationView}"  HorizontalAlignment="Right"/>
+
+        <materialDesign:Card Margin="5 5 5 0" Grid.Row="1" Style="{StaticResource MaterialDesignCardStyle}">
+            <ListView Name="Lv_Product" ItemsSource="{Binding Products}" Margin="0 0 0 5" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="Stock" DisplayMemberBinding="{Binding Stock}"/>
+                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                        <GridViewColumn Header="Original Price" DisplayMemberBinding="{Binding OriginalPrice}"/>
+                        <GridViewColumn Header="View Count" DisplayMemberBinding="{Binding ViewCount}"/>
+                        <GridViewColumn Header="Date Created" DisplayMemberBinding="{Binding DateCreated}"/>
+                        <GridViewColumn Header="Featured" DisplayMemberBinding="{Binding IsFeatured}"/>
+                        <GridViewColumn Header="Active" DisplayMemberBinding="{Binding IsActive}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </materialDesign:Card>
+
+        <Grid Grid.Row="2" Style="{StaticResource GridStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <materialDesign:Card Grid.Column="0" Margin="5 5 0 5" Style="{StaticResource MaterialDesignCardStyle}">
+                <Image RenderOptions.BitmapScalingMode="Fant"  Width="350" MaxHeight="600"
+                       VerticalAlignment="Center" Source="{Binding UrlImageCoverProduct}" />
+            </materialDesign:Card>
+            
+
+            <materialDesign:Card Margin="5 5 5 0" Grid.Column="1" Style="{StaticResource MaterialDesignCardStyle}">
+                <Grid Style="{StaticResource GridStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <materialDesign:Card Grid.Row="0" Style="{StaticResource MaterialDesignCardStyle}" Margin="5 5 5 0">
+                        <WrapPanel Margin="5">
+                            <Button Command="{Binding AddProductTranslationWindowCommand}" Content="Add" Padding="0" Margin="0" Height="30"
+                                    Background="{DynamicResource JadeDust}" Style="{StaticResource ButtonStyle}"/>
+
+                            <Button Command="{Binding UpdateProductTranslationWindowCommand}" Content="Update" Padding="0" Margin="15 0 0 0" Height="30"
+                                    Background="{DynamicResource MintyGreen}" Style="{StaticResource ButtonStyle}"/>
+
+                            <Button Command="{Binding DeleteProductTranslationWindowCommand}" Content="Delete" Margin="15 0 0 0" Padding="0" Height="30"
+                                    Background="{DynamicResource BaraRed}" Style="{StaticResource ButtonStyle}"/>
+
+                        </WrapPanel>
+                    </materialDesign:Card>
+
+                    <ListView Margin="5 5 5 0" Grid.Row="1" Name="Lv_ProductTranslation" ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                              ItemsSource="{Binding ProductTranslations}">
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn Header="Product Id" DisplayMemberBinding="{Binding ProductId}"/>
+                                <GridViewColumn Header="Name Product" DisplayMemberBinding="{Binding NameProduct}"/>
+                                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
+                                <GridViewColumn Header="Details" DisplayMemberBinding="{Binding Details}"/>
+                                <GridViewColumn Header="Seo Description" DisplayMemberBinding="{Binding SeoDescription}"/>
+                                <GridViewColumn Header="Seo Title" DisplayMemberBinding="{Binding SeoTitle}"/>
+                                <GridViewColumn Header="Seo Alias" DisplayMemberBinding="{Binding SeoAlias}"/>
+                                <GridViewColumn Header="Language" DisplayMemberBinding="{Binding LanguageId}"/>
+                            </GridView>
+                        </ListView.View>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseUp">
+                                <i:InvokeCommandAction Command="{Binding MouseUpLvProductTranslationCommand}"
+                                CommandParameter="{Binding ElementName=Lv_ProductTranslation, Path=SelectedItem}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListView>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</Window>

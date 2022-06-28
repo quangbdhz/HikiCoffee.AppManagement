@@ -5,10 +5,70 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HikiCoffee.AppManager.Views.MainViews.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="CustomerPage">
+      
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        
+      xmlns:prism="http://prismlibrary.com/"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      
+      Style="{StaticResource PageStyle}"
+      d:DesignHeight="686" d:DesignWidth="1205"
+      Title="Customer Page">
 
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock Text="CustomerPage"/>
+    <Grid Style="{StaticResource GridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <materialDesign:Card Grid.Row="0" Style="{StaticResource MaterialDesignCardStyle}" Margin="5 5 5 0">
+            <WrapPanel Margin="5">
+                <Button Command="{Binding DeleteUserCommand}" Content="Delete" Height="30" Padding="0" Margin="0"
+                        Background="{DynamicResource BaraRed}" Style="{StaticResource ButtonStyle}"/>
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="1" Margin="5" Style="{StaticResource MaterialDesignCardStyle}" VerticalAlignment="Stretch">
+            <ScrollViewer PreviewMouseWheel="LvUserScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                <ListView Name="Lv_User" ItemsSource="{Binding Users}" ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                          SelectedItem="{Binding SelectedUser, Mode=OneWayToSource}">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                            <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
+                            <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
+                            <GridViewColumn Header="User Name" DisplayMemberBinding="{Binding UserName}"/>
+                            <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
+                            <GridViewColumn Header="Confirm Mail">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <materialDesign:PackIcon Width="20" Height="20" Foreground="{Binding IsEmailConfirmed, Converter={StaticResource foregroundIsActiveUserConverter}}"
+                                                                     Kind="{Binding IsEmailConfirmed, Converter={StaticResource isActiveUserConverter}}" Opacity=".99" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="PhoneNumber" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                            <GridViewColumn Header="Gender" DisplayMemberBinding="{Binding NameGender}"/>
+                            <GridViewColumn Header="Active">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Margin="20 0" Command="{Binding ElementName=Lv_User, Path=DataContext.LockOrUnlockUserComamnd}" CommandParameter="{Binding}" Background="Aqua" Padding="0" Style="{DynamicResource MaterialDesignToolButton}">
+                                            <materialDesign:PackIcon Width="20" Height="20" Foreground="{Binding IsActive, Converter={StaticResource foregroundIsActiveUserConverter}}"
+                                                                     Kind="{Binding IsActive, Converter={StaticResource isActiveUserConverter}}" Opacity=".99" />
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding MouseUpLvUserCommand}"
+                                CommandParameter="{Binding ElementName=Lv_User, Path=SelectedItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
     </Grid>
 </Page>

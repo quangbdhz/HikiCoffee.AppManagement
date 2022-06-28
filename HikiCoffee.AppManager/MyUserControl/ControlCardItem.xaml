@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="HikiCoffee.AppManager.MyUserControl.ControlCardItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HikiCoffee.AppManager.MyUserControl"
+             
+             xmlns:muc="clr-namespace:HikiCoffee.AppManager.MyUserControl"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             
+             x:Name="this"
+             mc:Ignorable="d" 
+             d:DesignHeight="85" d:DesignWidth="250">
+
+    <Border CornerRadius="10" BorderThickness="1" Style="{StaticResource BorderCardItemStyle}">
+        <Border CornerRadius="10" BorderThickness="3">
+            <Grid Style="{StaticResource GridCardItemStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0" x:Name="img_url_image" Margin="10,0,0,0" Width="50" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderOptions.BitmapScalingMode="HighQuality" 
+                           Source="{Binding UrlImage, ElementName=this, FallbackValue=UrlImage, TargetNullValue=UrlImage}" />
+
+                <Grid Grid.Column="1" Margin="10 0 0 0" Style="{StaticResource GridCardItemStyle}" HorizontalAlignment="Right">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <materialDesign:PopupBox Margin="0 0 10 0" Grid.Row="0" HorizontalAlignment="Right" BorderBrush="Transparent" StaysOpen="False" Padding="0 0">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PackIcon Width="20" Height="20" Kind="DotsHorizontal" Padding="0" Margin="0 -1.5" 
+                                                 Style="{StaticResource MaterialDesignPackIconStyle}" />
+                        </materialDesign:PopupBox.ToggleContent>
+
+                        <StackPanel>
+                            <ListView FontFamily="Champagne &amp; Limousines"
+                                      ItemContainerStyle="{StaticResource ListViewSettingStyle}"
+                                      Margin="0" FontSize="13">
+                                <ListViewItem Height="35" Padding="0" Style="{StaticResource ListViewSettingStyle}">
+                                    <StackPanel Orientation="Horizontal" Margin="10 0">
+                                        <materialDesign:PackIcon Style="{StaticResource  MaterialDesignPackIconStyle}" HorizontalAlignment="Left" Kind="Import" Width="20" Height="20" Margin="0"/>
+                                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="Import" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                                    </StackPanel>
+                                </ListViewItem>
+
+                                <ListViewItem Height="35" Padding="0" Style="{StaticResource ListViewSettingStyle}">
+                                    <StackPanel Orientation="Horizontal" Margin="10 0">
+                                        <materialDesign:PackIcon Style="{StaticResource  MaterialDesignPackIconStyle}" HorizontalAlignment="Left" Kind="Export" Width="20" Height="20" Margin="0"/>
+                                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="Export" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                                    </StackPanel>
+                                </ListViewItem>
+
+                                <ListViewItem Height="35" Padding="0" Style="{StaticResource ListViewSettingStyle}">
+                                    <StackPanel Orientation="Horizontal" Margin="10 0">
+                                        <materialDesign:PackIcon Style="{StaticResource  MaterialDesignPackIconStyle}" HorizontalAlignment="Left" Kind="Settings" Width="20" Height="20" Margin="0"/>
+                                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="Settings" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                                    </StackPanel>
+                                </ListViewItem>
+                            </ListView>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+
+                    <TextBlock Grid.Row="1" FontSize="18" Style="{StaticResource TextBlockCardItemStyle}" 
+                               FontWeight="Bold" Margin="0 0 40 0" Text="{Binding Number, ElementName=this, FallbackValue=Number, TargetNullValue=Number}"/>
+
+                    <TextBlock Grid.Row="2" Margin="0 0 60 0" Style="{StaticResource TextBlockCardItemStyle}" 
+                               FontSize="14" FontStyle="Italic" Text="{Binding Description, ElementName=this, FallbackValue=Description, TargetNullValue=Description}"/>
+
+                </Grid>
+            </Grid>
+        </Border>
+    </Border>
+
+</UserControl>

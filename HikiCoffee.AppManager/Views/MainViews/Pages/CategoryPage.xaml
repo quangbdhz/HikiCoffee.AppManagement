@@ -1,0 +1,147 @@
+﻿<Page x:Class="HikiCoffee.AppManager.Views.MainViews.Pages.CategoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HikiCoffee.AppManager.Views.MainViews.Pages"
+      mc:Ignorable="d" 
+      
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        
+      xmlns:prism="http://prismlibrary.com/"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      
+      Style="{StaticResource PageStyle}"
+      d:DesignHeight="686" d:DesignWidth="1205"
+      Title="Category Page">
+
+    <Grid Style="{StaticResource GridStyle}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Margin="5 5 2.5 5" Style="{StaticResource GridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock FontWeight="Bold" FontSize="15" Style="{StaticResource TextBlockStyle}" Text="Category"/>
+
+            <materialDesign:Card Grid.Row="1" Margin="0 5 0 0" Style="{StaticResource MaterialDesignCardStyle}">
+                <WrapPanel Margin="5">
+                    <Button Padding="0" Margin="0" Height="30" Content="Add" Foreground="Black" Background="{DynamicResource JadeDust}" 
+                            Command="{Binding AddCategoryCommand}" Style="{StaticResource ButtonStyle}"/>
+
+                    <Button Padding="0" Margin="15 0 0 0" Height="30" Content="Update" Foreground="Black" Background="{DynamicResource MintyGreen}" 
+                            Command="{Binding UpdateCategoryCommand}" Style="{StaticResource ButtonStyle}"/>
+
+                    <Button Padding="0" Margin="15 0 0 0" Height="30" Content="Delete" Foreground="Black" Background="{DynamicResource BaraRed}" 
+                            Command="{Binding DeleteCategoryCommand}" Style="{StaticResource ButtonStyle}"/>
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="2" Margin="0 5 0 0" Style="{StaticResource MaterialDesignCardStyle}">
+                <WrapPanel Margin="5">
+                    <CheckBox Padding="0" IsChecked="{Binding IsShowOnHome}" Content="IsShowOnHome" Style="{StaticResource CheckBoxStyle}"/>
+
+                    <ComboBox Grid.Column="0" Margin="20 0 0 0" Padding="0 0 0 3" VerticalAlignment="Center" HorizontalAlignment="Left" Name="cbx_parent_id"
+                              materialDesign:HintAssist.Hint="Parent Category" FontSize="13" SelectedItem="{Binding SelectedParentCategory}"
+                              Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding ParentIdFilterByCategoryTranslations}" DisplayMemberPath="NameCategory">
+                    </ComboBox>
+
+                    <Image MaxWidth="50" MaxHeight="50" Margin="20 0 0 0" HorizontalAlignment="Center" Source="{Binding UrlImageCoverCategory}" />
+
+                    <Button Margin="20 0 0 0" Command="{Binding UpLoadImageCategoryCommand}" Content="Upload Image" Padding="5 0" Width="Auto" ToolTip="Upload"
+                            Style="{StaticResource ButtonStyle}" Height="30" Background="{DynamicResource MiddleBule}"/>
+
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="3" Margin="0 5" Style="{StaticResource MaterialDesignCardStyle}">
+                <ScrollViewer PreviewMouseWheel="LvCategoriesScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                    <ListView Name="Lv_Categories" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory, Mode=OneWayToSource}"
+                              ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn Header="Image Convert">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image RenderOptions.BitmapScalingMode="Fant"  MaxWidth="60" MaxHeight="60" Source="{Binding Path=UrlImageCoverCategory}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Show Home" DisplayMemberBinding="{Binding IsShowOnHome}"/>
+                                <GridViewColumn Header="Parent Id" DisplayMemberBinding="{Binding ParentId}"/>
+                                <GridViewColumn Header="Active">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Margin="20 0" Command="{Binding ElementName=Lv_Categories, Path=DataContext.LockOrUnlockUserComamnd}" 
+                                                CommandParameter="{Binding}" Background="Aqua" Padding="0" Style="{DynamicResource MaterialDesignToolButton}">
+                                                <materialDesign:PackIcon Width="20" Height="20" Foreground="{Binding IsActive, Converter={StaticResource foregroundIsActiveUserConverter}}"
+                                                                     Kind="{Binding IsActive, Converter={StaticResource isActiveUserConverter}}" Opacity=".99" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseUp">
+                                <i:InvokeCommandAction Command="{Binding GetSelectedCategoryCommand}"
+                                                       CommandParameter="{Binding ElementName=Lv_Categories, Path=SelectedItem}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="5 5 2.5 5" Style="{StaticResource GridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock FontWeight="Bold" FontSize="15" Style="{StaticResource TextBlockStyle}" Text="{Binding CategoryIdChoosed}"/>
+
+            <materialDesign:Card Grid.Row="1" Margin="0 5 0 0" Style="{StaticResource MaterialDesignCardStyle}">
+                <WrapPanel Margin="5">
+                    <Button Padding="0" Margin="0" Height="30" Content="Add" Foreground="Black" 
+                            Command="{Binding AddCategoryTranslationViewCommand}" Background="{DynamicResource JadeDust}" Style="{StaticResource ButtonStyle}"/>
+
+                    <Button Padding="0" Margin="15 0 0 0" Height="30" Content="Update" Foreground="Black" 
+                            Command="{Binding UpdateCategoryTranslationViewCommand}" Background="{DynamicResource MintyGreen}" Style="{StaticResource ButtonStyle}"/>
+
+                    <Button Padding="0" Margin="15 0 0 0" Height="30" Content="Delete" Foreground="Black" 
+                            Command="{Binding DeleteCategoryTranslationCommand}" Background="{DynamicResource BaraRed}" Style="{StaticResource ButtonStyle}"/>
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="2" Margin="0 5" Style="{StaticResource MaterialDesignCardStyle}">
+                <ScrollViewer PreviewMouseWheel="LvCategoryTranslationsScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                    <ListView Name="Lv_CategoryTranslations" ItemsSource="{Binding CategoryTranslations}" SelectedItem="{Binding SelectedCategoryTranslation}"
+                              ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                                <GridViewColumn Header="Category Id" DisplayMemberBinding="{Binding CategoryId}"/>
+                                <GridViewColumn Header="Name Category" DisplayMemberBinding="{Binding NameCategory}"/>
+                                <GridViewColumn Header="Language Id" DisplayMemberBinding="{Binding LanguageId}"/>
+                                <GridViewColumn Header="Seo Description" DisplayMemberBinding="{Binding SeoDescription}"/>
+                                <GridViewColumn Header="Seo Title" DisplayMemberBinding="{Binding SeoTitle}"/>
+                                <GridViewColumn Header="Seo Alias" DisplayMemberBinding="{Binding SeoAlias}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</Page>

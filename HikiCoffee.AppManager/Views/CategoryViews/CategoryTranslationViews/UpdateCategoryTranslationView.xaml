@@ -1,0 +1,62 @@
+﻿<Window x:Class="HikiCoffee.AppManager.Views.CategoryViews.CategoryTranslationViews.UpdateCategoryTranslationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HikiCoffee.AppManager.Views.CategoryViews.CategoryTranslationViews"
+        mc:Ignorable="d"
+           
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:customcontrol="clr-namespace:HikiCoffee.AppManager.MyUserControl"
+        
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        
+        Style="{StaticResource WindowStyle}"
+        Name="updateCategoryTranslationView"
+        Title="Update Category Translation" Height="450" Width="400">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
+    <Grid Style="{StaticResource GridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <customcontrol:ControlBarUC Margin="0 5 5 0" VerticalContentAlignment="Top" Grid.Row="0" 
+                                    Tag="{Binding ElementName=updateCategoryTranslationView}" HorizontalAlignment="Right"/>
+
+        <materialDesign:Card Grid.Row="1" Margin="5" Style="{StaticResource MaterialDesignCardStyle}">
+            <Grid Margin="5 2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBox Grid.Row="0" Margin="0" Padding="0" Text="{Binding NameCategory}" materialDesign:HintAssist.Hint="Name Category" 
+                         Style="{StaticResource TextBoxStyle}" />
+
+                <TextBox Grid.Row="1" Margin="0 5 0 0" Padding="0" Text="{Binding SeoDescription}" materialDesign:HintAssist.Hint="Seo Description" 
+                         Style="{StaticResource TextBoxStyle}" />
+
+                <TextBox Grid.Row="2" Margin="0 5 0 0" Padding="0" Text="{Binding SeoTitle}" materialDesign:HintAssist.Hint="Seo Title" 
+                         Style="{StaticResource TextBoxStyle}" />
+
+                
+                <Button Grid.Row="3" Padding="0" Margin="0 5 0 0" Height="30" Content="Update" Foreground="Black" 
+                        Command="{Binding UpdateCategoryTranslationCommand}" Background="{DynamicResource MintyGreen}" Style="{StaticResource ButtonStyle}"/>
+
+            </Grid>
+        </materialDesign:Card>
+        
+    </Grid>
+</Window>

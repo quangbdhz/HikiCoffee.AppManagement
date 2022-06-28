@@ -5,10 +5,57 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HikiCoffee.AppManager.Views.MainViews.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        
+      xmlns:prism="http://prismlibrary.com/"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      
+      Style="{StaticResource PageStyle}"
+      d:DesignHeight="686" d:DesignWidth="1205"
       Title="ImportProductPage">
 
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock Text="ImportProductPage"/>
+    <Grid Style="{StaticResource GridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <materialDesign:Card Grid.Row="0" Style="{StaticResource MaterialDesignCardStyle}" Margin="5 5 5 0">
+            <WrapPanel Margin="5">
+                <Button Padding="0" Margin="0" Command="{Binding AddImportProductWindowCommand}" Content="Add" Height="30"
+                        Background="{DynamicResource JadeDust}" Style="{StaticResource ButtonStyle}"/>
+
+                <Button Padding="0" Margin="15 0 0 0" Command="{Binding DeleteImportProductCommand}" Content="Delete" Height="30"
+                        Background="{DynamicResource BaraRed}" Style="{StaticResource ButtonStyle}"/>
+
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="1" Style="{StaticResource MaterialDesignCardStyle}" Margin="5" VerticalAlignment="Stretch">
+            <ScrollViewer PreviewMouseWheel="LvImportProuctScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                <ListView Name="Lv_ImportProduct" ItemsSource="{Binding ImportProducts}" ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                          SelectedItem="{Binding SelectedItemProduct, Mode=OneWayToSource}">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                            <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                            <GridViewColumn Header="Product Name" DisplayMemberBinding="{Binding ProductName}"/>
+                            <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}"/>
+                            <GridViewColumn Header="Name Staff" DisplayMemberBinding="{Binding FullNameStaffAddImportProduct}"/>
+                            <GridViewColumn Header="SuplierName" DisplayMemberBinding="{Binding SuplierName}"/>
+                            <GridViewColumn Header="Price Import" DisplayMemberBinding="{Binding PriceImportProduct}"/>
+                            <GridViewColumn Header="Date Created" DisplayMemberBinding="{Binding DateImportProduct}"/>
+                        </GridView>
+                    </ListView.View>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding MouseUpLvImportProductCommand}"
+                                CommandParameter="{Binding ElementName=Lv_ImportProduct, Path=SelectedItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
     </Grid>
 </Page>

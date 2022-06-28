@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"   
                         
-             xmlns:customconverter="clr-namespace:HikiCoffee.AppManager.Converter"           
+             xmlns:customconverter="clr-namespace:HikiCoffee.AppManager.Converter" 
+             xmlns:customconverterUser="clr-namespace:HikiCoffee.AppManager.Converter.UserConverter"           
+             xmlns:customConverterProduct="clr-namespace:HikiCoffee.AppManager.Converter.ProductConverter"
                         
              xmlns:local="clr-namespace:HikiCoffee.AppManager">
     <prism:PrismApplication.Resources>
@@ -14,9 +16,35 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
 
+                <ResourceDictionary Source="/Styles/StyleTextBlock.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleTextBox.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleButton.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleCalendar.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleCheckBox.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleComboBox.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleListView.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleListBox.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleGridView.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleTheme.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleWindow.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleBorder.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleGrid.xaml"/>
+                <ResourceDictionary Source="/Styles/StylePage.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleMaterialDesignCard.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleMaterialDesignPackIcon.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleExpander.xaml"/>
+                <ResourceDictionary Source="/Styles/StyleScrollViewer.xaml"/>
+                <ResourceDictionary Source="/Styles/Color.xaml"/>
+
                 <ResourceDictionary>
                     <customconverter:BackgroundTableFurnitureConverter x:Key="backgroundTableFurnitureConverter"/>
                     <customconverter:StatusTableFurnitureImageConverter x:Key="statusTableFurnitureImageConverter"/>
+                    <customconverter:NumberConverter x:Key="numberConverter"/>
+                    
+                    <customconverterUser:IsActiveUserConverter x:Key="isActiveUserConverter"/>
+                    <customconverterUser:ForegroundIsActiveUserConverter x:Key="foregroundIsActiveUserConverter"/>
+
+                    <customConverterProduct:ForegroundStockConverter x:Key="foregroundStockConverter"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

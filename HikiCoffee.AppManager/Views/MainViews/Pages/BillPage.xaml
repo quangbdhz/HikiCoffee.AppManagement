@@ -1,0 +1,86 @@
+﻿<Page x:Class="HikiCoffee.AppManager.Views.MainViews.Pages.BillPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HikiCoffee.AppManager.Views.MainViews.Pages"
+      mc:Ignorable="d" 
+      
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        
+      xmlns:prism="http://prismlibrary.com/"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      
+      Style="{StaticResource PageStyle}"
+      d:DesignHeight="686" d:DesignWidth="1205"
+      Title="SuplierPage">
+
+    <Grid Style="{StaticResource GridStyle}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="450"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Style="{StaticResource GridStyle}" Margin="5 5 2.5 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock FontWeight="Bold" FontSize="15" Style="{StaticResource TextBlockStyle}" Text="Bill"/>
+
+            <materialDesign:Card Grid.Row="1" Style="{StaticResource MaterialDesignCardStyle}" Margin="0 5 0 0">
+                <ScrollViewer PreviewMouseWheel="LvBillsScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                    <ListView Name="lv_bills" ItemsSource="{Binding Bills}" SelectedItem="{Binding SelectedBill, Mode=OneWayToSource}"
+                              ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding BillId}"/>
+                                <GridViewColumn Header="Coffee Table" DisplayMemberBinding="{Binding CoffeeTableId}"/>
+                                <GridViewColumn Header="Name Customer" DisplayMemberBinding="{Binding NameCustomer}"/>
+                                <GridViewColumn Header="Total PayPrice" DisplayMemberBinding="{Binding TotalPayPrice, Converter={StaticResource numberConverter}}"/>
+                                <GridViewColumn Header="Status" DisplayMemberBinding="{Binding StatusId}"/>
+                                <GridViewColumn Header="Date Check In" DisplayMemberBinding="{Binding DateCheckIn}"/>
+                                <GridViewColumn Header="Date Check Out" DisplayMemberBinding="{Binding DateCheckOut}"/>
+                            </GridView>
+                        </ListView.View>
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseUp">
+                                <i:InvokeCommandAction Command="{Binding GetSelectedBillCommand}"
+                                                       CommandParameter="{Binding ElementName=lv_bills, Path=SelectedItem}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
+
+        <Grid Grid.Column="1" Style="{StaticResource GridStyle}" Margin="2.5 5 5 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock FontWeight="Bold" FontSize="15" Style="{StaticResource TextBlockStyle}" Text="{Binding InfoBillChoosed}"/>
+
+            <materialDesign:Card Grid.Row="1" Style="{StaticResource MaterialDesignCardStyle}" Margin="0 5 0 0">
+                <ScrollViewer PreviewMouseWheel="LvBillInfosScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                    <ListView Name="lv_bill_infos" ItemsSource="{Binding BillInfos}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn Header="Product Id" DisplayMemberBinding="{Binding ProductId}"/>
+                                <GridViewColumn Header="Name Product" DisplayMemberBinding="{Binding NameProduct}"/>
+                                <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}"/>
+                                <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price, Converter={StaticResource numberConverter}}"/>
+                                <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount, Converter={StaticResource numberConverter}}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</Page>

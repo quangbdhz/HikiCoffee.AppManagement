@@ -5,6 +5,18 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HikiCoffee.AppManager", "HikiCoffee.AppManager\HikiCoffee.AppManager.csproj", "{96FC789A-68B3-47B2-A36A-F153E39B71DF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HikiCoffee.Utilities", "HikiCoffee.Utilities\HikiCoffee.Utilities.csproj", "{4041F26B-F438-4FC6-820E-EC966929D4A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HikiCoffee.ApiIntegration", "HikiCoffee.ApiIntegration\HikiCoffee.ApiIntegration.csproj", "{453BE564-9B14-41E4-A4A3-4CB396B4FF9D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HikiCoffee.Models", "HikiCoffee.Models\HikiCoffee.Models.csproj", "{12F198AE-68F7-4B4A-B265-90847ECF7566}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4F613B0-213F-4DCF-80F5-A2EBC64F4A81}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +27,18 @@ Global
 		{96FC789A-68B3-47B2-A36A-F153E39B71DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96FC789A-68B3-47B2-A36A-F153E39B71DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96FC789A-68B3-47B2-A36A-F153E39B71DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4041F26B-F438-4FC6-820E-EC966929D4A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4041F26B-F438-4FC6-820E-EC966929D4A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4041F26B-F438-4FC6-820E-EC966929D4A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4041F26B-F438-4FC6-820E-EC966929D4A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{453BE564-9B14-41E4-A4A3-4CB396B4FF9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{453BE564-9B14-41E4-A4A3-4CB396B4FF9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{453BE564-9B14-41E4-A4A3-4CB396B4FF9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{453BE564-9B14-41E4-A4A3-4CB396B4FF9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12F198AE-68F7-4B4A-B265-90847ECF7566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12F198AE-68F7-4B4A-B265-90847ECF7566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12F198AE-68F7-4B4A-B265-90847ECF7566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12F198AE-68F7-4B4A-B265-90847ECF7566}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

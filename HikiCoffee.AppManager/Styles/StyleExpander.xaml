@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:properties="clr-namespace:HikiCoffee.AppManager.Properties"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style BasedOn="{StaticResource MaterialDesignExpander}" TargetType="{x:Type Expander}" x:Key="ExpanderStyle" >
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Dark">
+                <Setter Property="Background" Value="{DynamicResource Dark36393F}"/>
+                <Setter Property="Foreground" Value="White"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Light">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

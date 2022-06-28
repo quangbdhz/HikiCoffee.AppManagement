@@ -1,0 +1,447 @@
+﻿<Page x:Class="HikiCoffee.AppManager.Views.MainViews.Pages.CoffeeTablePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HikiCoffee.AppManager.Views.MainViews.Pages"
+      mc:Ignorable="d" 
+      
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:customcontrol="clr-namespace:HikiCoffee.AppManager.MyUserControl"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        
+      xmlns:prism="http://prismlibrary.com/"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      
+      Style="{StaticResource PageStyle}"
+      d:DesignHeight="686" d:DesignWidth="1205"
+      Title="TableFurniturePage">
+
+    <Grid Style="{StaticResource GridStyle}" Margin="0 10 0 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="270"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" Style="{StaticResource GridStyle}">
+                <ScrollViewer  PreviewMouseWheel="LvTableFurnitureScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                    <ListView Name="lv_coffee_tables" Margin="0 0" Padding="0" 
+                              ItemsSource="{Binding CoffeeTables}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource Pinkff99ff}"/>
+                                        <Setter Property="BorderThickness" Value="1"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource BaraRed}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Margin="0 0 0 0"
+                                    Width="{Binding (FrameworkElement.ActualWidth), 
+                                    RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                    ItemWidth="{Binding (ListView.View).ItemWidth, 
+                                    RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                                    ItemHeight="{Binding (ListView.View).ItemHeight, 
+                                    RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Margin" Value="0"/>
+                                <Setter Property="Padding" Value="0 2"/>
+                            </Style>
+                        </ListView.Resources>
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyleNoPading}">
+                                <GridViewColumn>
+                                    <GridViewColumn.Header>
+                                        <TextBlock Text="TABLE" Margin="0" Style="{StaticResource TextBlockStyle}" Padding="0" FontWeight="Bold" 
+                                                   FontSize="14"/>
+                                    </GridViewColumn.Header>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <customcontrol:ControlTableFurniture NameTable="{Binding NameCoffeeTable}" 
+                                                                       UrlImage="{Binding StatusId}" BackgroundTable="{Binding StatusId}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseUp">
+                                <i:InvokeCommandAction Command="{Binding GetSelectedCoffeeTableCommand}" CommandParameter="{Binding ElementName=lv_coffee_tables, Path=SelectedItem}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListView>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+
+        <materialDesign:Card Grid.Column="1" Margin="5" Style="{StaticResource MaterialDesignCardStyle}">
+            <Grid Style="{StaticResource GridStyle}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="0 5 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Margin="5 0 0 0" Style="{StaticResource TextBlockStyle}" Text="Keyword" FontWeight="Bold" FontSize="15" VerticalAlignment="Center"/>
+
+                    <Border Grid.Column="1" Margin="10 0 5 0" Height="30" BorderBrush="Black" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <TextBox Grid.Column="0" Margin="2 0 0 0" materialDesign:HintAssist.Hint="Search the customer" 
+                                     Text="{Binding SearchNameCustomerOrder, UpdateSourceTrigger=PropertyChanged}"
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Padding="0"
+                                     Style="{StaticResource TextBoxNormalStyle}" BorderThickness="0" VerticalAlignment="Center"/>
+
+                            <Button Grid.Column="1" Padding="0" IsDefault="True" Width="30" Background="Transparent"
+                                    Visibility="{Binding VisibilityButtonSelectedCoffeeTable}" BorderBrush="Transparent"
+                                    Command="{Binding SearchCustomerOrderCommand}">
+                                <materialDesign:PackIcon Style="{StaticResource MaterialDesignPackIconStyle}" VerticalAlignment="Center" Kind="Search" Width="18" Height="18" Margin="0 0 6 0"/>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0 5 5 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="15" FontWeight="Bold" 
+                               Style="{StaticResource TextBlockStyle}" Text="{Binding NameTableChoosed, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <Button Grid.Column="1" Command="{Binding TurnOnCoffeeTableCommand}" Visibility="{Binding VisibilityButtonSelectedCoffeeTable}" 
+                            Margin="13 0 0 0" Background="{DynamicResource BlueMartina}" BorderThickness="0" Foreground="Black" Content="Turn On"/>
+                </Grid>
+
+                <materialDesign:Card Grid.Row="2" Style="{StaticResource MaterialDesignCardStyle}" Margin="5 5 5 0" VerticalAlignment="Stretch">
+                    <ScrollViewer PreviewMouseWheel="LvCustomerOderItemScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                        <ListView Name="lv_customer_orders" ItemsSource="{Binding BillInfoCustomerOrders}" ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                                  SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" Width="auto">
+                            <ListView.View>
+                                <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyleNoPading}">
+                                    <GridViewColumn Header="Name Product" DisplayMemberBinding="{Binding NameProduct}"></GridViewColumn>
+                                    <GridViewColumn Header="Qty" DisplayMemberBinding="{Binding Quantity}"></GridViewColumn>
+                                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price, Converter={StaticResource numberConverter}}"></GridViewColumn>
+                                    <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount, Converter={StaticResource numberConverter}}"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseUp">
+                                    <i:InvokeCommandAction Command="{Binding GetSelectedBillInfoInsideBillCommand}"
+                                                           CommandParameter="{Binding ElementName=lv_customer_orders, Path=SelectedItem}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListView>
+                    </ScrollViewer>
+                </materialDesign:Card>
+
+                <materialDesign:Card Grid.Row="3" Style="{StaticResource MaterialDesignCardCheckOutStyle}" Margin="5" VerticalAlignment="Bottom">
+                    <Grid Margin="5" Style="{StaticResource GridCheckOutStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Margin="0 5 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Name Customer:" FontWeight="Bold" FontSize="13"/>
+
+                            <TextBlock Grid.Column="1" Text="{Binding FullNameCustomerOrder}" 
+                                       Style="{StaticResource NameCustomerStyle}"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0 5 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="85"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Total Due" Style="{StaticResource InfoPaymentStyle}"/>
+
+                            <Border Grid.Column="1" Style="{StaticResource BorderInfoPayment}">
+                                <TextBlock Margin="5 2" HorizontalAlignment="Right" Text="{Binding TotalDueBillOfCustomerOrder, Converter={StaticResource numberConverter}}" 
+                                           Style="{StaticResource InfoPaymentStyle}"/>
+                            </Border>
+                        </Grid>
+
+                        <Grid Grid.Row="2" Margin="0 5 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="85"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="VAT" Style="{StaticResource InfoPaymentStyle}"/>
+
+                            <Border Grid.Column="1" Style="{StaticResource BorderInfoPayment}">
+                                <ComboBox Margin="0 0 0 0" BorderThickness="0" SelectedIndex="{Binding PercentVAT}" Width="90"
+                                          Style="{StaticResource ComboBoxStyle}" FontSize="13"
+                                          materialDesign:ColorZoneAssist.Mode="Dark" Name="cbx_vat"
+                                          HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                                          ItemsSource="{Binding NumberItemOrders}">     
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="DropDownClosed">
+                                            <i:InvokeCommandAction Command="{Binding SelectedVATCommand}"
+                                                           CommandParameter="{Binding ElementName=cbx_vat}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ComboBox>
+                            </Border>
+                            
+                            <Border Grid.Column="2" Style="{StaticResource BorderInfoPayment}">
+                                <TextBlock Margin="5 2" HorizontalAlignment="Right" Text="{Binding CheckOutPercentVAT, Converter={StaticResource numberConverter}}" 
+                                           Style="{StaticResource InfoPaymentStyle}"/>
+                            </Border>
+                        </Grid>
+
+                        <Grid Grid.Row="3" Margin="0 5 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="85"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Discount" Style="{StaticResource InfoPaymentStyle}"/>
+
+                            <Border Grid.Column="1" Style="{StaticResource BorderInfoPayment}">
+                                <TextBox Margin="0 2 2.5 2" Padding="0" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
+                                         Text="{Binding PromotionalCode}" BorderThickness="0" HorizontalContentAlignment="Center" VerticalAlignment="Center"
+                                         materialDesign:HintAssist.Hint="Promotional code "/>
+                            </Border>
+
+                            <Border Grid.Column="2" Style="{StaticResource BorderInfoPayment}">
+                                <TextBlock Margin="2.5 2 5 2" HorizontalAlignment="Right" Text="{Binding ValuePromotional, Converter={StaticResource numberConverter}}" 
+                                           Style="{StaticResource InfoPaymentStyle}"/>
+                            </Border>
+                        </Grid>
+
+                        <Grid Grid.Row="4" Margin="0 5 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="85"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Net Amount" Style="{StaticResource InfoPaymentStyle}"/>
+
+                            <Border Grid.Column="1" Style="{StaticResource BorderInfoPayment}">
+                                <TextBlock HorizontalAlignment="Right" Text="{Binding ToTalPayment, Converter={StaticResource numberConverter}}" 
+                                           Style="{StaticResource InfoPaymentStyle}"/>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </materialDesign:Card>
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Column="2" Style="{StaticResource MaterialDesignCardStyle}" Margin="0 5">
+            <StackPanel>
+                <Button Padding="0" Command="{Binding MoveCoffeeTableCommand}" Margin="5 5 5 0" 
+                        Style="{StaticResource ButtonStyle}" Height="30" HorizontalContentAlignment="Stretch"
+                        Background="{DynamicResource CoastalBreeze}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Margin="5 0 0 0" RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Left"
+                               Source="https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1655301460/HikiCoffee/App_Manager/MoveCoffeeTable_cs9yt5.png" Width="20" Height="20" Stretch="Fill"/>
+
+                        <TextBlock Grid.Column="1" Margin="10 0 0 0" Text="Move" FontSize="15"/>
+                    </Grid>
+                </Button>
+
+                <Button Padding="0" Command="{Binding MergeCoffeeTableComamnd}" Margin="5 15 5 0" 
+                        Style="{StaticResource ButtonStyle}" Height="30" HorizontalContentAlignment="Stretch"
+                        Background="{DynamicResource Energos}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Margin="5 0 0 0" RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Left"
+                               Source="https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1655301460/HikiCoffee/App_Manager/MergeCoffeeTable_cei1cv.png" Width="20" Height="20" Stretch="Fill"/>
+
+                        <TextBlock Grid.Column="1" Margin="10 0 0 0" Text="Merge" FontSize="15"/>
+                    </Grid>
+                </Button>
+
+                <TextBlock Width="100"  Margin="0 140 0 0" Text="Number" FontWeight="Bold" FontSize="15"/>
+                
+                <Border Margin="0 2 0 0" Height="30" BorderBrush="Black" Style="{StaticResource BorderCountItemStyle}" Width="100">
+                    <ComboBox Margin="0 0 0 0" Width="90" Height="27" BorderThickness="0" HorizontalAlignment="Center"
+                              FontSize="14" Name="cbx_number_item_order" Style="{StaticResource ComboBoxItemCountStyle}"
+                              SelectedIndex="{Binding IndexCountProductOrderInBill}" HorizontalContentAlignment="Center"
+                              ItemsSource="{Binding NumberItemOrders}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="DropDownClosed">
+                                <i:InvokeCommandAction Command="{Binding GetIndexCountProductOrderInBillCommand}"
+                                                        CommandParameter="{Binding ElementName=cbx_number_item_order}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </Border>
+
+                <Button Padding="0" Command="{Binding AddQuantityBillInfoCoffeeTableCommand}" Margin="5 15 5 0" 
+                        Style="{StaticResource ButtonStyle}" Height="30" HorizontalContentAlignment="Stretch"
+                        Background="{DynamicResource MintyGreen}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Margin="5 0 0 0" RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Left"
+                               Source="https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1655305920/HikiCoffee/App_Manager/Add_dpwbbl.png" Width="20" Height="20" Stretch="Fill"/>
+
+                        <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Add" FontSize="15"/>
+                    </Grid>
+                </Button>
+
+                <Button Padding="0" Command="{Binding MinusQuantityBillInfoCoffeeTableCommand}" Margin="5 15 5 0" 
+                        Style="{StaticResource ButtonStyle}" Height="30" HorizontalContentAlignment="Stretch"
+                        Background="{DynamicResource TwinkleBlue}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Margin="5 0 0 0" RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Left"
+                               Source="https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1655305920/HikiCoffee/App_Manager/Minus_ikbg4k.png" Width="20" Height="20" Stretch="Fill"/>
+
+                        <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Minus" FontSize="15"/>
+                    </Grid>
+                </Button>
+
+                <Button Padding="0" Command="{Binding DeleteQuantityBillInfoCoffeeTableCommand}" Margin="5 15 5 0" 
+                        Style="{StaticResource ButtonStyle}" Height="30" HorizontalContentAlignment="Stretch"
+                        Background="{DynamicResource BaraRed}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Margin="5 0 0 0" RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Left"
+                               Source="https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1655300910/HikiCoffee/App_Manager/Delete_ihufbk.png" Width="20" Height="20" Stretch="Fill"/>
+
+                        <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Delete" FontSize="15"/>
+                    </Grid>
+                </Button>
+
+                <Button Padding="0" Command="{Binding CheckOutBillCoffeeTableCommand}" Margin="5 150 5 0" 
+                        Style="{StaticResource ButtonStyle}" Height="30" HorizontalContentAlignment="Stretch"
+                        Background="{DynamicResource LavenderTea}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Margin="5 0 0 0" RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Left"
+                               Source="https://res.cloudinary.com/https-deptraitd-blogspot-com/image/upload/v1655300910/HikiCoffee/App_Manager/Print_Ver_2_t5nzki.png" Width="20" Height="20" Stretch="Fill"/>
+
+                        <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Payment" FontSize="15"/>
+                    </Grid>
+                </Button>
+
+            </StackPanel>
+        </materialDesign:Card>
+
+        <Grid Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <materialDesign:Card Grid.Column="3" Style="{StaticResource MaterialDesignCardStyle}" Margin="5 5 5 0" Padding="0" VerticalAlignment="Stretch" MaxHeight="300">
+                <Expander Header="{Binding NameCategoryChoosed}" Style="{StaticResource ExpanderStyle}" Margin="-1 -1 0 0" Padding="0">
+                    <ScrollViewer PreviewMouseWheel="LvCategoriesScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <ListBox Name="lb_category_translation" ItemsSource="{Binding CategoryTranslations}" Style="{StaticResource ListBoxStyle}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Grid.Column="0" RenderOptions.BitmapScalingMode="Fant" Source="{Binding UrlImageCoverCategory}" Width="30" Height="30" Stretch="Fill"/>
+
+                                        <TextBlock Grid.Column="1" Margin="15 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding NameCategory}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseUp">
+                                    <i:InvokeCommandAction Command="{Binding GetListItemByCategoryCommand}" CommandParameter="{Binding ElementName=lb_category_translation, Path=SelectedItem}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListBox>
+                    </ScrollViewer>
+                </Expander>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="1" Style="{StaticResource MaterialDesignCardStyle}" Visibility="{Binding VisibilityListItemOder}" Margin="5">
+                <ScrollViewer PreviewMouseWheel="LvProductItemOderScrollViewer_PreviewMouseWheel" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <ListView Name="lv_item_orders"  ItemsSource="{Binding ItemOrders}" ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                              SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" Width="auto">
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyleNoPading}">
+                                <GridViewColumn Header="Name Product" DisplayMemberBinding="{Binding NameProduct}"></GridViewColumn>
+                                <GridViewColumn Header=" Unit " DisplayMemberBinding="{Binding NameUnit}"></GridViewColumn>
+                                <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price, Converter={StaticResource numberConverter}}"></GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseUp">
+                                <i:InvokeCommandAction Command="{Binding GetItemCustomerOderCommand}" CommandParameter="{Binding ElementName=lv_item_orders, Path=SelectedItem}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</Page>
