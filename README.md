@@ -60,6 +60,6 @@
 
 ![Customer Dark Theme](https://user-images.githubusercontent.com/81171112/176134938-7be12225-7705-425e-9f92-4458e32f9337.jpg)
 
-#### Customer
+#### Print Bill
 
 ![Print Bill](https://user-images.githubusercontent.com/81171112/176134905-7357b610-259c-428b-b742-7eeea7c9ebe7.PNG)
