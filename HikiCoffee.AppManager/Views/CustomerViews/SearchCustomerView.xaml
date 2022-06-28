@@ -17,13 +17,14 @@
         WindowStyle="None"
         
         Name="searchCustomerWindow"
+        Style="{StaticResource WindowStyle}"
         Title="Search Customer" Height="600" Width="1139">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
 
-    <Grid>
+    <Grid Style="{StaticResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -33,27 +34,26 @@
         <customcontrol:ControlBarUC Grid.Row="0" Margin="0 5 5 0" VerticalContentAlignment="Top"
                                     Tag="{Binding ElementName=searchCustomerWindow}"  HorizontalAlignment="Right"/>
 
-        <materialDesign:Card Grid.Row="1" Margin="5 5 5 0">
-            <Border Margin="0 0 0 0" Height="30" CornerRadius="5" BorderBrush="Black" BorderThickness="1">
-                <Grid>
+        <materialDesign:Card Grid.Row="1" UniformCornerRadius="5" Margin="5 5 5 0" Style="{StaticResource MaterialDesignCardStyle}">
+            <Border Margin="2" Height="30" CornerRadius="5" Style="{StaticResource BorderInfoPayment}" BorderThickness="1">
+                <Grid Style="{StaticResource GridStyle}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-
-                    <TextBox Grid.Column="0" Margin="5 0 0 0" Name="tb_name_customer" materialDesign:HintAssist.Hint="Search the customer" 
+                    <TextBox Grid.Column="0" Margin="10 0 0 0" Name="tb_name_customer" materialDesign:HintAssist.Hint="Search the customer" 
                              Text="{Binding NameCustomerOrder, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderThickness="0"
-                             TextChanged="TextBox_TextChanged" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" VerticalAlignment="Center"/>
+                             TextChanged="TextBox_TextChanged" Style="{StaticResource TextBoxNormalStyle}" VerticalAlignment="Center"/>
 
                     <materialDesign:PackIcon Grid.Column="1" VerticalAlignment="Center" Kind="Search" 
-                                             Width="25" Height="25" Margin="0 0 0 0" Foreground="#2C3A47"/>
+                                             Width="25" Height="25" Margin="0 0 0 0" Style="{StaticResource MaterialDesignPackIconStyle}"/>
 
-                    <ComboBox Grid.Column="2" Margin="5 0"  BorderThickness="0" SelectedIndex="0" FontSize="14"
+                    <ComboBox Grid.Column="2" Margin="5 0 10 0"  BorderThickness="0" SelectedIndex="0" FontSize="14"
                               DropDownClosed="OptionSearch_DropDownClosed" HorizontalContentAlignment="Center"
                               materialDesign:TextFieldAssist.DecorationVisibility="Hidden" HorizontalAlignment="Center"
-                              materialDesign:ColorZoneAssist.Mode="Dark" Name="cbx_number_item_order">
+                              Style="{StaticResource ComboBoxStyle}" Name="cbx_number_item_order">
                         <ComboBoxItem>Last Name</ComboBoxItem>
                         <ComboBoxItem>First Name</ComboBoxItem>
                         <ComboBoxItem>Phone</ComboBoxItem>
@@ -63,25 +63,12 @@
             </Border>
         </materialDesign:Card>
 
-        <materialDesign:Card Grid.Row="2" Margin="5">
+        <materialDesign:Card Grid.Row="2" Margin="5" Style="{StaticResource MaterialDesignCardStyle}">
             <ScrollViewer PreviewMouseWheel="LvUserScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                <ListView Name="Lv_Users" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Update}" Value="True">
-                                    <Setter Property="Background" Value="Red" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding HasErrors}" Value="False">
-                                    <Setter Property="Background" Value="Green" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListView.ItemContainerStyle>
+                <ListView Name="Lv_Users" ItemsSource="{Binding Users}" ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                          SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
                     <ListView.View>
-                        <GridView>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
                             <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
                             <GridViewColumn Header="User Name" DisplayMemberBinding="{Binding UserName}"/>

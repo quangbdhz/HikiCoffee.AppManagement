@@ -92,7 +92,7 @@ namespace HikiCoffee.AppManager.ViewModels
 
             MouseMoveButtonCloseCommand = new DelegateCommand<Button>((p) => { ColorChangeButtonClose = "#EA2027"; }).ObservesProperty(() => ColorChangeButtonClose);
 
-            MouseLeaveButtonCloseCommand = new DelegateCommand<Button>((p) => { ColorChangeButtonClose = "#2f3542"; }).ObservesProperty(() => ColorChangeButtonClose);
+            MouseLeaveButtonCloseCommand = new DelegateCommand<Button>((p) => { ColorChangeButtonClose = "Black"; }).ObservesProperty(() => ColorChangeButtonClose);
 
             CloseWindowCommand = new DelegateCommand<Window>((p) => { p.Close(); });
 
@@ -112,11 +112,11 @@ namespace HikiCoffee.AppManager.ViewModels
         {
             Languages = new ObservableCollection<Language>();
 
-            ColorChangeButtonClose = "#2f3542";
+            ColorChangeButtonClose = "Black";
 
             UserName = Rms.Read("UserInfo", "UserName", "");
             Password = Rms.Read("UserInfo", "Password", "");
-            RememberMe = Rms.Read("UserInfo", "RememberMe", "") == "true" ? true : false;
+            RememberMe = Rms.Read("UserInfo", "RememberMe", "") == "True" ? true : false;
 
             string languageId = Rms.Read("Language", "Id", "");
             if (languageId == "")

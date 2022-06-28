@@ -22,20 +22,20 @@
             <ColumnDefinition Width="450"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Margin="5 5 2.5 5">
+        <Grid Grid.Column="0" Style="{StaticResource GridStyle}" Margin="5 5 2.5 5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock FontWeight="Bold" FontSize="15" Style="{StaticResource MainTextBlock}" Text="Bill"/>
+            <TextBlock FontWeight="Bold" FontSize="15" Style="{StaticResource TextBlockStyle}" Text="Bill"/>
 
-            <materialDesign:Card Grid.Row="1" Margin="0 5 0 0">
+            <materialDesign:Card Grid.Row="1" Style="{StaticResource MaterialDesignCardStyle}" Margin="0 5 0 0">
                 <ScrollViewer PreviewMouseWheel="LvBillsScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                     <ListView Name="lv_bills" ItemsSource="{Binding Bills}" SelectedItem="{Binding SelectedBill, Mode=OneWayToSource}"
-                              ItemContainerStyle="{StaticResource MainListView}">
+                              ItemContainerStyle="{StaticResource ListViewItemStyle}">
                         <ListView.View>
-                            <GridView ColumnHeaderContainerStyle="{StaticResource MainGridViewColumnHeader}">
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding BillId}"/>
                                 <GridViewColumn Header="Coffee Table" DisplayMemberBinding="{Binding CoffeeTableId}"/>
                                 <GridViewColumn Header="Name Customer" DisplayMemberBinding="{Binding NameCustomer}"/>
@@ -57,19 +57,19 @@
             </materialDesign:Card>
         </Grid>
 
-        <Grid Grid.Column="1" Margin="2.5 5 5 5">
+        <Grid Grid.Column="1" Style="{StaticResource GridStyle}" Margin="2.5 5 5 5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock FontWeight="Bold" FontSize="15" Style="{StaticResource MainTextBlock}" Text="{Binding InfoBillChoosed}"/>
+            <TextBlock FontWeight="Bold" FontSize="15" Style="{StaticResource TextBlockStyle}" Text="{Binding InfoBillChoosed}"/>
 
-            <materialDesign:Card Grid.Row="1" Margin="0 5 0 0">
+            <materialDesign:Card Grid.Row="1" Style="{StaticResource MaterialDesignCardStyle}" Margin="0 5 0 0">
                 <ScrollViewer PreviewMouseWheel="LvBillInfosScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                    <ListView Name="lv_bill_infos" ItemsSource="{Binding BillInfos}" ItemContainerStyle="{StaticResource MainListView}">
+                    <ListView Name="lv_bill_infos" ItemsSource="{Binding BillInfos}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
                         <ListView.View>
-                            <GridView ColumnHeaderContainerStyle="{StaticResource MainGridViewColumnHeader}">
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
                                 <GridViewColumn Header="Product Id" DisplayMemberBinding="{Binding ProductId}"/>
                                 <GridViewColumn Header="Name Product" DisplayMemberBinding="{Binding NameProduct}"/>

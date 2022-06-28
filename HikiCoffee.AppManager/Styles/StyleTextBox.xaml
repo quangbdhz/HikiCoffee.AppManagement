@@ -2,26 +2,32 @@
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:properties="clr-namespace:HikiCoffee.AppManager.Properties"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style TargetType="{x:Type materialDesign:Card}" x:Key="MaterialDesignCardStyle" >
+
+    <Style BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}" TargetType="{x:Type TextBox}" x:Key="TextBoxStyle">
+
         <Style.Triggers>
             <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Dark">
-                <Setter Property="Background" Value="{DynamicResource Dark36393F}"/>
+                <Setter Property="materialDesign:HintAssist.Foreground" Value="{DynamicResource HintOfPensive}"/>
+                <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="White"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource HintOfPensive}"/>
+                <Setter Property="Foreground" Value="White"/>
             </DataTrigger>
 
             <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Light">
-                <Setter Property="Background" Value="White"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Black"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type materialDesign:Card}" x:Key="MaterialDesignCardCheckOutStyle" >
+    <Style BasedOn="{StaticResource MaterialDesignTextBox}"  TargetType="{x:Type TextBox}" x:Key="TextBoxNormalStyle">
         <Style.Triggers>
             <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Dark">
-                <Setter Property="Background" Value="{DynamicResource FuelTown}"/>
+                <Setter Property="Foreground" Value="White"/>
             </DataTrigger>
 
             <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Light">
-                <Setter Property="Background" Value="{DynamicResource AuroraGreen}"/>
+                <Setter Property="Foreground" Value="Black"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>

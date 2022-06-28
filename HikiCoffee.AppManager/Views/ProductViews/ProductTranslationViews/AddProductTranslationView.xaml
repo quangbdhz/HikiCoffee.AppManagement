@@ -24,7 +24,7 @@
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
 
-    <Grid>
+    <Grid Style="{StaticResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -34,7 +34,7 @@
                                     Tag="{Binding ElementName=addProductTranslationWindow}"  HorizontalAlignment="Right"/>
 
 
-        <materialDesign:Card Grid.Row="1" Margin="5">
+        <materialDesign:Card Grid.Row="1" Margin="5" Style="{StaticResource MaterialDesignCardStyle}">
             <Grid VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -47,23 +47,22 @@
                 </Grid.RowDefinitions>
 
                 <TextBox Grid.Row="0" Margin="10 5 10 0" Padding="0" Text="{Binding NameProduct}" materialDesign:HintAssist.Hint="Name Product" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Row="1" Margin="10 5 10 00" Padding="0" Text="{Binding Description}" materialDesign:HintAssist.Hint="Description" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Row="2" Margin="10 5 10 0" Padding="0" Text="{Binding Details}" materialDesign:HintAssist.Hint="Details" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Row="3" Margin="10 5 10 0" Padding="0" Text="{Binding SeoDescription}" materialDesign:HintAssist.Hint="Seo Description" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Row="4" Margin="10 5 10 0" Padding="0" Text="{Binding SeoTitle}" materialDesign:HintAssist.Hint="Seo Title" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <ComboBox Grid.Row="5" Margin="10 5 10 0" Padding="0 8 0 7" VerticalAlignment="Top" HorizontalAlignment="Left" Name="cbx_language"
-                          materialDesign:HintAssist.Hint="Languages" FontSize="13" Width="Auto"
-                          BorderThickness="0 0 0 1" materialDesign:ColorZoneAssist.Mode="Light" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderBrush="Black"
+                          materialDesign:HintAssist.Hint="Languages" FontSize="13" Width="Auto" Style="{StaticResource ComboBoxStyle}"
                           ItemsSource="{Binding Languages}" DisplayMemberPath="NameLanguage">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="DropDownClosed">
@@ -74,7 +73,7 @@
                 </ComboBox>
 
                 <Button Grid.Row="6" Width="Auto" Command="{Binding AddProductTranslationCommand}" Margin="10 5" 
-                            Background="#00cec9" Content="Add ProductTranslation" Style="{StaticResource MainButton}"/>
+                            Background="#00cec9" Content="Add ProductTranslation" Style="{StaticResource ButtonStyle}"/>
             </Grid>
         </materialDesign:Card>
     </Grid>

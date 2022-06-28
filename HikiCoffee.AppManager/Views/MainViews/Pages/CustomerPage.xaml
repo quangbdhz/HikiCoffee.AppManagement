@@ -22,19 +22,19 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <materialDesign:Card Grid.Row="0" Margin="5 5 5 0">
+        <materialDesign:Card Grid.Row="0" Style="{StaticResource MaterialDesignCardStyle}" Margin="5 5 5 0">
             <WrapPanel Margin="5">
                 <Button Command="{Binding DeleteUserCommand}" Content="Delete" Height="30" Padding="0" Margin="0"
-                        Background="{DynamicResource BaraRed}" Style="{StaticResource MainButton}"/>
+                        Background="{DynamicResource BaraRed}" Style="{StaticResource ButtonStyle}"/>
             </WrapPanel>
         </materialDesign:Card>
 
-        <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Stretch">
+        <materialDesign:Card Grid.Row="1" Margin="5" Style="{StaticResource MaterialDesignCardStyle}" VerticalAlignment="Stretch">
             <ScrollViewer PreviewMouseWheel="LvUserScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                <ListView Name="Lv_User" ItemsSource="{Binding Users}" ItemContainerStyle="{StaticResource MainListView}"
+                <ListView Name="Lv_User" ItemsSource="{Binding Users}" ItemContainerStyle="{StaticResource ListViewItemStyle}"
                           SelectedItem="{Binding SelectedUser, Mode=OneWayToSource}">
                     <ListView.View>
-                        <GridView ColumnHeaderContainerStyle="{StaticResource MainGridViewColumnHeader}">
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
                             <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
                             <GridViewColumn Header="User Name" DisplayMemberBinding="{Binding UserName}"/>

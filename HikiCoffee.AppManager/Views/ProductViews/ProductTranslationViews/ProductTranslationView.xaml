@@ -24,33 +24,20 @@
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
 
-    <Grid Background="#2d3436">
+    <Grid Style="{StaticResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <customcontrol:ControlBarUC Margin="0 5 5 0" Background="Aqua" VerticalContentAlignment="Top" Grid.Row="0" Tag="{Binding ElementName=productTranslationView}"  HorizontalAlignment="Right"/>
+        <customcontrol:ControlBarUC Margin="0 5 5 0"  VerticalContentAlignment="Top" Grid.Row="0" 
+                                    Tag="{Binding ElementName=productTranslationView}"  HorizontalAlignment="Right"/>
 
-        <materialDesign:Card Margin="5 5 5 0" Grid.Row="1">
-            <ListView Name="Lv_Product" ItemsSource="{Binding Products}" Margin="0 0 0 5">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="VerticalAlignment" Value="Center" />
-                        <Setter Property="HorizontalContentAlignment" Value="Center" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Update}" Value="True">
-                                <Setter Property="Background" Value="Red" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding HasErrors}" Value="False">
-                                <Setter Property="Background" Value="Green" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListView.ItemContainerStyle>
+        <materialDesign:Card Margin="5 5 5 0" Grid.Row="1" Style="{StaticResource MaterialDesignCardStyle}">
+            <ListView Name="Lv_Product" ItemsSource="{Binding Products}" Margin="0 0 0 5" ItemContainerStyle="{StaticResource ListViewItemStyle}">
                 <ListView.View>
-                    <GridView>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                         <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
                         <GridViewColumn Header="Stock" DisplayMemberBinding="{Binding Stock}"/>
                         <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
@@ -64,40 +51,43 @@
             </ListView>
         </materialDesign:Card>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Style="{StaticResource GridStyle}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0" Margin="5 0 0 0" RenderOptions.BitmapScalingMode="Fant"  Width="350" MaxHeight="600"
-                   VerticalAlignment="Center" Source="{Binding UrlImageCoverProduct}" />
+            <materialDesign:Card Grid.Column="0" Margin="5 5 0 5" Style="{StaticResource MaterialDesignCardStyle}">
+                <Image RenderOptions.BitmapScalingMode="Fant"  Width="350" MaxHeight="600"
+                       VerticalAlignment="Center" Source="{Binding UrlImageCoverProduct}" />
+            </materialDesign:Card>
+            
 
-            <materialDesign:Card Margin="5 5 5 0" Grid.Column="1">
-                <Grid>
+            <materialDesign:Card Margin="5 5 5 0" Grid.Column="1" Style="{StaticResource MaterialDesignCardStyle}">
+                <Grid Style="{StaticResource GridStyle}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <materialDesign:Card Grid.Row="0" Margin="5 5 5 0">
+                    <materialDesign:Card Grid.Row="0" Style="{StaticResource MaterialDesignCardStyle}" Margin="5 5 5 0">
                         <WrapPanel Margin="5">
                             <Button Command="{Binding AddProductTranslationWindowCommand}" Content="Add" Padding="0" Margin="0" Height="30"
-                                    Background="{DynamicResource JadeDust}" Style="{StaticResource MainButton}"/>
+                                    Background="{DynamicResource JadeDust}" Style="{StaticResource ButtonStyle}"/>
 
                             <Button Command="{Binding UpdateProductTranslationWindowCommand}" Content="Update" Padding="0" Margin="15 0 0 0" Height="30"
-                                    Background="{DynamicResource MintyGreen}" Style="{StaticResource MainButton}"/>
+                                    Background="{DynamicResource MintyGreen}" Style="{StaticResource ButtonStyle}"/>
 
                             <Button Command="{Binding DeleteProductTranslationWindowCommand}" Content="Delete" Margin="15 0 0 0" Padding="0" Height="30"
-                                    Background="{DynamicResource BaraRed}" Style="{StaticResource MainButton}"/>
+                                    Background="{DynamicResource BaraRed}" Style="{StaticResource ButtonStyle}"/>
 
                         </WrapPanel>
                     </materialDesign:Card>
 
-                    <ListView Margin="5 5 5 0" Grid.Row="1" Name="Lv_ProductTranslation" ItemContainerStyle="{StaticResource MainListView}"
+                    <ListView Margin="5 5 5 0" Grid.Row="1" Name="Lv_ProductTranslation" ItemContainerStyle="{StaticResource ListViewItemStyle}"
                               ItemsSource="{Binding ProductTranslations}">
                         <ListView.View>
-                            <GridView ColumnHeaderContainerStyle="{StaticResource MainGridViewColumnHeader}">
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
                                 <GridViewColumn Header="Product Id" DisplayMemberBinding="{Binding ProductId}"/>
                                 <GridViewColumn Header="Name Product" DisplayMemberBinding="{Binding NameProduct}"/>

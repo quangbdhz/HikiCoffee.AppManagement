@@ -17,14 +17,14 @@
         WindowStyle="None"
         
         Name="addProductTranslationWindow"
-        
+        Style="{StaticResource WindowStyle}"
         Title="Update ProductTranslation" Height="Auto" Width="600">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
 
-    <Grid>
+    <Grid Style="{StaticResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -34,8 +34,8 @@
                                     Tag="{Binding ElementName=addProductTranslationWindow}"  HorizontalAlignment="Right"/>
 
 
-        <materialDesign:Card Grid.Row="1" Margin="5">
-            <Grid VerticalAlignment="Top">
+        <materialDesign:Card Grid.Row="1" Margin="5" Style="{StaticResource MaterialDesignCardStyle}">
+            <Grid VerticalAlignment="Top" Style="{StaticResource GridStyle}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -47,22 +47,22 @@
                 </Grid.RowDefinitions>
 
                 <TextBox Grid.Row="0" Margin="10 5 10 0" Padding="0" Text="{Binding NameProduct}" materialDesign:HintAssist.Hint="Name Product" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Row="1" Margin="10 5 10 00" Padding="0" Text="{Binding Description}" materialDesign:HintAssist.Hint="Description" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Row="2" Margin="10 5 10 0" Padding="0" Text="{Binding Details}" materialDesign:HintAssist.Hint="Details" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Row="3" Margin="10 5 10 0" Padding="0" Text="{Binding SeoDescription}" materialDesign:HintAssist.Hint="Seo Description" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <TextBox Grid.Row="4" Margin="10 5 10 0" Padding="0" Text="{Binding SeoTitle}" materialDesign:HintAssist.Hint="Seo Title" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource TextBoxStyle}" />
 
                 <Button Grid.Row="6" Width="Auto" Command="{Binding UpdateProductTranslationCommand}" Margin="10 5 10 0" 
-                            Background="#00cec9" Content="Update ProductTranslation" Style="{StaticResource MainButton}"/>
+                            Background="#00cec9" Content="Update ProductTranslation" Style="{StaticResource ButtonStyle}"/>
             </Grid>
         </materialDesign:Card>
     </Grid>

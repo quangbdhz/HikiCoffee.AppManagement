@@ -22,4 +22,32 @@
         <Setter Property="Height" Value="25"/>
         <Setter Property="Margin" Value="5 0 0 0"/>
     </Style>
+
+
+    <Style TargetType="{x:Type Border}" x:Key="BorderCountItemStyle">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Dark">
+                <Setter Property="Background" Value="{DynamicResource Dark36393F}"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Light">
+                <Setter Property="Background" Value="White"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type Border}" x:Key="BorderCardItemStyle">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Dark">
+                <Setter Property="BorderBrush" Value="{DynamicResource GreyPorcelain}"/>
+                <Setter Property="Background" Value="{DynamicResource GreyPorcelain}"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ThemeAppManager}" Value="Light">
+                <Setter Property="BorderBrush" Value="{DynamicResource Greenb3ff99}"/>
+                <Setter Property="Background" Value="{DynamicResource Greenb3ff99}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

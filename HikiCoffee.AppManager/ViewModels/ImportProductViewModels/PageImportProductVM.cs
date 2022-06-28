@@ -29,6 +29,8 @@ namespace HikiCoffee.AppManager.ViewModels.ImportProductViewModels
 
         public DelegateCommand AddImportProductWindowCommand { get; set; }
 
+        public DelegateCommand DeleteImportProductCommand { get; set; }
+
         public DelegateCommand<ImportProduct> MouseUpLvImportProductCommand { get; set; }
 
         
@@ -47,6 +49,8 @@ namespace HikiCoffee.AppManager.ViewModels.ImportProductViewModels
 
                 Loaded();
             }).ObservesProperty(() => ImportProducts);
+
+            DeleteImportProductCommand = new DelegateCommand(() => { }, () => { return false; });
 
             MouseUpLvImportProductCommand = new DelegateCommand<ImportProduct>((p) =>
             {

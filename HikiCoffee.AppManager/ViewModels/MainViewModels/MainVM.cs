@@ -3,6 +3,7 @@ using Prism.Commands;
 using System.Windows.Controls;
 using System;
 using HikiCoffee.Utilities;
+using System.Windows;
 
 namespace HikiCoffee.AppManager.ViewModels.MainViewModels
 {
@@ -104,10 +105,13 @@ namespace HikiCoffee.AppManager.ViewModels.MainViewModels
 
         public DelegateCommand<ListView> ChoosePageCommand { get; set; }
 
+        public DelegateCommand<ListView> GetSelectedSettingCommand { get; set; }
+
+        public DelegateCommand<Window> CloswWindowCommand { get; set; }
+
         public MainVM()
         {
             SourcePage = @"/Views/MainViews/Pages/MainPage.xaml";
-
             FullNameOfEmployeeWorking = SystemConstants.UserLogin.FirstName + " " + SystemConstants.UserLogin.LastName;
             UrlImageCoverEmployee = SystemConstants.UserLogin.UrlImageUser;
 
@@ -120,8 +124,46 @@ namespace HikiCoffee.AppManager.ViewModels.MainViewModels
             ColorIconBill = "White";
             ColorIconDelete = "White";
 
+            string theme = Rms.Read("Theme", "Option", "");
+            if(theme == "Light")
+            {
+                Properties.Settings.Default.ThemeAppManager = "Light";
+                Properties.Settings.Default.Save();
+            }
+            if (theme == "Dark")
+            {
+                Properties.Settings.Default.ThemeAppManager = "Dark";
+                Properties.Settings.Default.Save();
+            }
+
+
             ChoosePageCommand = new DelegateCommand<ListView>(ExcuteChoosePage);
+
+            GetSelectedSettingCommand = new DelegateCommand<ListView>((p) => 
+            {
+                OptionMenu = p.SelectedIndex;
+
+                if (OptionMenu == 0)
+                {
+                    Properties.Settings.Default.ThemeAppManager = "Light";
+                    Rms.Write("Theme", "Option", "Light");
+                    Properties.Settings.Default.Save();
+                }
+                else if (OptionMenu == 1)
+                {
+                    Properties.Settings.Default.ThemeAppManager = "Dark";
+                    Rms.Write("Theme", "Option", "Dark");
+                    Properties.Settings.Default.Save();
+                }
+                else if(OptionMenu == 3)
+                {
+
+                }
+            });
+
+            CloswWindowCommand = new DelegateCommand<Window>((p) => { p.Close(); });
         }
+
 
         private void ExcuteChoosePage(ListView obj)
         {
@@ -189,4 +231,5 @@ namespace HikiCoffee.AppManager.ViewModels.MainViewModels
             ColorIconDelete = arrColor[7];
         }
     }
+
 }

@@ -28,10 +28,10 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid Background="#ebb5b5">
-        <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=loginWindow}" Margin="0 8 8 0" BorderBrush="Transparent" 
-                Background="Transparent" Name="buttonClose" Width="40" Height="40" Padding="0" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <materialDesign:PackIcon Foreground="{Binding ColorChangeButtonClose}" Width="35" Height="35" Kind="CloseCircleOutline" />
+    <Grid Background="{DynamicResource StormPetrel}">
+        <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=loginWindow}" Margin="0 4 4 0" BorderBrush="Transparent" 
+                Background="Transparent" Name="buttonClose" Width="35" Height="35" Padding="0" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <materialDesign:PackIcon Foreground="{Binding ColorChangeButtonClose}" Width="30" Height="30" Kind="CloseCircleOutline" />
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseMove">
                     <i:InvokeCommandAction Command="{Binding MouseMoveButtonCloseCommand}" CommandParameter="{Binding ElementName=buttonClose}"/>
@@ -54,7 +54,7 @@
             </i:Interaction.Triggers>
         </ComboBox>
 
-        <materialDesign:Card Width="250" Margin="0 35" Background="#000232">
+        <materialDesign:Card Width="250" Margin="0 35" Background="{DynamicResource PrestigeBlue}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -76,9 +76,11 @@
                     </Ellipse.Fill>
                 </Ellipse>
 
-                <TextBlock Grid.Row="1" Margin="0,10,0,0" Text="WELCOME" HorizontalAlignment="Center" FontSize="20" Foreground="White"/>
+                <TextBlock Grid.Row="1" Margin="0,10,0,0" Text="WELCOME" HorizontalAlignment="Center" 
+                           FontWeight="DemiBold" FontSize="20" Foreground="White"/>
 
-                <TextBlock HorizontalAlignment="Center" Margin="0,5,0,0" Grid.Row="2" Foreground="#747d8c" Text="Sign in entering the information below"/>
+                <TextBlock HorizontalAlignment="Center" Margin="0,5,0,0" Grid.Row="2" Foreground="{DynamicResource Peace}" 
+                           Text="Sign in entering the information below"/>
 
                 <Border Margin="20,15,20,0" Grid.Row="3" BorderThickness="0 0 0 1" BorderBrush="White">
                     <Grid>
@@ -90,8 +92,8 @@
                         <materialDesign:PackIcon Width="25" Height="25" Margin="0 4 0 0" Foreground="White" Kind="Account" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
                         <TextBox Margin="10 0 0 1" Grid.Column="1" BorderThickness="0" materialDesign:HintAssist.Hint="Username" VerticalAlignment="Center"
-                            materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Text="{Binding UserName, NotifyOnTargetUpdated=True}"
-                            Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Text="{Binding UserName, NotifyOnTargetUpdated=True}"
+                                 Foreground="White" Style="{StaticResource TextBoxStyle}"/>
                     </Grid>
                 </Border>
 
@@ -117,17 +119,19 @@
                 </Border>
 
                 <Grid Grid.Row="5" Margin="20, 5, 20, 0">
-                    <CheckBox FontSize="9" IsChecked="{Binding RememberMe}" Foreground="White" Style="{StaticResource MaterialDesignDarkCheckBox}" Content="Remenber me" />
+                    <CheckBox Margin="3 0 0 0" FontSize="10" BorderThickness="1" BorderBrush="Pink" IsChecked="{Binding RememberMe}" Foreground="White" 
+                              Style="{StaticResource MaterialDesignAccentCheckBox}" Content="Remember Me" />
                 </Grid>
 
                 <Button Grid.Row="6" FontSize="12" Padding="0" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" Margin="0 10 20 0" Foreground="#747d8c" Content="Forgot Password"/>
 
-                <Button Grid.Row="7" IsDefault="True" Background="#7158e2" Command="{Binding GetStartedCommand}" CommandParameter="{Binding ElementName=loginWindow}" Margin="30 10 20 0" Content="Get Started" Grid.RowSpan="2"/>
+                <Button Grid.Row="7" Width="150" Background="{DynamicResource BaraRed}" IsDefault="True" Style="{StaticResource ButtonStyle}" Height="30"
+                        Foreground="Black" Command="{Binding GetStartedCommand}" CommandParameter="{Binding ElementName=loginWindow}" 
+                        Margin="0 10 0 0" Content="Get Started" />
 
                 <TextBlock Grid.Row="9" HorizontalAlignment="Center" Margin="0,10,0,0" Foreground="#747d8c" Text="Don't have an account?"/>
 
                 <TextBlock Grid.Row="10" HorizontalAlignment="Center" FontSize="15" Margin="0, 10, 0, 10" Foreground="#747d8c" Text="SIGN UP"/>
-
             </Grid>
         </materialDesign:Card>
     </Grid>
