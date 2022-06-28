@@ -20,6 +20,10 @@
 * **GUI Framework:** WPF
 * **Framework WPF:** Prism WPF
 
+## Video Demo
+
+[![Watch the video](https://user-images.githubusercontent.com/81171112/176134910-ac40a441-a5c4-4e71-9e16-a71f74f84d2e.jpg)](https://youtu.be/LvtGNmnr-1g)
+
 ## Images
 
 #### Login
@@ -55,3 +59,7 @@
 ![Customer Light Theme](https://user-images.githubusercontent.com/81171112/176134897-00a26316-c51f-4cb5-a5ff-963259b700d5.jpg)
 
 ![Customer Dark Theme](https://user-images.githubusercontent.com/81171112/176134938-7be12225-7705-425e-9f92-4458e32f9337.jpg)
+
+#### Customer
+
+![Print Bill](https://user-images.githubusercontent.com/81171112/176134905-7357b610-259c-428b-b742-7eeea7c9ebe7.PNG)
