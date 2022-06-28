@@ -24,13 +24,13 @@
 
 #### Login
 
-![Login](C: \Users\Microsoft Windows\Documents\Bandicam\bandicam 2022 - 06 - 28 11 - 49 - 17 - 560.jpg)
+![Login](https://user-images.githubusercontent.com/81171112/176134910-ac40a441-a5c4-4e71-9e16-a71f74f84d2e.jpg)
 
 #### Coffee Table
 
-![Coffee Table Light Theme](C: \Users\Microsoft Windows\Documents\Bandicam\bandicam 2022 - 06 - 28 11 - 51 - 17 - 242.jpg)
+![Coffee Table Light Theme](https://user-images.githubusercontent.com/81171112/176134913-2ec724c8-8f88-4b3d-959d-535eb36bd1fe.jpg)
 
-![Coffee Table Dark Theme](C: \Users\Microsoft Windows\Documents\Bandicam\bandicam 2022 - 06 - 28 11 - 51 - 22 - 556.jpg)
+![https://user-images.githubusercontent.com/81171112/176134918-de815b4c-8164-4cf8-9456-e2f923ac7cde.jpg)
 
 
 
