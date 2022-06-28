@@ -32,5 +32,26 @@
 
 ![Coffee Table Dark Theme](https://user-images.githubusercontent.com/81171112/176134918-de815b4c-8164-4cf8-9456-e2f923ac7cde.jpg)
 
+#### Product
 
+![Product Light Theme](https://user-images.githubusercontent.com/81171112/176134922-1aa0eca9-5ff2-4d77-9be5-be926b001661.jpg)
 
+![Product Dark Theme](https://user-images.githubusercontent.com/81171112/176134927-fcd04c4f-facc-4ec3-bc9e-a08b6229682e.jpg)
+
+#### Category
+
+![Category Light Theme](https://user-images.githubusercontent.com/81171112/176134959-5ddcc918-6e4a-4887-8845-669249b8ad05.jpg)
+
+![Category Dark Theme](https://user-images.githubusercontent.com/81171112/176134941-ac197b78-9e29-4d00-9af8-7d43df0b1ef4.jpg)
+
+#### Import Product
+
+![Import Product Light Theme](https://user-images.githubusercontent.com/81171112/176134897-00a26316-c51f-4cb5-a5ff-963259b700d5.jpg)
+
+![Import Product Dark Theme](https://user-images.githubusercontent.com/81171112/176134931-0fd86960-673a-48cc-9c5c-e75d452b210c.jpg)
+
+#### Customer
+
+![Customer Light Theme](https://user-images.githubusercontent.com/81171112/176134897-00a26316-c51f-4cb5-a5ff-963259b700d5.jpg)
+
+![Customer Dark Theme](https://user-images.githubusercontent.com/81171112/176134938-7be12225-7705-425e-9f92-4458e32f9337.jpg)
