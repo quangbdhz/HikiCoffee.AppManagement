@@ -5,6 +5,7 @@
                         
              xmlns:customconverter="clr-namespace:HikiCoffee.AppManager.Converter" 
              xmlns:customconverterUser="clr-namespace:HikiCoffee.AppManager.Converter.UserConverter"           
+             xmlns:customConverterProduct="clr-namespace:HikiCoffee.AppManager.Converter.ProductConverter"
                         
              xmlns:local="clr-namespace:HikiCoffee.AppManager">
     <prism:PrismApplication.Resources>
@@ -42,6 +43,8 @@
                     
                     <customconverterUser:IsActiveUserConverter x:Key="isActiveUserConverter"/>
                     <customconverterUser:ForegroundIsActiveUserConverter x:Key="foregroundIsActiveUserConverter"/>
+
+                    <customConverterProduct:ForegroundStockConverter x:Key="foregroundStockConverter"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

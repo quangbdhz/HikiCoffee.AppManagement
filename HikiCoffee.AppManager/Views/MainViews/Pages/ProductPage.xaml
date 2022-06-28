@@ -42,7 +42,13 @@
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
-                            <GridViewColumn Header="Stock" DisplayMemberBinding="{Binding Stock}"/>
+                            <GridViewColumn Header="Stock">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Stock}" Foreground="{Binding Stock, Converter={StaticResource foregroundStockConverter}}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
                             <GridViewColumn Header="Original Price" DisplayMemberBinding="{Binding OriginalPrice}"/>
                             <GridViewColumn Header="View Count" DisplayMemberBinding="{Binding ViewCount}"/>
