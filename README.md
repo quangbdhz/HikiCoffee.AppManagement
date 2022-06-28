@@ -22,7 +22,7 @@
 
 ## Video Demo
 
-[![Watch the video](https://user-images.githubusercontent.com/81171112/176134910-ac40a441-a5c4-4e71-9e16-a71f74f84d2e.jpg)](https://youtu.be/LvtGNmnr-1g)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LvtGNmnr-1g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Images
 
